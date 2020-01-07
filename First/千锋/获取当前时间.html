@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算时间差&获取当前时间</title>
+    <style>
+        div button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="ipt-date"/>
+        <label for="ipt-date">请输入时间，类型如(YYYY-MM-DD 或者YYYY/MM/DD)</label>
+    </div>
+    <div>
+        <button id="btn" onclick="getDate()">提交</button>
+    </div>
+    <script>
+        function showDate() {
+            var d = new Date();
+            var year = d.getFullYear();
+            var mounth = d.getMonth() + 1; //月份从0开始
+            var day = d.getDate();
+            var week = d.getDay();
+            var hour = d.getHours();
+            var min = d.getMinutes();
+            var sec = d.getSeconds();
+
+            switch (week) {     //星期从0开始
+                case 1:
+                    week = '一'
+                    break;
+                case 2:
+                    week = '二'
+                    break;
+                case 3:
+                    week = '三'
+                    break;
+                case 4:
+                    week = '四'
+                    break;
+                case 5:
+                    week = '五'
+                    break;
+                case 6:
+                    week = '六'
+                    break;
+                default:
+                    week = '日'
+                    break;
+            }
+            
+            return year + '/' + mounth + '/' + day + ' 星期' + week + ' ' + hour + ':' + min + ':' + sec;
+        }
+        console.log('当前时间：' + showDate());
+
+        //计算时间差
+        function getDate() {
+
+            //声明变量
+            var  date, millisecond, nowDate, reduceTime, newItem,btn;
+            //获取输入的时间
+            date = document.getElementById('ipt-date').value;
+            if (!date) {
+                alert('日期输入不合法');
+            }
+            millisecond = Date.parse(String(date));  
+            nowDate = Date.now();
+            reduceTime = Math.abs(millisecond - nowDate);
+
+            //创建新节点将结果插入到dom中
+            btn = document.getElementById('btn');
+            newItem = document.createElement('p');
+            newItem.append('距离现在：' + Math.floor(reduceTime/ (1000 * 3600 * 24)));
+            btn.after(newItem);
+
+            console.log('距离现在：' + (reduceTime/ (1000 * 3600 * 24)));
+            console.log('距离现在：' + Math.floor(reduceTime/ (1000 * 3600 * 24)));
+        }
+    </script>
+</body>
+</html>

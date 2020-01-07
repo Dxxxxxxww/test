@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 求 n - m 之间的和
+        /*  function getSum(n, m) {
+            var sum = 0;
+            for (let i = n; i <= m; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+        console.log(getSum(1,100)); */
+
+        //圆的面积
+        /* function getS(r) {
+            return Math.PI * Math.pow(r,2);
+        }
+        console.log(getS(2)); */
+
+        //质数/素数
+        /* function isPrime(num) {
+            if (num < 2) {
+                return false;
+            }
+            var factor = Math.sqrt(num);
+            for (let i = 2; i <= factor; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        //求范围内质数
+        function getPrime(n, m) {
+            var arr = [];
+            for (let i = n; i <= m; i++) {
+                if (isPrime(i)) {
+                    arr.push(i)
+                }
+            }
+            return arr;
+        }
+        console.log(isPrime(prompt('输入一个整数来判断是否为质数？')));
+        // console.log(getPrime(1,100000)); */
+
+        //返回一个数组中的最大值，最小值，和.
+        /**
+         *
+         * 给我一个数组，返回一个数组(最大值，最小值，和)
+         * @param {*} arr参数是一个数组
+         * @return{*} arrResult是一个数组
+         */
+        /* function getArrMaxAndMinAndSum(arr) {
+            var min = arr[0];
+            var max = arr[0];
+            var sum = 0;
+
+            for (let i = 0; i < arr.length; i++) {
+                if (max < arr[i]) {
+                    max = arr[i];
+                }
+                if (min > arr[i]) {
+                    min = arr[i];
+                }
+                sum += arr[i];
+            }
+            var arrResult = [max, min, sum];
+            return arrResult;
+        }
+
+        console.log(getArrMaxAndMinAndSum([1,2,3,4,5,6])); */
+
+        //斐波那锲函数 --黑马
+        /* function getFib(num) {
+            var num1 = 1;
+            var num2 = 1;
+            var sum = 0;
+            if (num <= 2) {
+                return 1;
+            }
+            for (let i = 3; i <= num; i++) {
+                sum = num1 + num2;
+                num1 = num2;
+                num2 = sum;
+            }
+            return sum;
+        }
+
+        //使用递归
+        function getFibRecursion(num) {
+            if (num <= 2) {
+                return 1;
+            }
+            return getFibRecursion(num - 1) + getFibRecursion(num - 2);
+        }
+        console.log(getFib(6));
+        console.log(getFibRecursion(6)); */
+
+        //输入年月日，获取这个日期是这一年的第多少天
+        /* function getDays(year, mounth, day) {
+            var days = day;
+            //如果用户输入的是一月，则不需要往下进行。
+            if (mounth == 1) {
+                return day;
+            }
+            //定义一个数组，存储每个月的天数
+            var mounths = [31,28,31,30,31,30,31,31,30,31,30,31];
+            //输入月份 - 1
+            for (let i = 0; i < mounth - 1; i++) {
+                days += mounths[i];
+            }
+            //判断是否为闰年
+            if (isLeapYear(year) && mounth > 2) {
+                days++;
+            }
+
+            return days;
+        }
+
+        function isLeapYear(year) {
+            if ((year % 4 === 0 && year % 100 !== 0)|| year % 400 === 0) {
+                return true;
+            }
+            return false;
+        }
+
+        console.log(getDays(2019,3,2)); */
+
+        //阶乘
+        /* function getFactorial(num) {
+            var product = 1;
+            for (let j = 1; j <= num; j++) {
+                product *= j;
+            }
+            return product;
+        }
+        console.log(getFactorial(5));
+        //求一个数字的阶乘和 5： 5阶乘 + 4阶乘+ ……
+        function getFactorialSum(num) {
+            var sum = 0;
+            for (let i = 1; i <=num; i++) {
+                sum += getFactorial(i);
+            }
+            return sum;
+        }
+        console.log(getFactorialSum(5)); */
+
+        //使用arguments来求和
+        /* function getSum() {
+            var sum = 0;
+            for (let i = 0; i < arguments.length; i++) {
+                sum += arguments[i];
+            }
+            return sum;
+        }
+        console.log(getSum(10,20,30)); */
+
+        //函数自调用
+        /* (function () {
+            console.log(123);
+        })(); */
+
+        //回调函数
+        /* function sayHi(fn) {
+            console.log('Hi');
+            fn();
+        }
+        function sayBye() {
+            console.log('Bye');
+        }
+        sayHi(sayBye); */
+
+        //闭包
+        /* function f1() {
+            var abc = 1;
+            console.log(abc);
+            return function (n) {
+                abc = n;
+                console.log(abc);
+            };
+        }
+
+        var ff = f1();
+        ff(2);
+        ff(3);
+        ff(4); */
+        /* f1();
+        console.log(c);
+        console.log(b);
+        console.log(a);
+        function f1() {
+            var a = b = c = 9;
+            console.log(c);
+            console.log(b);
+            console.log(a);
+        } */
+        console.log('abc'.padEnd(6,'123abc'));
+    </script>
+</body>
+
+</html>

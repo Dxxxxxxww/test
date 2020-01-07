@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //数组总结
+      /*   var arr1 = new Array();     // 空数组
+        var arr2 = new Array(6);    //长度为6的数组，每个值为undefined
+        var arr3 = new Array(1,2,3,4,5,6);   //长度为6的数组，值为1,2,3,4,5,6
+        var arr4 = [];  //空数组
+        var arr5 = [1,2,3,4,5,6];   //长度为6的数组，值为1,2,3,4,5,6
+        var arr6 = ['arr','abc',1,true];    //数组中的元素值类型可以不一样
+        var arr7 = [];
+        arr7[0] = 10;
+        arr7[1] = 20; */
+
+        // 数组求和
+        /* var arr = [10,20,30,40,50,60];
+        var sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        console.log(sum); */
+        // 数组求平均值
+        /* var arr = [10,20,30,40,50,60];
+        var sum = 0;
+        var avg = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum+= arr[i];
+        }
+        avg = sum / arr.length;
+        console.log(avg); */
+        // 数组求最大值/最小值
+       /*  var arr = [10,20,30,40,50,60];
+        var max = arr[0];
+        var min = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+            // if (min > arr[i]) {
+            //     min = arr[i];
+            // }
+        }
+        // console.log(max);
+        console.log(min); */
+       /*  // 反转遍历数组
+        var arr = [10,20,30,40,50,60];
+        // 假反转，真正数组没有反转
+        // for (let i = arr.length - 1; i >= 0; i--) {
+        //     console.log(arr[i]);
+        // } 
+        // 真反转1 常用
+        // console.log(arr.reverse());  
+        // 真反转2
+    //      for (let i = 0; i < arr.length; i++) {
+    //         // 长度 - i 不能小于 i ，否则会又换回来
+    //         if (arr.length - 1 - i > i) { 
+    //             var temp = arr[i];
+    //             arr[i] = arr[arr.length - 1 - i];
+    //             arr[arr.length - 1 - i] = temp;
+    //             console.log('arr.length -1 - i:  ' + (arr.length - 1 - i));
+    //         }
+    //     }
+    //    console.log(arr);
+       // 真反转2的延伸 真反转3  
+       // 不管数组长度为奇数还是偶数，只换长度的一半次数 
+       // 4 -- 2   5 -- 2  6 -- 3 7 -- 3 8 -- 4 9 -- 4
+    //    for (let i = 0; i < arr.length / 2; i++) {
+    //         var temp = arr[i];
+    //         arr[i] = arr[arr.length - 1 - i];
+    //         arr[arr.length - 1 - i] = temp;
+    //     }
+    //    console.log(arr); */
+        // 数组元素用|拼接成一个字符串
+        /* var arr = [10,20,30,40,50,60];
+        var str = '';
+        str = arr.join('|');
+        console.log(str); */
+        // 去掉数组中重复的0
+       /*  var arr = [10,0,20,0,30,0,40,0,50,0,60,0];
+        var newArr = [];
+        // for (let i = 0; i < arr.length; i++) {
+        //     if (arr[i]!= 0) {
+        //         newArr[newArr.length] = arr[i];
+        //     }
+        // }
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i]!= 0) {
+                newArr.push(arr[i]);
+            }
+        }
+        console.log(newArr); */
+        // 提示用户输入班级人数，求总成绩，平均值，最高分，最低分
+        /* var perCount = parseInt(prompt('请输入班级人数'));
+        var perScores = [];
+        var totalScores = 0;
+        var avgScores = 0;
+        for (let i = 0; i < perCount; i++) {
+            perScores[perScores.length] = parseInt(prompt('请输入第'+(i+1)+'个人的成绩: '));
+        }
+        for (let i = 0; i < perScores.length; i++) {
+            totalScores += perScores[i];
+        }
+        console.log('总成绩为: ' + totalScores);
+
+        avgScores = totalScores / perCount;
+        console.log('平均分为: ' + avgScores);
+
+        var maxScores = perScores[0];
+        var minScores = perScores[0];
+        for (let i = 1; i < perScores.length; i++) {
+            if (maxScores < perScores[i]) {
+                maxScores = perScores[i];
+            }
+            if (minScores > perScores[i]) {
+                minScores = perScores[i];
+            }
+        }
+        console.log('最高分为: ' + maxScores);
+        console.log('最低分为: ' + minScores); */
+        // 冒泡 
+        var arr = [10,50,40,30,20,60];
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] < arr[j+1]) {
+                    var temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+</html>

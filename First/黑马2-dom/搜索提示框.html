@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../JavaScript/comman.js"></script>
+</head>
+<body>
+  <div id="dv">
+    <input type="text" name="ipt" id="ipt" />
+    <input type="button" name="btn" id="btn" value="搜索"/>
+  </div>
+  <script>
+    var keywords = ['董喜炜爱岳婷婷','岳婷婷爱董喜炜','董喜炜最帅了','岳婷婷最美了','董喜炜岳婷婷过得幸福美满','2019年开始要很有钱很有钱！',
+                    '董岳良缘'];
+    var dv = my$('dv');
+    var ipt = my$('ipt');
+    ipt.onkeyup = function () {
+      var str = this.value;       //输入框内容
+      var arr = [];               //临时数组
+      for (let i = 0; i < keywords.length; i++) {
+        if (keywords[i].indexOf(str) == 0) {
+          arr.push(keywords[i]);
+        }
+      }
+      //每一次键盘抬起都判断界面中有没有这个div，有的话就删除
+      if (my$('divContent')) {
+        dv.removeChild(my$('divContent'));
+      }
+      //这个删除和下面代码中&&str.length>0作用一样
+      // if (arr.length <= 0 || str.length <= 0 ) {
+      //   if (my$('divContent')) {
+      //     console.log('456');
+      //     dv.removeChild(my$('divContent'));
+      //   }
+      //   return;
+      // }
+      //当有输入并且临时数组有数据，并且没有这个div时候创建div
+      if (!my$('divContent')&&arr.length>0&&str.length>0) {//&&str.length>0
+        var divContent = document.createElement('div');
+        divContent.id = 'divContent';
+        divContent.style.width = '300px';
+        divContent.style.border = '1px solid black';
+        dv.appendChild(divContent);
+
+        for (let i = 0; i < arr.length; i++) {
+          var pObj = document.createElement('p');
+          pObj.innerText = arr[i];
+          pObj.style.margin = '0';
+          pObj.style.padding = '0';
+          pObj.style.marginTop = '5px';
+          pObj.style.marginLeft = '5px';
+          divContent.appendChild(pObj);
+        }
+      }
+
+    }
+  </script>
+</body>
+</html>

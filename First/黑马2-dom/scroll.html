@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 推导获取滚动值的封装函数--1 返回数组
+    // function getScroll() {
+    //   var top = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || -1;
+    //   var left = window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || -1;
+    //   return [toop, left];
+    // }
+    // 推导获取滚动值的封装函数--2 返回数组可以那返回对象呢？
+    // function getScroll() {
+    //   var obj = {};
+    //   var top = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || -1;
+    //   var left = window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || -1;
+    //   obj.top = top;
+    //   obj.left = left;
+    //   return obj;
+    // }
+    // 推导获取滚动值的封装函数--3 返回对象似乎更简单，但是写法还要优化
+    // function getScroll() {
+    //   var obj = {
+    //     top : window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || -1,
+    //     left : window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || -1
+    //   };
+    //   return obj;
+    // }
+    // 推导获取滚动值的封装函数--4 变量可以都不要了，最终版本
+    function getScroll() {
+      return {
+        top : window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || -1,
+        left : window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || -1
+      };
+    }
+    // window.onscroll = function () {
+    //   console.log(getScroll().top);
+    // }
+  </script>
+</body>
+</html>

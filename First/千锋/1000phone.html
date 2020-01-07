@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,
+        minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1000phone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        a {
+            text-decoration: none;
+        }
+        .header{
+
+            position: relative;
+        }
+        ul {
+            position: absolute;
+            bottom: 2px;
+        }
+        div {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #f00;
+        }
+        ul li {
+            list-style-type: none;
+            float: left;
+        }
+        ul li a {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ccc;
+            background: #ccc;
+            margin: 0 2px;
+        }
+        ul li a:hover {
+            opacity: 0.7;
+        }
+        .container {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+        div:target {
+            background: #ff0;
+        }
+        .cube {
+            width: 600px;
+            height: 600px;
+            background: #eee;
+            margin: 0 auto;
+            position: relative;
+            perspective-origin: left top;
+            perspective: 1200px;
+        }
+        .cube ul {
+            transform-style: preserve-3d;
+            /* 这里的position absolute纯粹是为了居中 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            float: left;
+            width: 300px;
+            height: 300px;
+            font-size: 30px;
+        }
+        .cube ul li {
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            position: absolute;
+            list-style: none;
+            backface-visibility: hidden;
+        }
+        .cube ul li:nth-child(1){
+            background: rgba(255, 0, 0, 0.5);
+            transform: translateY(150px) rotateX(-90deg);
+        }
+        .cube ul li:nth-child(2){
+            background:rgba(255, 255, 0, 0.5);
+            transform: translateY(-150px) rotateX(90deg);
+        }
+        .cube ul li:nth-child(3){
+            background: rgba(0, 255, 0, 0.5);
+            transform: translateX(-150px) rotateY(-90deg);
+        }
+        .cube ul li:nth-child(4){
+            background: rgba(0, 0, 255, 0.5);
+            transform: translateX(150px) rotateY(90deg);
+        }
+        .cube ul li:nth-child(5){
+            background: rgba(0, 255, 255, 0.5);
+            transform: translateZ(150px);
+        }
+        .cube ul li:nth-child(6){
+            background: rgba(255, 0, 255, 0.5);
+            transform: translateZ(-150px) rotateY(180deg);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="div-wrapper">
+            <ul>
+                <li><a href="#img1">1</a></li>
+                <li><a href="#img2">2</a></li>
+                <li><a href="#img3">3</a></li>
+                <li><a href="#img4">4</a></li>
+                <li><a href="#img5">5</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <img src="../images/photo/1.png" alt="" id="img1"/>
+            <img src="../images/photo/2.png" alt="" id="img2"/>
+            <img src="../images/photo/3.png" alt="" id="img3"/>
+            <img src="../images/photo/4.png" alt="" id="img4"/>
+            <img src="../images/photo/5.png" alt="" id="img5"/>
+        </div>
+    </div>
+    <div>
+        <a href="#text1">跳转文字1</a>| <a href="#text2">跳转文字2</a>
+    </div>
+    <div class="div2" id="text1">
+        <h1>文字1</h1>
+    </div>
+    <div id="text2">
+        <h1>文字2</h1>
+    </div>
+    <div style="width: 500px;height: 500px;background: url(../images/photo/5.png) no-repeat;
+         border: #ccc 10px dashed; background-clip: border-box;padding: 20px;">
+    </div>
+    <div class="cube">
+        <ul>
+            <li>上</li>
+            <li>下</li>
+            <li>左</li>
+            <li>右</li>
+            <li>前</li>
+            <li>后</li>
+        </ul>
+    </div>
+    <div>
+        <input type="radio" name="abcd" value="a" id="ipt-a" onclick="onSelect(this)"/>
+        <label for="ipt-a">A</label>
+        <input type="radio" name="abcd" value="b" id="ipt-b" onclick="onSelect(this)"/>
+        <label for="ipt-b">B</label>
+        <input type="radio" name="abcd" value="c" id="ipt-c" onclick="onSelect(this)"/>
+        <label for="ipt-c">C</label>
+        <input type="radio" name="abcd" value="d" id="ipt-d" onclick="onSelect(this)"/>
+        <label for="ipt-d">D</label>
+    </div>
+    <div style="display: flex; width:600px;">
+        <div class="box1">1</div>
+        <div class="box2">2</div>
+        <div class="box3">3</div>
+        <div class="box4">4</div>
+        <div class="box5">5</div>
+    </div>
+    <script>
+        // function onSelect(obj) {
+        //     console.log(obj.value)
+        // }
+        // var arr = [1,2,3];
+        // var item;
+        // while (item = arr.pop()) {
+        //     console.log(arr)
+        // }
+        // for (let i = arr.length; i >0; i--) {
+        //     arr.pop();
+        // }        
+        /* 
+            1  2  3  4  5
+            6  7  8  9  10
+            11 12 13 14 15
+            16 17 18 19 20
+            21 22 23 24 25
+        */
+        // var arr = [];
+        // var count = 0;
+        // for (let i = 0; i < 5; i++) {
+        //     var newArr = [];
+        //     for (let j = 0; j < 5; j++) {
+        //         newArr.push(++count);
+        //     }
+        //     arr.push(newArr);
+        // }
+        // for (let i = 0; i < arr.length; i++) {
+        //     for (let j = 0; j <= i; j++) {
+        //         document.write(arr[i][j] + '&nbsp;')
+        //     }
+        //     document.write('<br />')
+        // }
+
+        //排序
+        // function mySort(a,b) {
+                
+        //         return  b - a ;
+        // }
+        // console.log([1,2,5,3,5,87,4].sort(mySort))
+        // var a = 10;
+        // function show() {
+        //     a = 5;
+        //     alert(a);
+        // }
+        // alert(a);   //10
+        // show()      //5
+
+     /*    var a = 10;
+
+        function show(a) {
+            a = 5;
+            alert(a);
+        }
+        alert(a);   //10
+        show(a)      //5
+        alert(a)    //10 */
+
+
+        // var arr = [10,20];
+
+        // function show(arr) {
+        //     arr.push(30,40)
+        //     alert(arr);
+        // }
+        // alert(arr);   //10,20
+        // show(arr)      //10,20,30,40
+        // alert(arr)    //10,20,30,40
+/* 
+        var str = 'abc hello';
+        console.log(str[2]) */
+
+        document.write('ac'.sub());
+        document.write('ac'.sup());
+    </script>
+</body>
+</html>

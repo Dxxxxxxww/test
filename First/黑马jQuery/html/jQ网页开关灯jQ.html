@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .bg {
+      background-color: white;
+      transition: all 0.5s;
+    }
+    .bg-black{
+      background-color: black;
+      transition: all 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" name="button" id="btn" value="关灯"/>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+  //网页开关灯jQuery的两种实现方法
+  // $('#btn').click(function () {
+  //   if ($('body').hasClass('bg-black')) {
+  //     $('body').removeClass('bg-black');
+  //     $('body').addClass('bg');
+  //     $(this).val('开灯');
+  //   }else {
+  //     $('body').removeClass('bg');
+  //     $('body').addClass('bg-black');
+  //     $(this).val('关灯');
+  //   }
+  // });
+
+  $('#btn').click(function () {
+    if ($(this).val() === '关灯') {
+      $('body').css({'backgroundColor': 'black','transition': '0.5s'});
+      $(this).val('开灯');
+    }else {
+      $('body').css({'backgroundColor': '','transition': '0.5s'});
+      $(this).val('关灯');
+    }
+  });
+
+  </script>
+</body>
+</html>

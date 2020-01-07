@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }  
+    Person.prototype.eat = function () {
+      console.log('吃东西');
+    };
+    Person.prototype.play = function () {
+      console.log('玩');
+    };
+
+    function Student(score) {
+      this.score = score;
+    }
+
+    Student.prototype = new Person('bob', 10);
+    Student.prototype.study = function () {
+      console.log('学习');
+    };
+
+    let std = new Student(100);
+    console.log('下面是继承的属性：');
+    console.log(std.name);
+    console.log(std.age);
+    std.eat();
+    std.play();
+    console.log('下面是自己的属性：');
+    console.log(std.score);
+    std.study();
+    console.log('改变下继承的名字，变成自己的名字：');
+    // Student.prototype.name = 'Allen';
+    std.name = 'Allen';
+    console.log(std.name);
+    console.dir(std);
+    console.dir(Student);
+    console.log('并不能改变继承的属性值，而是在自己身上加了一个属性，除非在prototype上改');
+  </script>
+</body>
+</html>

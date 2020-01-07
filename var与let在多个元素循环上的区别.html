@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <input type="text" name="" id="aa" />
+    <input type="file" name=""  />
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+    <button data-focus="false">关注</button>
+
+    
+    <script>
+        // 如果使用var 就需要使用闭包来营造每个点击事件的单独环境了，不然var变量会提升，导致每个按钮的i都一样了
+        // var btns = document.getElementsByTagName('button');
+        // for (var i = 0; i < btns.length; i++) {
+        //     ((index)=>{
+        //         btns[i].addEventListener('click',(e)=>{
+        //             console.log(index);
+        //         var focusValue = e.target.attributes['data-focus'].value;
+        //         if (focusValue === 'false') {
+        //             e.target.attributes['data-focus'].value = 'true';
+        //             e.target.innerHTML = '已关注';
+        //         } else {
+        //             e.target.attributes['data-focus'].value = 'false';
+        //             e.target.innerHTML = '关注';
+        //         }
+        //         });
+        //     })(i);
+        // }
+        (function () {
+            
+        })()
+        // ES6 let有自己的作用域就不需要闭包了
+        // let btns = document.getElementsByTagName('button');
+        // for (let i = 0; i < btns.length; i++) {
+        //     btns[i].addEventListener('click', function (e) {
+        //         let focusValue = e.target.attributes['data-focus'].value;
+        //         console.log(i);
+        //         if (focusValue === 'false') {
+        //             this.setAttribute('data-focus','true');
+        //             this.innerHTML = '已关注';
+        //         }else {
+        //             this.setAttribute('data-focus','false');
+        //             this.innerHTML = '关注';
+        //         }
+        //     });
+        // }
+        // 接ES6 LET 或者使用箭头函数
+        // let btns = document.getElementsByTagName('button');
+        // for (let i = 0; i < btns.length; i++) {
+        //     btns[i].addEventListener('click', (e) =>{
+        //         console.log(e);
+        //         let focusValue = e.target.attributes['data-focus'].value;
+        //         if (focusValue === 'false') {
+        //             e.target.attributes['data-focus'].value = 'true';
+        //             e.target.innerHTML = '已关注';
+        //         }else {
+        //             e.target.attributes['data-focus'].value = 'false';
+        //             e.target.innerHTML = '关注';
+        //         }
+        //     });
+        // }
+    </script>
+</body>
+
+</html>

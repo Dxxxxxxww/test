@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    (function (window) {
+      //产生随机数的构造函数
+      function Random() {
+        
+      };
+      //在原型上添加产生随机数的方法
+      Random.prototype.getRandom = function (min, max) {
+        return Math.floor(Math.random()*(max - min) + min);
+      };
+      //将构造函数暴露给window对象
+      window.Random = Random;
+    })(window);
+
+    var ram = new Random();
+    console.log(ram.getRandom(10,70));
+  </script>
+</body>
+</html>

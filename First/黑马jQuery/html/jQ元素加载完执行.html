@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    //1 
+//     问题：在使用  jquery 3.3.1  版本时，写了如下测试代码：
+
+//                        
+
+//                               $(window).load(function(){
+
+//                               console.log("just a test!");
+
+//                               });
+
+//                       
+
+//                运行出错：TypeError: url.indexOf is not a function ..........
+
+
+
+// 原因：  .load() ,  .error() ,  .unload() ,已经不在支持，jquery1.8版本之后的都无法再使用； 
+
+
+
+// 解决办法：使用  .on("load",function(){.................}) 来代替  .load()  即可；
+// --------------------- 
+// 作者：cvper 
+// 来源：CSDN 
+// 原文：https://blog.csdn.net/cvper/article/details/79150566 
+// 版权声明：本文为博主原创文章，转载请附上博文链接！
+    $(window).on('load',function () {
+      console.log(123);
+    });
+
+    $(function () {
+      $('#btn1').click(function () {
+        console.log(456);
+      });
+    });
+  </script>
+</head>
+<body>
+  <button id="btn1">btn</button>
+</body>
+</html>

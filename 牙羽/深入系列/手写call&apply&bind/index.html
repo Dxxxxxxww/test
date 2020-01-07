@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>手写call&apply&bind</title>
+</head>
+
+<body>
+  <script>
+    // call
+    // 一
+    /*     let value = 2;
+        let foo = {
+          value: 1
+        };
+
+        function bar() {
+          console.log(this.value);
+        }
+
+        bar.call(foo); // 1 */
+    /* 
+      1. call 改变了 this 的指向，指向到 foo
+      2. bar 函数执行了
+    */
+    // 二
+    // 上面的代码其实就可以理解为
+    /*     let foo = {
+          value: 1,
+          bar() {
+            console.log(this.value);
+          }
+        }
+
+        foo.bar(); //1 */
+    // 但是这样会给对象多了一个属性，污染了对象，不过可以用 delete 删除它，所以模拟的思路就是
+    /* 
+      1. 将函数设置为对象的属性
+      2. 执行函数
+      3. 删除函数
+      foo.fn = bar;
+      foo.fn();
+      delete foo.fn
+    */
+
+    // 三 
+    // 开始写第一版 call
+    //Function.prototype.call = Function.prototype.call || func ...
+    /*     Function.prototype.call2 = function (context) {
+          context.fn = this;
+          context.fn();
+          delete context.fn;  
+        };
+        
+        let foo = {
+          value: 10
+        };
+
+        function bar() {
+          console.log(this.value);
+        }
+
+        bar.call2(foo);//10 成功实现*/
+    // 四
+    // 第一版只是成功设置了 this ，而call可以给定参数。
+    /*     let foo = {
+          value: 20
+        };
+
+        function bar(name, age) {
+          console.log(name);
+          console.log(age);
+          console.log(this.value);
+        }
+
+        bar.call(foo,'ngls','60');// ngls 60 20 */
+    // 注意：此时传入的参数是确定的，如果不确定的话，
+    // 就得从 arguments 对象中取值（可以通过 for 取出第二个直至最后的参数）
+    // 不能对 arguments 使用 slice ，因为 arguments 是类数组
+    // 使用方式为 Array.prototype.slice.call()
+    /*     Function.prototype.call2 = function (context) {
+          context.fn = this;
+          let arr = [];
+          for (let i = 1; i < arguments.length; i++) {
+            arr.push(arguments[i]);        
+          }
+          eval('context.fn('+arr+')');
+          delete context.fn;
+        };
+
+        let foo = {
+          value: 30
+        };
+
+        function bar(name, age) {
+          console.log(name);
+          console.log(age);
+          console.log(this.value);
+        }
+
+        bar.call2(foo, "'kim'", 20);  */ // kim is not defined有点问题 改进一下
+
+    // 上面代码在 arr.push(arguments[i]);  是个错误，如果直接把参数值传递进去，bar 函数
+    // 执行的变量就是 kim ，20 了，如果是 number 的话没问题，
+    // 但是如果是字符串的话就需要再传入字符串的时候多嵌套一层 "",
+    // 这样在eval (内部会对arr执行toString())的时候才不会把
+    // 字符串去除 '' 变为变量了。
+    // 而 arguments[1], arguments[2] ，相对方便
+    // 让 bar 函数拿到参数
+    /*     Function.prototype.call2 = function (context) {
+          context.fn = this;
+          let arr = [];
+          for (let i = 1; i < arguments.length; i++) {
+            arr.push(`arguments[${i}]`);        
+          }
+          eval(`context.fn(${arr})`);
+          delete context.fn;
+        };
+
+        let foo = {
+          value: 30
+        };
+
+        function bar(name, age) {
+          console.log(name);
+          console.log(age);
+          console.log(this.value);
+        }
+
+        bar.call2(foo, 'kim', 20); */ // kim 20 30 
+    // 完成的差不多了还有两点需要注意
+    // 1. null 可以作为参数调用，当传入 null 时，视为指向 window 
+    // 2. 函数可以有返回值
+    // Function.prototype.call2 = function (context = window) {
+    //   context.fn = this;
+    //   let arr = [];
+    //   for (let i = 1; i < arguments.length; i++) {
+    //     arr.push(`arguments[${i}]`);
+    //   }
+    //   let res ;
+    //   res = eval(`context.fn(${arr})`);
+    //   delete context.fn;
+    //   return res;
+    // }
+
+    // let foo = {
+    //   value: 40
+    // }
+
+    // function bar(name, age) {
+    //   console.log(name);
+    //   console.log(age);
+    //   console.log(this.value);
+    //   return [name, age];
+    // }
+
+    // let res = bar.call2(foo, 'kim', 20);
+    // console.log(typeof res);
+    // console.log('res: ' + res); //kim 20 40 object res: kim, 20  大功告成！
+
+
+
+
+
+
+    /*  1、在对象上创建函数的拷贝
+        2、传参
+        3、调用函数
+        4、删除对象上的函数 */
+    // Function.prototype.call2 = function (obj) {
+    //   obj = obj || window;
+    //   obj.func = this;
+    //   let args = [];
+    //   for (let i = 1; i < arguments.length; i++) {
+    //     args.push(`arguments[${i}]`);        
+    //   }
+    //   let res = eval(`obj.func(${args})`);
+    //   delete obj.func;
+    //   return res;
+    // }
+
+    // let obj = {
+    //   a: 1
+    // }
+
+    // a = 10;
+    // function aa(a,b) {
+    //   console.log(this.a);
+    //   console.log(a);
+    //   console.log(b);
+    //   return 2;
+    // }
+    // console.log(aa.call2(obj,'a','b'));
+
+    //apply 实现
+    // Function.prototype.apply2 = function (obj, arr) {
+    //   obj = obj || window;
+    //   obj.func = this;
+    //   let res;
+    //   if (!arr) {
+    //     let res = eval(`obj.func()`);
+    //   } else {
+    //     let args = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //       args.push(`arr[${i}]`);
+    //     }
+    //     let res = eval(`obj.func(${args})`);
+    //   }
+
+    //   delete obj.func;
+    //   return res;
+    // }
+
+    // let obj = {
+    //   a: 1
+    // }
+    // a = 10;
+
+    // function aa(a, b, c) {
+    //   console.log(this.a);
+    //   console.log('--------');
+    //   console.log(a);
+    //   console.log(b);
+    //   console.log(c);
+    //   return 2;
+    // }
+
+    //     Function.prototype.apply3 = function (context, arr) {
+    //     var context = Object(context) || window;
+    //     context.fn = this;
+
+    //     var result;
+    //     if (!arr) {
+    //         result = context.fn();
+    //     }
+    //     else {
+    //         var args = [];
+    //         console.log(arr);
+    //         for (var i = 0, len = arr.length; i < len; i++) {
+    //             args.push('arr[' + i + ']');
+    //         }
+    //         console.log(args.toString());
+    //         result = eval('context.fn(' + args + ')')
+    //     }
+
+    //     delete context.fn
+    //     return result;
+    // }
+    // Function.prototype.apply4 = function(context) {
+    //     if (typeof this !== 'function') {
+    //         throw new TypeError('Error')
+    //     }
+    //     context = context || window
+    //     context.fn = this
+    //     let result
+    //     if (arguments[1]) {
+    //         result = context.fn(...arguments[1])
+    //     } else {
+    //         result = context.fn()
+    //     }
+    //     delete context.fn
+    //     return result
+    // }
+
+    // let ars = ['a', 'b', 'c'];
+    // //  bb.call(obj,1,2,3,4);
+    // console.log(aa.apply2(obj, null));
+
+    //再一次手写call
+    /* 
+      1 call 是用一个指定的 this 和若干参数来调用函数的方法
+      2 .1 将函数指向到给定的 this , this 可以为 null
+        .2 传递函数的参数, 用 arguments 接收
+        .3 执行函数， 删除函数
+        .4 函数的返回值
+    */
+    // Function.prototype.call2 = function (obj) {
+    //   obj = obj || window;
+    //   obj.fn = this;
+    //   let arr = [];
+    //   for (let i = 1; i < arguments.length; i++) {
+    //     arr.push(`arguments[${i}]`);
+    //   }
+    //   return eval(`obj.fn(${arr})`);
+    //   delete obj.fn;
+    // }
+    // let obj = {
+    //   a: 1
+    // }
+    // let a = 10;
+
+    // function aa(b, c) {
+
+    //   console.log(b);
+    //   console.log(c);
+    //   return 2;
+    // }
+    // console.log(aa.call2(obj, 'b', 'c'));
+
+    // Function.prototype.apply2 = function (obj, arr) {
+    //   obj = obj || window;
+    //   obj.fn = this;
+    //   let args = [];
+    //   if (!arr) {
+    //     return obj.fn();
+    //   } else {
+    //     for (let i = 0; i < arr.length; i++) {
+    //       args.push(`arr[${i}]`);
+    //     }
+    //     return eval(`obj.fn(${args})`);
+    //   }
+    //   delete obj.fn;
+    // }
+
+    // let obj = {
+    //   a: 1
+    // }
+
+    // let arr = [2, 3, 'aa', 'bb'];
+
+    // function aa(a, b, c, d) {
+    //   console.log(this.a);
+    //   console.log(a);
+    //   console.log(b);
+    //   console.log(c);
+    //   console.log(d);
+    //   return 2;
+    // }
+    // console.log(aa.apply2(obj, arr));
+
+    //手写 bind
+    //函数调用的方法，当函数调用该方法时，不像 call,apply 一样直接运行函数，而是会返回一个函数
+    //参数，1：context 改变的 this 指向，后面都是函数所使用的参数。
+    //第一版 使用 call 或者 apply 来改变指向
+    // Function.prototype.bind2 = function (context) {
+    //   context = context || window;
+    //   let self = this;
+    //   return function () {
+    //     return self.call(context);
+    //   }
+    // }
+    //第二版 加入 bind 参数， bind 有两种方式传入参数。1、是从 bind 的时候填入参数。2、从 bind 返回的函数里填入参数
+    // Function.prototype.bind2 = function (context) {
+    //   context = context || window;
+    //   const self = this;
+    //   // console.log(this);
+    //   // console.log('___________');
+    //   let args = Array.prototype.slice.call(arguments, 1);
+    //   //这里不能使用箭头函数，如果使用箭头函数会导致 this 指向与父级相同(指向函数 a )， arguments获取到的
+    //   //参数就不是 bind2 返回的函数所获取的参数了，而会变成 bind2 所获得的参数。
+    //   return function () {
+    //     let argsBind = Array.prototype.slice.call(arguments);
+    //     return self.apply(context, (args.concat(argsBind)));
+    //   }
+    // }
+
+    // function a(a1, a2) {
+    //   console.log(a1);
+    //   console.log(a2);
+    //   console.log(this.z);
+    // }
+
+    // const foo = {
+    //   z: 'z'
+    // }
+
+    // let aa = a.bind2(foo, 1);
+    // aa(2);
+
+    // Function.prototype.call2 = function (obj) {
+    //   obj = obj || window;
+    //   obj.fn = this;
+    //   let arr = [];
+    //   for (let i = 1; i < arguments.length; i++) {
+    //     arr.push(`arguments[${i}]`);
+    //   }
+    //   return eval(`obj.fn(${arr})`);
+    //   delete obj.fn;
+    // }
+    // let obj = {
+    //   a: 1
+    // }
+    // let a = 10;
+
+    // function aa(b, c) {
+
+    //   console.log(b);
+    //   console.log(c);
+    //   return 2;
+    // }
+    // console.log(aa.call2(obj, 'b', 'c'));
+  </script>
+</body>
+
+</html>

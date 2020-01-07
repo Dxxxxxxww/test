@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //如何查找一个类实例及其父辈类上所有指定名称前缀的属性和方法名。
+    class A {
+      constructor() {
+        this.nameA = 'a';
+      }
+      validateA() {
+        console.log('A');
+      }
+    }
+    class B extends A {
+      constructor() {
+        super();
+        this.nameB = 'b';
+      }
+      validateB() {
+        console.log('B');
+      }
+    }
+    class C extends B {
+      constructor() {
+        super();
+        this.nameC = 'c';
+      }
+      validateB() {
+        console.log('C');
+      }
+    }
+
+    let c = new C();
+
+    const members = findMembers(c, 'name', 'validate');
+    console.log(members);
+
+    function findMembers(instance, fieldPrefix, funcPrefix) {
+
+      //递归函数
+      function _find(instance) {
+        //基线条件
+        if (instance.__proto__ === null) {
+          return [];
+        }
+
+        let names = Reflect.ownKeys(instance);
+        names = names.filter((name) => {
+          //过滤掉不满足条件的属性或方法
+          return _shouldKeep(name);
+        });
+
+        return [...names, ..._find(instance.__proto__)];
+      }
+
+      function _shouldKeep(val) {
+        if (val.startsWith(fieldPrefix) || val.startsWith(funcPrefix)) {
+          return true;
+        }
+      }
+
+      return _find(instance);
+    }
+  </script>
+</body>
+</html>

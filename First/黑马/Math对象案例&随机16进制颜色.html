@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dv {
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var strColor = getColor();
+            document.getElementById('dv').style.background = strColor;
+            console.log(strColor);
+        }
+    </script>
+</head>
+<body>
+    <div id="dv"></div>
+    <script>
+        //自己实现Math.max()方法
+        /* function MyMath() {
+            this.getMax = function () {
+                var max = arguments[0];
+                for (let i = 1; i < arguments.length; i++) {
+                    if (max < arguments[i]) {
+                        max = arguments[i];
+                    }
+                }
+                return max;
+            }
+        }
+        var myMath = new MyMath();
+        console.log(myMath.getMax(1,3,5,2,4,6,7,8,9)); */
+
+        //随机生成十六进制颜色
+        function getColor() {
+            var str = '#';
+            var arr = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+            for (let i = 0; i < 6; i++) {
+                var sup = Math.floor(Math.random()*16);
+                str += arr[sup];
+            }
+            return str;
+        }
+    </script>
+</body>
+</html>

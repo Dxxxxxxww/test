@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style-type: none;
+    }
+    .container {
+      position: relative;
+    }
+    .cloud {
+      position: absolute;
+      float: left;
+      width: 100px;
+      height: 50px;
+      background: rgba(249, 204, 157, 0.5);
+      pointer-events: none;
+    }
+    .uul li {
+      float: left;
+      margin-left: 10px;
+      width: 100px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      background: orange;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="cloud" id="cloud"></span>
+    <ul class="uul" id="items">
+      <li>董董董</li>
+      <li>喜喜喜</li>
+      <li>炜炜炜</li>
+      <li>岳岳岳</li>
+      <li>婷婷婷</li>
+      <li>婷婷婷</li>
+    </ul>
+  </div>
+  <script>
+    var cloud = document.getElementById('cloud');
+    var ulObj = document.getElementById('items');
+    var items = ulObj.children;
+    var defaultPlace = items[0].offsetLeft;
+    cloud.style.left = defaultPlace + 'px';
+
+    for (let i = 0; i < items.length; i++) {
+      items[i].onmouseover = overHandler;
+      items[i].onclick = clickHandler;
+      items[i].onmouseout = outHandler;
+    }
+    function overHandler() {
+      animate(cloud, this.offsetLeft);
+    }
+    function clickHandler() {
+      defaultPlace = this.offsetLeft;
+    }
+    function outHandler() {
+      animate(cloud, defaultPlace);
+    }
+
+
+    function animate(element, target) {
+      if (element.timeId) {
+        clearInterval(element.timeId);
+      }
+      var current = element.offsetLeft;
+      
+      element.timeId = setInterval(function () {
+        var step = (target - current)/5;
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        current += step;
+        element.style.left = current + 'px';
+        if (current == target) {
+          clearInterval(element.timeId);
+        }
+        console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+      }, 20);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <script language="javascript" type="text/javascript">
+      // 以下方式直接跳转  
+      //飞鸟慕鱼博客-直接跳转
+      // window.location.href = 'https://www.feiniaomy.com/';
+      // 五秒以后再跳转
+      // setTimeout("javascript:location.href='https://www.feiniaomy.com'", 5000);
+      // setTimeout(() => {
+      //     window.location.href = "https://www.taobao.com";
+      // }, 5000);
+
+      function debounce(fn, wait, immediate) {
+          console.log(3);
+          let timer = null;
+          return function () {
+              console.log(4);
+              let args = arguments
+              let context = this
+              if (immediate && !timer) {
+                  fn.apply(context, args)
+              }
+              if (timer) clearTimeout(timer)
+              timer = setTimeout(() => {
+                  fn.apply(context, args)
+              }, wait)
+          }
+      }
+      let inp = document.getElementById('aa');
+      inp.addEventListener('change',debounce(function () {
+          console.log(this.value);
+      },2000))
+  </script>
+</body>
+</html>

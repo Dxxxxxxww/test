@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    $(function () {
+      $('ul>li').mouseenter(function () {  
+        $(this).css('backgroundColor','red');
+      }).mouseout(function () {  
+        $(this).css('backgroundColor','');
+      }).click(function () {  
+        $(this).css({'fontSize':'32px','color':'yellow'});
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul>
+      <li>岳</li>
+      <li>婷</li>
+      <li>婷</li>
+      <li>董</li>
+      <li>喜</li>
+      <li>炜</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" name="btn" value="赞(1)" />
+  <input type="button" name="btn" value="赞(1)" />
+  <input type="button" name="btn" value="赞(1)" />
+  <script>
+    //使用闭包来点赞  我感觉可以使用对象
+    function getNum() {
+      let num = 1;
+      return function () {
+        this.value = '赞(' +(++num)+ ')';
+      };
+    }
+
+    let btnObjs = document.getElementsByTagName('input');
+    for (let i = 0; i < btnObjs.length; i++) {
+      btnObjs[i].onclick = getNum();
+    }
+  </script>
+</body>
+</html>

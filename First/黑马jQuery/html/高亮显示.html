@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+    }
+    li:first-child {
+      background-color: burlywood;
+    }
+    li:nth-child(2) {
+      background-color: brown;
+    }
+    li:nth-child(3) {
+      background-color: chocolate;
+    }
+    li:nth-child(4) {
+      background-color: crimson;
+    }
+    li:nth-child(5) {
+      background-color: darkviolet;
+    }
+    li:last-child {
+      background-color: orangered;
+    }
+    .cls {
+      color: blue;
+      font-size: 32px;
+    }
+  </style>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    $(function () {
+      $('ul>li').mouseenter(function () {
+        $(this).css('opacity', 1).siblings().css('opacity','0.5');
+        $('ul>li').attr('class','cls');
+      }).mouseout(function () {
+        $(this).css('opacity', '0.5');
+        $('ul>li').attr('class','');
+      }).click(function () {
+        alert('123');
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul>
+    <li>岳</li>
+    <li>婷</li>
+    <li>婷</li>
+    <li>董</li>
+    <li>喜</li>
+    <li>炜</li>
+  </ul>
+</body>
+</html>

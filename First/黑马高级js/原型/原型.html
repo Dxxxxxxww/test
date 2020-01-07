@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 原型引入
+    function Animal(name) {
+      this.name = name;
+      //(1)
+      // this.eat = function () {
+      //   console.log('吃骨头');
+      // }
+      //(2) 避免内存浪费，要数据共享，所以将函数提出来
+      this.eat = myEat;
+    };
+    var dog = new Animal('狗子');
+    // console.dir(dog);
+    // console.dir(Animal);
+
+    // console.log(dog.__proto__.constructor === Animal);  //true
+    // console.log(dog.constructor === Animal);            //true
+    // console.log(dog instanceof Animal);                 //true
+    var dog1 = new Animal('啊黑');
+    var dog2 = new Animal('大黄');
+    //(1) 
+    console.log(dog1.eat === dog2.eat); // false
+
+    function myEat() {
+      console.log('外面的eat');
+    }
+    //(2)
+    console.log(dog1.eat === dog2.eat); // true
+
+  </script>
+</body>
+</html>

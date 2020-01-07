@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //ES5 实现类
+    // function Point(x, y) {
+    //   this.x = x;
+    //   this.y = y;
+    // }
+
+    // Point.prototype.sayHi = function () {
+    //   console.log(this.x + ',' + this.y);
+    // }
+
+    // let point = new Point(1, 2);
+    // point.sayHi();
+
+    //ES6 实现类
+    class Point {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+
+      sayHi() {
+        console.log(this.x + ',' + this.y);
+      }
+    }
+
+    let point = new Point(1, 2);
+    point.sayHi();
+    console.log(Point.prototype);
+  </script>
+</body>
+
+</html>

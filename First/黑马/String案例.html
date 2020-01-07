@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //replace
+        /* var str = 'abcdefg';
+        if (str.indexOf('efg') !== -1) {
+           str = str.replace('efg','123');
+        }else {
+            console.log('不存在');
+        }
+        console.log(str); */
+
+        //查找相对应的字符串
+        /* var str = '董喜炜太帅啦';
+        var key = '董喜炜';
+        // str = str.match(key);
+        // console.log(str);
+        var index = str.indexOf(key);
+        str = str.substr(index,3);
+        console.log(str); */
+
+        //查找想要的字符在字符串中的第几位
+        /* var str = 'hello hola haho heiho heiho heiho';
+        var index = 0;
+        var key = 'o';
+        while ((index = str.indexOf(key,index))!== -1) {
+            console.log(index);
+            index++;
+        } */
+
+        //查找想要的字符在字符串中出现了几次
+        /* var str = 'hellohellohellowwwabc';
+        var obj = {};
+        for (let i = 0; i < str.length; i++) {
+            if (obj[str[i]]) {
+                obj[str[i]]++;
+            }else {
+                obj[str[i]] = 1;
+            }
+        }
+        console.log(obj); */
+
+        //输入英文单词，输出翻译
+/*         var obj = {
+            able: 'adj. 能；[经管] 有能力的；能干的',
+            abandon: 'n. 放任；狂热 vt. 遗弃；放弃',
+            ky: '空気が読めない'
+        }
+        var keyStr = prompt('您想查什么?');
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (key === keyStr) {
+                    console.log(obj[key]);
+                }                
+            }
+        } */
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @media screen and (min-width: 1200px) {
+            html {
+                font-size: calc(625% * 4.8)
+            }
+        }
+        @media screen and (min-width: 800px) and (max-width: 1200px) {
+            html {
+                font-size: calc(625% * 3.6)
+            }
+        }
+        @media screen and (max-width: 800px) {
+            html {
+                font-size: calc(625% * 2.4)
+            }
+        }
+        header ,footer {
+            width: 0.2rem;
+            height: 0.2rem;
+            background: red;
+            font-size: 0.1rem;
+        }
+        section {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: blue;
+            font-size: 0.1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <header>header</header>
+        <section>section</section>
+        <footer>footer</footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .map {
+      width: 800px;
+      height: 600px;
+      background: #ccc;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="map"></div>
+  <script>
+    var map = document.querySelector('.map');
+
+    //获取随机数自调用函数
+    (function (win) {
+      //构造函数
+      function Random() {
+        
+      }
+      //在原型上添加方法
+      Random.prototype.getRandom = function (min, max) {
+        return Math.floor( Math.random()*(max - min) + min );
+      };
+      //实例化对象添加到window属性上
+      win.random = new Random();
+    })(window);
+
+    //创建小方块
+    (function () {
+      //小方块构造函数
+      function Block(width, height, color) {
+        //默认为20
+        this.width = width || 20;
+        this.height = height || 20;
+        this.color = color || 'black';
+        this.x = 0;
+        this.y = 0;
+        this.element = document.createElement('div');
+      }
+
+      //初始化小方块
+      Block.prototype.init = function (map) {
+        var div = this.element;
+        div.style.position = 'absolute';
+        div.style.width = this.width + 'px';
+        div.style.height = this.height + 'px';
+        div.style.backgroundColor = this.color;
+        map.appendChild(div);
+        //x, y 坐标
+        this.render(map);
+      };
+
+      //渲染小方块坐标
+      Block.prototype.render = function (map) {
+        var x = random.getRandom(0, map.offsetWidth / this.width) * this.width;
+        var y = random.getRandom(0, map.offsetHeight / this.height) * this.height;
+        this.x = x;
+        this.y = y;
+        var div = this.element;
+        div.style.left = this.x + 'px';
+        div.style.top = this.y + 'px';
+      };
+
+      var food = new Block(20,20,'orange');
+      food.init(map);
+    })();
+
+  </script>
+</body>
+</html>

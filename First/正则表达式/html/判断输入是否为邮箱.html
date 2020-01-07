@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    input {
+      outline: none;
+    }
+
+    /* 淘宝腾讯和b站对浏览器自动填入改变输入框的背景颜色也没有处理 */
+    /* input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+      border: 1px solid #CCC!important;
+    } */
+  </style>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    $(function () {
+      let reg = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/;
+      $('#email').blur(function () {
+        if (reg.test($(this).val())) {
+          $(this).css('backgroundColor','green');
+          // this.style.backgroundColor = 'green';
+        }else {
+          $(this).css('backgroundColor','red');
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  请输入邮箱: <input type="text" name="email" id="email" value="" />
+
+</body>
+</html>

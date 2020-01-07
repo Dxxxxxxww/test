@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="four" style="position: absolute; left: 0; top: 0; z-index: 10;">start</button>
+  <div id="car" style="width: 300px;height: 150px; background: pink;position: absolute;">
+
+  </div>
+  <!-- <script>
+    //做任意运动 输入多个属性改变多个属性值做运动
+    var four = document.getElementById('four');
+    var car = document.getElementById('car');
+
+    var item = {
+      'height': 600,
+      'width': 800,
+      'left': 200,
+      'top': 100
+    };
+    four.onclick = function () {
+      animate(car,item);
+    }
+
+    //获取任意属性值
+    function getStyle(element, attr) {
+      return (window.getComputedStyle? window.getComputedStyle(element, null)[attr]: element.currentStyle[attr]) || -1;
+    }
+
+    //传入元素，任意属性， 目标值，做动画效果
+    function animate(element, json) {
+      if (element.timeId) {
+        clearInterval(element.timeId);
+      }
+      element.timeId = setInterval(function () {
+        //设置标记
+        var flag = true;
+        for (const attr in json) {
+          var current = parseInt(getStyle(element, attr));
+          var target = json[attr];
+          var step = (target - current)/5;
+          step = step > 0 ? Math.ceil(step) : Math.floor(step);
+          current += step;
+          element.style[attr] = current + 'px';
+
+          //当遍历json中属性时，倘若有一个属性尚未达到目标值，则将标记改为false，不清除定时器，直至所有值达到目标值。
+          if (current !== target) {
+            flag = false;
+          }
+          console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+        }
+        if (flag) {
+          clearInterval(element.timeId);
+        }
+      }, 20);
+    }
+  </script> -->
+
+  <!-- <script>
+      //做任意运动 输入多个属性改变多个属性值做运动  增添回调函数
+      var four = document.getElementById('four');
+      var car = document.getElementById('car');
+  
+      var item = {
+        'height': 600,
+        'width': 800,
+        'left': 200,
+        'top': 100
+      };
+      var item2 = {
+        'height': 300,
+        'width': 400,
+        'left': 100,
+        'top': 50
+      };
+      four.onclick = function () {
+        animate(car,item,function () {
+          animate(car,item2);
+        });
+      }
+  
+      //获取任意属性值
+      function getStyle(element, attr) {
+        return (window.getComputedStyle? window.getComputedStyle(element, null)[attr]: element.currentStyle[attr]) || -1;
+      }
+  
+      //传入元素，任意属性， 目标值，做动画效果
+      function animate(element, json, func) {
+        if (element.timeId) {
+          clearInterval(element.timeId);
+        }
+        element.timeId = setInterval(function () {
+          //设置标记
+          var flag = true;
+          for (const attr in json) {
+            var current = parseInt(getStyle(element, attr));
+            var target = json[attr];
+            var step = (target - current)/5;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current += step;
+            element.style[attr] = current + 'px';
+  
+            //当遍历json中属性时，倘若有一个属性尚未达到目标值，则将标记改为false，不清除定时器，直至所有值达到目标值。
+            if (current !== target) {
+              flag = false;
+            }
+            console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+          }
+          if (flag) {
+            clearInterval(element.timeId);
+            if (func) {
+              func();
+            }
+          }
+        }, 20);
+      }
+  </script> -->
+  <script>
+      //做任意运动 输入多个属性改变多个属性值做运动  增添回调函数 添加层级和透明度
+      var four = document.getElementById('four');
+      var car = document.getElementById('car');
+  
+      var item = {
+        'height': 600,
+        'width': 800,
+        // 'left': 200,
+        // 'top': 100,
+        'opacity': 0.2,
+        'zIndex': 1000
+      };
+      var item2 = {
+        'height': 300,
+        'width': 400,
+        // 'left': 100,
+        // 'top': 50,
+        'opacity': 0.6,
+        'zIndex': 1
+      };
+      four.onclick = function () {
+        animate(car,item,function () {
+          animate(car,item2);
+        });
+      }
+  
+      //获取任意属性值
+      function getStyle(element, attr) {
+        return (window.getComputedStyle? window.getComputedStyle(element, null)[attr]: element.currentStyle[attr]) || -1;
+      }
+  
+      //传入元素，任意属性， 目标值，做动画效果
+      function animate(element, json, func) {
+        if (element.timeId) {
+          clearInterval(element.timeId);
+        }
+        element.timeId = setInterval(function () {
+          //设置标记
+          var flag = true;
+          for (const attr in json) {
+            var current = 0 ;
+            var target = 0;
+            var step = 0;
+            if (attr == 'opacity') {
+              current = getStyle(element, attr) * 100; // 乘100 更好算，避免浮点数
+              target = json[attr] * 100;
+              step = (target - current) / 5;
+              step = step > 0 ? Math.ceil(step) : Math.floor(step);
+              current += step;
+              element.style[attr] = current / 100;
+            }else if (attr == 'zIndex') {
+              element.style[attr] = json[attr];
+            } else {
+              current = parseInt(getStyle(element, attr));
+              target = json[attr];
+              step = (target - current)/5;
+              step = step > 0 ? Math.ceil(step) : Math.floor(step);
+              current += step;
+              element.style[attr] = current + 'px';
+            }
+            //当遍历json中属性时，倘若有一个属性尚未达到目标值，则将标记改为false，不清除定时器，直至所有值达到目标值。
+            if (current !== target) {
+              flag = false;
+            }
+            console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+          }
+          if (flag) {
+            clearInterval(element.timeId);
+            if (func) {
+              func();
+            }
+          }
+        }, 20);
+      }
+    </script>
+</body>
+</html>

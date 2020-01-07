@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+    }
+
+    .cls {
+      color: blue;
+      font-size: 32px;
+    }
+  </style>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    $(function () {
+      $('button').click(function () {
+        // $('#tli').prev().css('backgroundColor', 'orange');
+        // $('#tli').prevAll().css('backgroundColor', 'orange');
+        // $('#tli').next().css('backgroundColor', 'orange');
+        // $('#tli').nextAll().css('backgroundColor', 'orange');
+        $('#tli').parent().css('backgroundColor', 'orange');
+      });
+    });
+  </script>
+</head>
+<body>
+  <button>btn</button>
+  <ul>
+    <li>岳</li>
+    <li>婷</li>
+    <li id="tli">婷</li>
+    <li>董</li>
+    <li>喜</li>
+    <li>炜</li>
+  </ul>
+</body>
+</html>

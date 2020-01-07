@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    table {
+      border: 1px solid black;
+      border-left: 0;
+      border-top: 0;
+    }
+    th {
+      background: blue;
+    }
+    th, td {
+      border: 1px solid black;
+      border-right: 0;
+      border-bottom: 0;
+    }
+    tr{
+      background: orange;
+    }
+    /* 隔行变色1，用css */
+    /* tr:nth-child(odd) {
+      background: orange;
+    }
+    tr:nth-child(even) {
+      background: red;
+    }
+    tr:nth-child(odd):hover {
+      background: #ccc;
+    }
+    tr:nth-child(even):hover {
+      background: pink;
+    } */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <table cellpadding='0' cellspacing = '0' id="tb">
+      <th colspan="2">haha</th>
+      <tr id="tr1">
+        <td>董喜炜</td>
+        <td>男</td>
+      </tr>
+      <tr>
+        <td>岳婷婷</td>
+        <td>女</td>
+      </tr>
+      <tr>
+        <td>男朋友</td>
+        <td>女朋友</td>
+      </tr>
+      <tr>
+        <td>老公</td>
+        <td>老婆</td>
+      </tr>
+      <tr>
+        <td>富二代</td>
+        <td>富婆</td>
+      </tr>
+      <tr>
+        <td>幸福</td>
+        <td>平安</td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    //隔行变色2，用js
+    var tb = document.getElementById('tb');
+    var trList = tb.getElementsByTagName('tr');
+    for (let i = 0; i < trList.length; i++) {
+      trList[i].style.background = (i % 2 === 0 ? 'orange' : 'pink');
+      trList[i].onmouseover = mouseoverHandler;
+      trList[i].onmouseout = mouseoutHandler;
+    }
+    var lastColor = '';
+    function mouseoverHandler() {
+      lastColor = this.style.background;
+      this.style.background = '#ccc';
+    }
+    function mouseoutHandler() {
+      this.style.background = lastColor;
+    }
+  </script>
+</body>
+</html>

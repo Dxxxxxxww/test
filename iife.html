@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <a href=""></a>
+  <script>
+    var elems = document.getElementsByTagName('a');
+    for (var i = 0; i < elems.length; i++) {
+      (function (lockedInIndex) {
+        console.log('lockedInIndex',lockedInIndex)
+        console.log('i',i)
+        elems[i].addEventListener('click', function (e) {
+          e.preventDefault();
+          alert('I am link #' + lockedInIndex);
+        }, false)
+      })(i);
+    }
+  </script>
+</body>
+
+</html>

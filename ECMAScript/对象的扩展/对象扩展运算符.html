@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //解构赋值的拷贝是浅拷贝
+    // let obj = {a:{b:1}};
+    // let {...x} = obj;
+    // console.log(x);
+    // obj.a.b = 2;
+    // console.log(x.a.b);
+
+    //扩展运算符的解构赋值，不能复制继承自原型对象的属性。
+    // let o1 = { a: 1};
+    // let o2 = { b: 2};
+    // o2.__proto__ = o1;
+    // let {...o3} = o2;
+    // console.log(o3);
+    // console.log(o3.a);
+
+    // let obj1 = Object.create({
+    //   name: 'protoName',
+    //   age: 'protoAge'
+    // });
+    // obj1.a = 'a';
+    // obj1.b = 'b';
+
+    // const clone1 = {
+    //   __proto__: Object.getPrototypeOf(obj1),
+    //   ...obj1
+    // }
+
+    // console.log(clone1);
+
+    // let obj2 = Object.create({
+    //   name: 'protoName',
+    //   age: 'protoAge'
+    // });
+    // obj2.a = 'a';
+    // obj2.b = 'b';
+    // const clone2 = Object.assign(
+    //   Object.create(Object.getPrototypeOf(obj2)),
+    //   obj2
+    // );
+    // console.log(clone2);
+
+    // let obj3 = Object.create({
+    // name: 'protoName',
+    // age: 'protoAge'
+    // });
+    // obj3.a = 'a';
+    // obj3.b = 'b';
+
+    // const clone3 = Object.create(
+    //   Object.getPrototypeOf(obj3),
+    //   Object.getOwnPropertyDescriptors(obj3)
+    // );
+    // console.log(clone3);
+
+    // let a = {
+    //   a: 1,
+    //   aa: 2,
+    //   aaa: 3
+    // };
+    // let b = {
+    //   b: 'b',
+    //   bb: 'bb',
+    //   bbb: 'bbb'
+    // }
+    // let ab = { ...a, ...b};
+    // console.log(ab);
+
+    let a = {
+      a: 1,
+      b: 2
+    };
+    let newA = {
+      ...a,
+      a: 2
+    }
+    console.log(newA);
+  </script>
+</body>
+
+</html>

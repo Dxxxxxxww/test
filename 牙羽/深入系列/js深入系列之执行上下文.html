@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var scope = "global scope";
+
+    function checkscope() {
+      var scope = "local scope";
+
+      function f() {
+        return scope;
+      }
+      return f;
+    }
+    checkscope()();
+    /* 
+      1. 执行全局代码，全局上下文入栈
+      2. 全局上下文初始化
+            变量对象 -> 使用 arguments 初始化，添加 scope，checkscope。
+            作用域链 -> global.vo
+            this -> 本身 global.vo
+          同时函数 checkscope 创建，保存父级所有作用域链到内部属性 [[Scopes]] -> global.vo
+      3. checkscope 执行, checkscope 上下文入栈
+      4. checkscope 上下文初始化
+            作用域链 -> 复制函数.Scopes
+            变量对象 -> 使用 arguments 初始化，scope， 函数 f
+            this -> undefined  -> window
+            将自身变量对象添加到作用域链头部， [AO, global.vo]
+          同时函数 f 创建，保存父级所有作用域链到内部属性 [[Scopes]] -> checkscope.vo global.vo
+      5. checkscope 执行完出栈
+      6. f 函数执行， f 上下文入栈
+      7. f 上下文初始化
+            作用域链 -> 复制函数.Scopes
+            变量对象 -> 使用 arguments 初始化，
+            this -> undefined -> window
+            将自身变量对象添加到作用域链头部， [AO, checkscope.vo, global.vo]   
+            闭包，即便父级函数上下文出栈了，仍然保留着作用域链（Scopes是在函数定义时产生的）
+            f 执行完出栈
+     */
+  </script>
+</body>
+
+</html>

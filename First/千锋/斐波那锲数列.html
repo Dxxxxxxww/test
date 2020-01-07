@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归-斐波那锲数列</title>
+</head>
+<body>
+    <script>
+        /* 斐波那锲数列  兔子问题 */
+        function rabbit(mounth) {
+            if (mounth < 3) {
+                return 1
+            }
+            return rabbit(mounth - 1) + rabbit(mounth - 2);
+        }    
+        console.log(rabbit(6))
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    "use strict";
+    var arr = ['o', 't', 'tr'];
+    for (var i = 0; i < arr.length; i++) {
+      console.log(i,arr[i]);
+      setTimeout(function () {
+        console.log(arr[i]);
+      }, i * 1000);
+    }
+    console.log('外部------', i);
+    //输出 undefined ，注意这里的i经过循环已经是3了。
+  </script>
+</body>
+
+</html>

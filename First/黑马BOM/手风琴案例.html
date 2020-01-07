@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      width: 1800px;
+      padding: 0 80px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    ul {
+      position: relative;
+      width: 1600px;
+      margin: 0 auto;
+    }
+    ul li {
+      list-style-type: none;
+      float: left;
+      width: 400px;
+      height: 600px;
+    }
+    .clearfix {
+      zoom: 1;
+    }
+    .clearfix::after {
+      content: "";
+      height: 0;
+      line-height: 0;
+      visibility: hidden;
+      display: block;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="nav">
+    <ul class="clearfix">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script>
+    var nav = document.getElementById('nav');
+    var ulObj = nav.children[0];
+    var list = ulObj.children;
+    for (let i = 0; i < list.length; i++) {
+      list[i].style.backgroundImage = 'url(../images/img/'+(i+1)+'.png)';
+      list[i].onmouseover = mouseoverHandler;
+      list[i].onmouseout = mouseoutHandler;
+    }
+
+    function mouseoverHandler() {
+      for (let j = 0; j < list.length; j++) {
+        animate(list[j],{'width': 130});
+      }
+      animate(this,{'width': 1210});
+    }
+    function mouseoutHandler() {
+      for (let j = 0; j < list.length; j++) {
+        animate(list[j],{'width': 400});
+      }
+    }
+
+
+          //获取任意属性值
+      function getStyle(element, attr) {
+        return (window.getComputedStyle? window.getComputedStyle(element, null)[attr]: element.currentStyle[attr]) || -1;
+      }
+  
+      //传入元素，任意属性， 目标值，做动画效果
+      function animate(element, json, func) {
+        if (element.timeId) {
+          clearInterval(element.timeId);
+        }
+        element.timeId = setInterval(function () {
+          //设置标记
+          var flag = true;
+          for (const attr in json) {
+            var current = 0 ;
+            var target = 0;
+            var step = 0;
+            if (attr == 'opacity') {
+              current = getStyle(element, attr) * 100; // 乘100 更好算，避免浮点数
+              target = json[attr] * 100;
+              step = (target - current) / 5;
+              step = step > 0 ? Math.ceil(step) : Math.floor(step);
+              current += step;
+              element.style[attr] = current / 100;
+            }else if (attr == 'zIndex') {
+              element.style[attr] = json[attr];
+            } else {
+              current = parseInt(getStyle(element, attr));
+              target = json[attr];
+              step = (target - current)/5;
+              step = step > 0 ? Math.ceil(step) : Math.floor(step);
+              current += step;
+              element.style[attr] = current + 'px';
+            }
+            //当遍历json中属性时，倘若有一个属性尚未达到目标值，则将标记改为false，不清除定时器，直至所有值达到目标值。
+            if (current !== target) {
+              flag = false;
+            }
+            console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+          }
+          if (flag) {
+            clearInterval(element.timeId);
+            if (func) {
+              func();
+            }
+          }
+        }, 20);
+      }
+  </script>
+</body>
+</html>

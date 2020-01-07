@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #container {
+      position: absolute;
+    }
+    #container img {
+      width: 300px;
+      height: 300px;
+    }
+    #sky span {
+      font-size: 24px;
+      color: white;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <!-- <input type="button" name="btn" id="stop" value="stop"/>
+  <script>
+    var interval = window.setInterval(function () {
+      console.log('董喜炜好帅啊，岳婷婷好美啊');
+    },2000);
+    document.getElementById('stop').onclick = function () {
+      window.clearInterval(interval);
+    }
+  </script> -->
+
+<!--   <button id="start">start</button>
+  <button id="stop">stop</button>
+  <div id="container">
+    <img src="../images/a.jpg" alt="" />
+    <img src="../images/b.png" alt="" />
+  </div>
+  <script>
+    //动起来案例
+    var div = document.getElementById('container');
+    var start = document.getElementById('start');
+    var stop = document.getElementById('stop');
+    var interval;
+    var flag = 0;
+    start.onclick = function () {
+      if (flag) {
+        console.log(flag);
+        return;
+      }
+      flag = 1;
+      interval = window.setInterval(function () {
+        var x = Math.ceil(Math.random()*200+100);
+        var y = Math.ceil(Math.random()*200+100);
+        div.style.left = x + 'px';
+        div.style.top = y + 'px';
+      },80)
+    }
+    stop.onclick = function () {
+      window.clearInterval(interval);
+      flag = 0;
+    }
+
+  </script> -->
+  
+<!--   <button id="start">start</button>
+  <button id="stop">stop</button>
+  <div id="sky" style="width: 500px; height: 500px; background: black;position: relative;"></div>
+  <script>
+    //五角星闪烁
+    var start = document.getElementById('start');
+    var stop = document.getElementById('stop');
+    var sky = document.getElementById('sky');
+    var interval ;
+    var flag = 0;
+    start.onclick = function () {
+      if (flag) {
+        return;
+      }
+      flag = 1;
+      sky.innerHTML = '<span>☆</span>';
+      interval = setInterval(function () {
+        var x = Math.ceil(Math.random()*200 + 100);
+        var y = Math.ceil(Math.random()*200 + 100);
+        sky.firstElementChild.style.left = x +'px';
+        sky.firstElementChild.style.top = y +'px';
+      }, 80);
+    }
+
+    stop.onclick = function () {
+      window.clearInterval(interval);
+      flag = 0;
+    }
+  </script> -->
+
+  <!-- <div>
+    <textarea name="protocol" id="protocol" cols="30" rows="10">哈哈</textarea>
+    <input type="button" name="btn" id="btn" value="请仔细阅读协议(5)" disabled/>
+  </div>
+  <script>
+    //倒计时 使按钮可点击
+    var btn = document.getElementById('btn');
+    var time = 5;
+    var interval = setInterval(function () {
+      time--;
+      btn.value = '请仔细阅读协议('+ time +')';
+      if (time<= 0) {
+        clearInterval(interval);
+        btn.disabled = false;
+        btn.value = '同意';
+      }
+    },1000);
+  </script> -->
+
+  <!-- <button id="start">start</button>
+  <div id="box" style="width: 300px; height: 300px; background: pink;">
+
+  </div>
+  <script>
+    var box = document.getElementById('box');
+    var start = document.getElementById('start');
+    var opacity = 10;
+    start.onclick = function () {
+      var interval = setInterval(function () {
+        opacity--;
+        box.style.opacity = opacity / 10;
+        if (opacity <= 0) {
+          clearInterval(interval);
+        }
+      },200);
+    }
+  </script> -->
+
+  <!-- <button id="start">start</button>
+  <div id="box" style="width: 300px; height: 300px; background: pink; border-radius: 50px;">
+  <script>
+    var btn = document.getElementById('start');
+    var box = document.getElementById('box');
+
+    btn.onclick = function () {
+      var width = 300;
+      var interval = setInterval(function () {
+        console.log(interval);
+        width+=10;
+        box.style.width = width + 'px';
+        if (width >= 600) {
+          clearInterval(interval);
+        }
+      },20);
+    }
+  </script> -->
+  
+</body>
+</html>

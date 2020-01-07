@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="button"></button>
+  <script>
+    function Button(id) {
+      this.element = document.querySelector('#' + id);
+      this.bindEvent();
+    }
+    Button.prototype.bindEvent = function () {
+      console.log(this);
+      // 当使用 addEventListener 为一个元素 (这里指的是 this.element)注册事件的时候，事件函数里的 this 值是该元素的引用(也就是说 this.setBgColor 这里的 this 指的是 this.element)。
+      this.element.addEventListener('click', this.setBgColor, false);
+    }
+    Button.prototype.setBgColor = function () {
+      console.log(this);
+      this.element.style.backgroundColor = '#1abc9c';
+    }
+
+    let btn = new Button('button');
+  </script>
+</body>
+
+</html>

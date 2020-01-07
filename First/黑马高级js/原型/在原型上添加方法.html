@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../JavaScript/comman.js"></script>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn">btnbtn</button>
+  <div id="div1"></div>
+  <script>
+    // function Person(name) {
+    //   this.name = name;
+    // }
+    // Person.prototype.eat = function () {
+    //   console.log('吃了吗？');
+    // }
+    // var per1 = new Person('小红');
+    // var per2 = new Person('小蓝');
+    // console.log(per1 === per2);
+    // console.log(per1.eat === per2.eat);
+    // per1.eat();
+
+      function ChangeStyle(btnObj, targetObj, json) {
+        this.btnObj = btnObj;
+        this.targetObj = targetObj;
+        this.json = json;
+      }
+
+      ChangeStyle.prototype.init = function () {
+        var that = this;
+        this.btnObj.onclick = function () {
+          for (const key in that.json) {
+            that.targetObj.style[key] = that.json[key];
+          }
+        }
+      }
+
+      var jsons = {
+        'width': '200px',
+        'height': '200px',
+        'background': 'pink'
+      }
+      var cs = new ChangeStyle(my$('btn'),my$('div1'),jsons);
+      cs.init();
+  </script>
+</body>
+</html>

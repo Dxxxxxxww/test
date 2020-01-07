@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(name, age, sex) {
+      this.name = name;
+      this.age = name;
+      this.sex = sex;
+    }
+    Person.prototype.study = function () {
+      console.log('学习是一辈子的事情');
+    };
+
+    function Student(name, age, sex, score) {
+      Person.call(this, name, age, sex);
+      this.score = score;
+    }
+
+    let stu1 = new Student('小明',10,'male',100);
+    console.log(stu1.name, stu1.age, stu1.sex, stu1.score);
+    let stu2 = new Student('小红',10,'female',100);
+    console.log(stu2.name, stu2.age, stu2.sex, stu2.score);
+    let stu3 = new Student('小黄',10,'male',100);
+    console.log(stu3.name, stu3.age, stu3.sex, stu3.score);
+    stu1.study();
+
+  </script>
+</body>
+</html>

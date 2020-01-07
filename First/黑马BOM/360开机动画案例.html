@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../JavaScript/comman.js"></script>
+  <style>
+    .container {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+    }
+    .div1 {
+      width: 400px;
+      height: 400px;
+      background: pink;
+      text-align: right;
+    }
+    .div2 {
+      width: 400px;
+      height: 200px;
+      background: orange;
+    }
+    span {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="box">
+    <div class="div1">x</div>
+    <div class="div2"></div>
+  </div>
+  <script>
+    var box = my$('box');
+    var div1 = box.children[0];
+    var div2 = box.children[1];
+    var span = div1.children[0];
+
+    div1.onclick = function () {
+      animate(div2,{'height':0}, function () {
+        animate(box,{'width': 0});
+      })
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="uu">
+        <li>一</li>
+        <li>二</li>
+        <li>三</li>
+        <li>四</li>
+        <li>五</li>
+        <li>六</li>
+    </ul>
+    <script>
+        //element.firstChild --- 谷歌和火狐获取的是第一个子节点
+        //element.firstChild --- IE8获取的是第一个子元素
+        //element.firstElementChild --- 谷歌和火狐是第一个子元素，IE8不支持
+        //获取任意一个父级元素的第一个子级元素
+        function getFirstElementChild(ele) {
+            if (ele.firstElementChild) { //true-->支持
+                return ele.firstElementChild;
+            }else {
+                var node = ele.firstChild; //第一个节点
+                //当ele.firstElementChild)不兼容且node又不是元素时。
+                while (node&&node.nodeType !== 1) { 
+                    node = node.nextSibling;
+                }
+                return node;
+            }
+        }
+
+        //获取任意一个父级元素的最后一个子级元素
+        function getLastElementChild(ele) {
+            if (ele.lastElementChild) { //true-->支持
+                return ele.lastElementChild;
+            }else {
+                var node = ele.lastChild; //第一个节点
+                //当ele.firstElementChild)不兼容且node又不是元素时。
+                while (node&&node.nodeType !== 1) { 
+                    node = node.previousSibling;
+                }
+                return node;
+            }
+        }
+
+        console.log(getFirstElementChild(document.getElementById('uu')).innerText);
+        console.log(getLastElementChild(document.getElementById('uu')).innerText);
+    </script>
+</body>
+</html>

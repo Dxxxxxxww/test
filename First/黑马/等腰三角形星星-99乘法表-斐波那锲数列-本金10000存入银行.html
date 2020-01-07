@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>黑马程序员js练习</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //画 等腰三角形星星
+        // for (let i = 0; i < 5; i++) {
+        //     if (i > 0) {
+        //         for (let x = 5 - 1; x >= i; x--) {
+        //             document.write('&nbsp;');
+        //         }
+        //     }
+        //     for (let j= 0; j < i; j++) {
+        //         document.write('★');
+        //     }
+        //     if (i > 0) {
+        //         document.write('<br/>')
+        //     }
+        // }
+        
+        // 99乘法表
+        // document.write("<table>");
+        // for (let i = 1; i < 10; i++) {
+        //     document.write('<tr>');
+        //     for (let j = 1; j <= i; j++) {
+        //         document.write('<td>');
+        //         document.write(j + ' * ' + i + ' = ' + i * j + '&nbsp;');
+        //         document.write('</td>');
+        //     }
+        //     document.write('</tr>');
+        // }
+
+        //斐波那锲数列 3个月生兔子 非递归
+       /*  function rabbits(mounth) {
+            if (mounth < 0) {
+                return 'error , mounth must > 0 !'
+            }
+            var rabbitSum ;
+            var numPre = 1;
+            var numAfter = 1;
+            if (mounth <= 2) {
+                return 1;
+            }else {
+                for (let i = 3; i <= mounth; i++) {
+                    rabbitSum = numPre + numAfter;
+                    numPre = numAfter;
+                    numAfter = rabbitSum;
+                }   
+                return rabbitSum;
+            }
+        }
+        console.log(rabbits(6)); */
+
+        //本金10000存入银行，年利率千分之3，每过1年，将本金和利息相加作为新的本金。 5年后多少？
+        // function moneyRate(year) {
+        //     if (year < 0) {
+        //         return 'error!';
+        //     }
+        //     var money = 10000;
+        //     var rate = 0.003;
+        //     for (let i = 0; i  < year; i++) {
+        //         // money = money + money * rate;
+        //         money += money * rate;             
+        //     }
+        //     return money;
+        // }
+        // console.log(moneyRate(5));
+
+        
+    </script>
+</body>
+</html>

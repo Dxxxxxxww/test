@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style-type: none;
+        }
+        .hd ul, .bd ul {
+            position: relative;
+        }
+        .hd ul li {
+            width: 100px;
+            height: 50px;
+            margin: 0 5px;
+            border: 1px solid black;
+            float: left;
+            background: pink;
+        }
+        .bd ul li {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: pink;
+            width: 500px;
+            height: 500px;
+            display: none;
+        }
+        .clearfix:after {
+            content: "";
+            height: 0;
+            line-height: 0;
+            visibility: hidden;
+            display: block;
+            clear: both
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .hd ul li.current {
+            background: orange;
+        }
+        .bd ul li.bdcurrent {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="box">
+        <div class="hd clearfix">
+            <ul>
+                <li  class="current">新闻</li>
+                <li>综合</li>
+                <li>加入</li>
+                <li>设置</li>
+            </ul>
+        </div>
+        <div class="bd clearfix">
+            <ul>
+                <li class="bdcurrent">这是新闻板块</li>
+                <li>这是综合板块</li>
+                <li>这是加入板块</li>
+                <li>这是设置板块</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var divs = document.getElementById('box').getElementsByTagName('div');
+        var itemTabs = divs[0].getElementsByTagName('li');
+        var bodys = divs[1].getElementsByTagName('li');
+
+        for (let i = 0; i < itemTabs.length; i++) {
+            itemTabs[i].setAttribute('index',i);
+            itemTabs[i].onclick = function () {
+                //先清除所有类样式
+                for (let j = 0; j < itemTabs.length; j++) {
+                    itemTabs[j].removeAttribute('class');
+                    bodys[j].removeAttribute('class');
+                }
+                //再设置点击项的样式
+                this.className = 'current';
+                //第三件事，通过index属性值来切换选项卡
+                bodys[this.getAttribute('index')].className = 'bdcurrent';
+            }
+        }
+    </script>
+</body>
+</html>

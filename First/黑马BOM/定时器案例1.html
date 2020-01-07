@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #car {
+      width: 300px;
+      height: 150px; 
+      background: pink;
+      position: absolute; 
+      top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <button id="four">400px</button>
+  <button id="eight">800px</button>
+  <div id="car">
+
+  </div>
+  <!-- <script>
+    //利用定时器来做动画效果  匀速动画
+    var four = document.getElementById('four');
+    var eight = document.getElementById('eight');
+    var car = document.getElementById('car');
+    
+    four.onclick = function () {
+      move(car, 400);
+    }
+    eight.onclick = function () {
+
+      move(car, 800);
+    }
+
+    function move(element, target) {
+      //每次开始时先清理一次定时器。
+      if (element.interval) {
+        console.log('element.interval==='+element.interval);
+        clearInterval(element.interval);
+      }
+      //当前位置
+      var current = element.offsetLeft;
+      //步进
+      var step = 9;
+      step = (target > current) ? step : -step;
+      //移动 如果使用var 来创建定时器，那么每点一次就会开辟一个空间创建一个定时器所以将定时器设置在元素的属性上，这样就是改变元素的指向
+      element.interval = setInterval(function () {
+        console.log('第一次step：'+step);
+        current += step;
+        if (Math.abs(current - target) > Math.abs(step)) {
+          car.style.left = current + 'px';
+        }else {
+          console.log('element.interval++++'+element.interval);
+          clearInterval(element.interval);
+          element.style.left = target + 'px';
+        }
+      },10);
+    }
+  </script> -->
+  <!-- <script>
+    //变速
+    var four = document.getElementById('four');
+    var eight = document.getElementById('eight');
+    var car = document.getElementById('car');
+
+    four.onclick = function () {
+      animate(car, 400);
+    }
+    eight.onclick = function () {
+      animate(car, 800);
+    }
+
+    function animate(element, target) {
+      if (element.timeId) {
+        clearInterval(element.timeId);
+      }
+      var current = element.offsetLeft;
+      
+      element.timeId = setInterval(function () {
+        var step = (target - current)/5;
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        current += step;
+        element.style.left = current + 'px';
+        //变速运动 速度除到最后肯定会变为1所以只存在等于的情况
+        if (current == target) {
+          clearInterval(element.timeId);
+        }
+        console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+      }, 20);
+    }
+  </script> -->
+  <script>
+    //做任意运动 输入单个属性改变单个属性值做运动 增添getStyle()函数，用来获取属性
+    var four = document.getElementById('four');
+    var eight = document.getElementById('eight');
+    var car = document.getElementById('car');
+
+    var item = 'left';
+    four.onclick = function () {
+      animate(car,item,400);
+    }
+    eight.onclick = function () {
+      animate(car,item,800);
+    }
+
+    //获取任意属性值 但是这个函数要获取left等值，元素需要设置position，如果没有设置，top left right bottom等值都是0。因为一般而言只有设置了position才会去修改left等值。 
+    function getStyle(element, attr) {
+      return window.getComputedStyle? window.getComputedStyle(element, null)[attr]: element.currentStyle[attr];
+    }
+
+    //传入元素，任意属性， 目标值，做动画效果
+    function animate(element, attr, target) {
+      if (element.timeId) {
+        clearInterval(element.timeId);
+      }
+      var current = parseInt(getStyle(element, attr));
+      
+      element.timeId = setInterval(function () {
+        var step = (target - current)/5;
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        current += step;
+        element.style[attr] = current + 'px';
+        //变速运动 速度除到最后肯定会变为1所以只存在等于的情况
+        if (current == target) {
+          clearInterval(element.timeId);
+        }
+        console.log('目标位置: '+target+'当前位置: '+current+'当前速度: '+ step);
+      }, 20);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="../images/a.jpg" alt="" width="200" height="100" id="img1" style="position:absolute;" />
+  <script>
+    //图片跟随鼠标移动
+    var img = document.getElementById('img1');
+
+    //兼容代码写入对象当中 兼容ie8
+    var EVT = {
+      //如果有事件对象e则用事件对象e，如果没有则用window.event
+      getEvent: function (e) {
+        return e || window.event;
+      },
+      //获取可视区域横坐标
+      getClientX: function (e) {
+        return this.getEvent(e).clientX;
+      },
+      //获取可视区域纵坐标
+      getClientY: function (e) {
+        return this.getEvent(e).clientY;
+      },
+      //获取左边滚动距离
+      getScrollLeft: function () {
+        return window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft;
+      },
+      //获取上边滚动距离
+      getScrollTop: function () {
+        return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+      },
+      //获取文档横坐标
+      getPageX: function (e) {
+        return this.getEvent(e).pageX ? this.getEvent(e).pageX : (this.getClientX(e) + this.getScrollLeft());
+      },
+      //获取文档纵坐标
+      getPageY: function (e) {
+        return this.getEvent(e).pageY ? this.getEvent(e).pageY : (this.getClientY(e) + this.getScrollTop());
+      },
+    }
+
+    document.onmousemove = function (e) {
+      img.style.left = EVT.getPageX(e) + 'px';
+      img.style.top = EVT.getPageY(e) + 'px';
+    }
+  </script>
+</body>
+
+</html>

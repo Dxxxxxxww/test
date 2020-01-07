@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Person(age) {
+      this.age = age;
+    }  
+
+    function Student(num) {
+      this.num = num;
+    }
+
+    Student.prototype = new Person(10);
+
+    Student.prototype.eat = function () {
+      console.log('eat');
+    };
+
+    let stu = new Student();
+    let per = new Person(10);
+    console.log('stu:');
+    console.dir(stu);
+    console.log('Student:');
+    console.dir(Student);
+    console.log('per:');
+    console.dir(per);
+    console.log('Person:');
+    console.dir(Person);
+  </script>
+</body>
+</html>

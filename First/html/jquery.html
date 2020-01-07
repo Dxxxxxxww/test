@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("input").focus(function () {
+                $("span").css("display","inline");
+            });
+            $("input").blur(function(){
+                $("span").fadeOut(2000);
+            });
+        })
+    </script>
+    <style>
+        span {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text"/>
+        <span>请输入你的电话号码</span>
+    </div>
+</body>
+</html>

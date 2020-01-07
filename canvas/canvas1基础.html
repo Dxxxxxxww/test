@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+<style>
+  .cvs {
+    border: 1px solid red;
+  }
+</style>
+</head>
+
+<body>
+  <canvas id="app" class="cvs" width="500px" height="500px">您的浏览器版本过旧，请升级至最新版本</canvas>
+  <script>
+    function draw() {
+      const canvas = document.querySelector('#app');
+      let cvsCtx;
+      if (canvas.getContext) {
+        cvsCtx = canvas.getContext('2d');
+      }
+
+      cvsCtx.fillStyle = 'rgb(200,0,0)';
+      cvsCtx.fillRect(10, 10, 200, 100);
+
+      cvsCtx.fillStyle = 'rgb(10,10,10)';
+      cvsCtx.fillRect(10, 10, 50, 50);
+    }
+    draw();
+  </script>
+</body>
+
+</html>

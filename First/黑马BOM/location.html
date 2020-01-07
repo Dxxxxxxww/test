@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 当前网址为
+    // http://user:passwd@www.example.com:4097/path/a.html?x=111#part1
+    console.log(window.location.href);          // "http://user:passwd@www.example.com:4097/path/a.html?x=111#part1"
+    console.log(window.location.protocol);      // "http:"
+    console.log(window.location.host);          // "www.example.com:4097"
+    console.log(window.location.hostname);      // "www.example.com"
+    console.log(window.location.port);          // "4097"
+    console.log(window.location.pathname);      // "/path/a.html"
+    console.log(window.location.search);        // "?x=111"
+    console.log(window.location.hash);          // "#part1"
+    console.log(window.location.username);      // "user"
+    console.log(window.location.password);      // "passwd"
+    console.log(window.location.origin);        // "http://user:passwd@www.example.com:4097"
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选择排序法</title>
+</head>
+<body>
+    <p>通过选择一个元素与其他元素的比较 --- b站毕向东30天java</p>
+    <script>
+        var arr = [1,9,2,8,3,7,4,6,5]
+        function xuanZe(arr) {
+            var temp;
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[i]>arr[j]) {
+                        temp = arr[j];
+                        arr[j] = arr[i];
+                        arr[i] = temp;
+                    }
+                }
+            }
+        }
+        console.log(arr);
+        xuanZe(arr);
+        console.log(arr);
+    </script>
+</body>
+</html>

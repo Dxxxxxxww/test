@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //apply call
+    // function f1(x, y) {
+    //   return (x+y) + '=======>this指向: ' + this;
+    // } 
+    // console.log(f1(1,2));
+    // let obj = {};
+    // console.log(obj);
+
+    // console.log(f1.apply(obj, [1, 2]));
+    // console.log(f1.call(obj, 1, 2));
+
+    // console.dir(f1);
+    // function Person() {  }
+    // console.dir(Person);
+
+    // bind
+    // function ShowRandomNums() {
+    //   this.num = Math.ceil( Math.random()*10 );
+    // }
+    // ShowRandomNums.prototype.show1 = function () {
+    //   setInterval(this.show2.bind(this),1000);
+    // };
+    // ShowRandomNums.prototype.show2 = function () {
+    //   console.log(this.num);
+    // };
+
+    // let showObj = new ShowRandomNums();
+    // showObj.show1();
+
+    function abcd() {
+      console.log(arguments);
+      console.log(abcd.arguments);
+    }
+    abcd(1,2,3);
+  </script>
+</body>
+</html>

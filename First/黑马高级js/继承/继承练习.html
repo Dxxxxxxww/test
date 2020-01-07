@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Animal(name, weight) {
+      this.name = name;
+      this.weight = weight;
+    }  
+
+    Animal.prototype.eat = function () {
+      console.log('Animal:    吃吃吃就知道吃');
+    };
+
+    function Dog(color) {
+      this.color = color;
+    }
+
+    Dog.prototype = new Animal('阿金','50kg');
+    Dog.prototype.bite = function () {
+      console.log('Dog:     咬人啦咬人啦');
+    };
+
+    function JinMao() {
+      
+    }
+
+    JinMao.prototype = new Dog('gold');
+    JinMao.prototype.play = function () {
+      console.log('play~~~');
+    };
+
+    let jinDoge = new JinMao();
+    console.log(jinDoge.name);
+    console.log(jinDoge.weight);
+    jinDoge.eat();
+    jinDoge.bite();
+    jinDoge.play();
+    console.dir(JinMao);
+  </script>
+</body>
+</html>

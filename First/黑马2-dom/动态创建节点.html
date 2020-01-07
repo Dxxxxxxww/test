@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script>
+        //  1、document.write()
+        //  2、obj.innerHTML()
+        //  3、document.createElement('标签名')
+    </script>
+    <div id="dv" style="width:300px;height:200px;border: 1px solid pink;"></div>
+    <button id="btn">btnbtn</button>
+    <script>
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            document.getElementById('dv').innerHTML = "<p>这是一个P</p>";
+        }
+    </script> -->
+
+    <!-- <button id="btn">btnbtn</button>
+    <div id="box" style="width:500px;height: 500px;border: 1px solid pink;"></div>
+    <script>
+        //动态创建元素
+        var box = document.getElementById('box');
+        var btn = document.getElementById('btn');
+        var arr = ['董喜炜','岳婷婷','非常','恩爱哦','非常','幸福哦'];
+
+        btn.onclick = function () {
+            var str = '<ul style="list-style-type:none;">';
+            for (let i = 0; i < arr.length; i++) {
+                str += '<li>' + arr[i] + '</li>'; 
+            }
+            str += '</ul>';
+            box.innerHTML = str;
+
+            var list = box.getElementsByTagName('li');
+            for (let i = 0; i < list.length; i++) {
+                list[i].onmouseover = function () {
+                    this.style.backgroundColor = 'yellow';
+                    this.style.cursor = 'pointer';
+                }
+
+                list[i].onmouseout = function () {
+                    this.style.backgroundColor = '';
+                }
+            }
+        }
+    </script> -->
+    <!-- <div id="dv" style="width:200px;height:200px;border:1px dashed pink;"></div>
+    <script>
+        var dv = document.getElementById('dv');
+        dv.onclick = function () {
+            var pObj = document.createElement('p');
+            // pObj.innerText= '这又是一个P';
+            // var str = '这又是一个P';
+            // pObj.append(str);
+            pObj.textContent ='这又是一个P';
+            dv.append(pObj);
+        }
+    </script> -->
+
+    <!-- <div id="dv" style="width:300px;height: 300px;border: 1px solid pink;"></div>
+    <script>
+        var dv = document.getElementById('dv');
+        var kungfu = ['坐忘经','北冥剑气','天道剑势','秀明尘身','雪絮金屏','松烟竹雾'];
+        dv.onclick = function () {
+            var ulObj = document.createElement('ul');
+            dv.appendChild(ulObj);
+
+            for (let i = 0; i < kungfu.length; i++) {
+                var liObj = document.createElement('li');
+                liObj.innerText = kungfu[i];
+                dv.appendChild(liObj);
+
+                liObj.onmouseover = mouseoverHandle;
+                liObj.onmouseout = mouseoutHandle;
+            }
+        }
+
+        function mouseoverHandle() {
+            this.style.backgroundColor = 'orange';
+            this.style.cursor = 'pointer';
+        }
+        function mouseoutHandle() {
+            this.style.backgroundColor = '';
+        }
+    </script> -->
+
+    <!-- <button id="btn">btnbtn</button>
+    <div id="dv" style="width: 300px;height: 300px;border: 1px solid pink;"></div>
+    <script>
+        var dv = document.getElementById('dv');
+        var btn = document.getElementById('btn');
+        var arr = [
+            {name:'淘宝',src: 'https://www.taobao.com'},
+            {name:'百度',src: 'https://www.baidu.com'},
+            {name:'知乎',src: 'https://www.zhihu.com'},
+            {name:'斗鱼',src: 'https://www.douyu.com'},
+            {name:'b站',src: 'https://www.bilibili.com'},
+        ];
+        btn.onclick = function () {
+            var tableObj = document.createElement('table');
+            tableObj.border = '1';
+            tableObj.cellPadding = '0';
+            tableObj.cellSpacing = '0';
+            dv.appendChild(tableObj);
+            for (let i = 0; i < arr.length; i++) {
+                var trObj = document.createElement('tr');
+                tableObj.appendChild(trObj);
+                
+                var tdObj1 = document.createElement('td');
+                tdObj1.innerText = arr[i].name;
+                tableObj.appendChild(tdObj1);
+
+                var tdObj2 = document.createElement('td');
+                tdObj2.innerHTML = '<a href="'+arr[i].src+'">'+arr[i].name+'</a>';
+                tableObj.appendChild(tdObj2);
+            }
+        }
+    </script> -->
+
+    <!-- <button id="add">添加</button>
+    <button id="remove">单个删除</button>
+    <button id="removeAll">全删除</button>
+    <button id="replace">替换</button>
+    <div id="dv" style="width: 300px;height: 30px;border: 2px dashed pink;"></div>
+    <script>
+        //按钮的增删改 节点的增删改，元素的增删改
+        var dv = document.getElementById('dv');
+        var index = 0;
+        document.getElementById('add').onclick = function () {
+            var btnObj = document.createElement('button');
+            index++;
+            btnObj.innerText = '按钮'+index;
+            dv.insertBefore(btnObj,dv.firstElementChild);
+        }
+        document.getElementById('remove').onclick = function () {
+            dv.removeChild(dv.firstElementChild);
+        }
+        document.getElementById('removeAll').onclick = function () {
+            while (dv.firstElementChild) {
+                dv.removeChild(dv.firstElementChild);
+            }
+        }
+        document.getElementById('replace').onclick = function () {
+            var p = document.createElement('p');
+            p.innerText = '这是一个P';
+            dv.replaceChild(p,dv.firstElementChild);
+        }
+
+    </script> -->
+
+    <!-- <div id="container">
+        <button id="btn">btnbtn</button>
+    </div>
+    <script>
+        //只创建一次
+        document.getElementById('btn').onclick = function () {
+            if (!document.getElementById('btn2')) {
+                var btnObj = document.createElement('input');
+                btnObj.id = 'btn2';
+                btnObj.type = 'button';
+                btnObj.value = 'btn2';
+                document.getElementById('container').append(btnObj);
+            }
+        }
+    </script> -->
+</body>
+</html>

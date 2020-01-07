@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Symbol</title>
+</head>
+
+<body>
+    <script>
+        // const a = Symbol('a');
+        // console.log(String(a));
+        // console.log(a.description);
+
+        //3 作为属性名的Symbol-------------
+        // let mySymbol = Symbol('hello');
+        // let a = {
+        //   [mySymbol] : 'world'
+        // }
+        // console.log(a[mySymbol]);
+        // 第二种写法
+        // let a = {};
+        // a[mySymbol] = 'world';
+        // console.log(a[mySymbol]);
+        // 第三种写法
+        // let a = {};
+        // Object.defineProperty(a, mySymbol, {value: 'world!'});
+        // console.log(a[mySymbol]); 
+        //注: Symbol值作为对象属性名时，不能用点运算符。 因为点运算符后面总是字符串
+        //同理，在对象的内部，使用 Symbol 值定义属性时，Symbol 值必须放在方括号之中。
+        /* Symbol 作为属性名，该属性不会出现在for...in、for...of循环中，
+        也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。
+        但是，它也不是私有属性，有一个Object.getOwnPropertySymbols方法，
+        可以获取指定对象的所有 Symbol 属性名。 
+        可以利用这个特性，为对象定义一些非私有的、但又希望只用于内部的方法。*/
+        /*     let size = Symbol('size');
+            class Collection {
+              constructor() {
+                this[size] = 0;
+              }
+
+              add(item) {
+                this[this[size]] = item;
+                this[size]++;
+              }
+
+              static sizeOf(instance) {
+                return instance[size];
+              }
+            }
+
+            let x = new Collection();
+            console.log(Collection.sizeOf(x));//0
+            x.add('foo');
+            console.log(Collection.sizeOf(x));//1
+            console.log(x[0]);//foo
+
+            console.log(x);//Collection {0: "foo", Symbol(size): 1}
+            console.log(Object.keys(x));//["0"]
+            console.log(Object.getOwnPropertyNames(x));//["0"]
+            console.log(Object.getOwnPropertySymbols(x));//[Symbol(size)] */
+        /*     //6 Symbol.for() Symbol.keyFor()
+            // let s1 = Symbol.for('foo');
+            // let s2 = Symbol.for('foo');
+            // console.log(s1 === s2); //true 
+
+            let s1 = Symbol.for('foo');
+            console.log(Symbol.keyFor(s1));//foo
+            let s2 = Symbol('foo');
+            console.log(Symbol.keyFor(s2));//undefined */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>此文件是轮播图拆解步骤的简单组合，并不是最终效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      box-sizing: border-box;
+    }
+    .container {
+      width: 400px;
+      height: 200px;
+      border: 1px solid red;
+      position: relative;
+      overflow: hidden;
+    }
+    .inner {
+      position: relative;
+      width: 400px;
+      height: 200px;
+    }
+    .inner ul {
+      width: 1000%;
+      position: absolute;
+    }
+    .inner ul li {
+      float: left;
+    }
+    img {
+      width: 400px;
+      height: 200px;
+    }
+    .square {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+    .square span {
+      display: inline-block;
+      /* float: left; */
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      background: white;
+      cursor: pointer;
+    }
+    .square span:hover {
+      background: orange;
+    }
+    .arrow {
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      display: none;
+    }
+    .arrow span {
+      width: 50px;
+      height: 50px;
+      background: rgba(240, 240, 240, 0.2);
+      color: #ccc;
+      line-height: 50px;
+      font-size: 36px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .container:hover .arrow {
+      display: block;
+    }
+    .left {
+      float: left;
+    }
+    .right {
+      float: right;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      alert('此文件是轮播图拆解步骤的简单组合，并不是最终效果');
+    }
+  </script>
+</head>
+<body>
+  <div id="container" class="container">
+    <div class="inner">
+      <ul>
+        <li><a><img src="../images/a.jpg" alt=""/></a></li>
+        <li><a><img src="../images/b.png" alt=""/></a></li>
+        <li><a><img src="../images/c.png" alt=""/></a></li>
+        <li><a><img src="../images/d.png" alt=""/></a></li>
+        <li><a><img src="../images/a.jpg" alt=""/></a></li>
+      </ul>
+    </div>
+    <div class="square">
+      <span>1</span>
+      <span>2</span>
+      <span>3</span>
+      <span>4</span>
+    </div>
+    <div class="arrow">
+      <span class="left"> < </span>
+      <span class="right"> > </span>
+    </div>
+  </div>
+  <script>
+    var container = document.getElementById('container');
+    var ulObj = container.children[0].firstElementChild;
+    //图片li集合
+    var liList = ulObj.children;
+    //小按钮
+    var spanList = container.children[1].children;
+    //左右箭头
+    var left = container.children[2].children[0];
+    var right = container.children[2].children[1];
+    //相框宽度
+    var imgWidth = container.children[0].offsetWidth;
+
+    //* ****************第一部分: 点击小按钮跳转图片***************** */
+    //循环设置小按钮事件
+    for (let i = 0; i < spanList.length; i++) {
+      // spanList[i].setAttribute('index',i);
+      spanList[i].onmouseover = function () {
+        // var index = this.getAttribute('index');
+        var index = this.innerText - 1;
+        move(ulObj,-index*imgWidth);
+      }
+    }
+    //* ***************第二部分: 左右箭头点击跳转图片****************** */
+    let index =0;
+    //左箭头点击事件
+    left.onclick = function () {
+      if (index > 0) {
+        index--;
+        move(ulObj, -index*imgWidth);
+      }
+    }
+    right.onclick = function () {
+      if (index < liList.length - 1) {
+        index++;
+        move(ulObj, -index*imgWidth);
+      }
+    }
+    //* ***************第三部分: 自动轮播****************** */
+    //自动轮播调用
+    let interval = setInterval(autoPlay, 100);
+   
+    //鼠标进入停止自动轮播
+    container.onmouseover = function () {
+      clearInterval(interval);
+    }
+
+    container.onmouseout = function () {
+      interval = setInterval(autoPlay, 10);
+    }
+     //自动轮播函数
+    function autoPlay() {
+      var current = ulObj.offsetLeft;
+      current -= 10;
+      if (current < -1600) {
+        current = 0;
+      }
+      var flag = Math.floor(Math.abs(current/400));
+      console.log(flag);
+
+        //此处代码还未设置排他性，但是这种方式(CSS来控制hover)也是可以的，
+      // switch (flag) {
+      //   case 0:
+      //     spanList[0].style.backgroundColor = 'orange';
+      //     break;
+      //   case 1:
+      //     spanList[1].style.backgroundColor = 'orange';
+      //     break;
+      //   case 2:
+      //     spanList[2].style.backgroundColor = 'orange';
+      //     break;
+      //   case 3:
+      //     spanList[3].style.backgroundColor = 'orange';
+      //     break;
+      //   default:
+      //     break;
+      // }
+      ulObj.style.left = current + 'px';
+    }
+    //* ********************************* */
+
+    //轮播点击的事件
+    function move(element, target) {
+      //每次开始时先清理一次定时器。
+      if (element.interval) {
+        // console.log('element.interval==='+element.interval);
+        flag = 0;
+        clearInterval(element.interval);
+      }
+      //当前位置
+      var current = element.offsetLeft;
+      //步进, 如果是跳跃式的选择就将步进变大
+      if (Math.abs(target - current) > imgWidth) {
+        var step = 100;
+      }else {
+        var step = 10;
+      }
+      step = (target > current) ? step : -step;
+      //移动 如果使用var 来创建定时器，那么每点一次就会开辟一个空间创建一个定时器所以将定时器设置在元素的属性上，这样就是改变元素的指向
+      element.interval = setInterval(function () {
+        current += step;
+        if (Math.abs(current - target) > Math.abs(step)) {
+          element.style.left = current + 'px';
+        }else {
+          // console.log('element.interval++++'+element.interval);
+          clearInterval(element.interval);
+          element.style.left = target + 'px';
+        }
+      },10);
+    }
+  </script>
+</body>
+</html>

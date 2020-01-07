@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>创建对象的三种方法</title>
+</head>
+<body>
+  <script>
+    //创建对象的三种方法
+
+    // 1 字面量创建对象
+    // var person1 = {
+    //   name: '大帅比',
+    //   age: '23',
+    //   work: function () {
+    //     console.log('very good');
+    //   }
+    // };
+    // person1.work();
+
+    // 2 系统对象创建对象
+    // var person2 = new Object();
+    // person2.name = '大帅比';
+    // person2.age = 23;
+    // person2.work = function () {
+    //   console.log('挣大钱');
+    // };
+    // person2.work();
+
+    // 3 自定义构造函数创建对象
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+      this.work = function () {
+        console.log('挣大钱挣大钱');
+      };
+    }
+    var person3 = new Person('董喜炜岳婷婷',23);
+    person3.work();
+    console.dir(person3);
+    console.dir(Person);
+
+    // 工厂模式创建对象
+    // function createObject(name, age) {
+    //   var obj = new Object();
+    //   obj.name = name;
+    //   obj.age = age;
+    //   obj.work = function () {
+    //     console.log('dxw and ytt very happiness!');
+    //   }
+    //   return obj;
+    // }
+    // var family = createObject('dxwytt','100');
+    // family.work();
+  </script>
+</body>
+</html>

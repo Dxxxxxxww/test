@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,
+        minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>董喜炜的个人简历</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .header {
+      height: 100px;
+      overflow: hidden;
+    }
+
+    ul li {
+      list-style-type: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .div-wrapper {
+      position: relative;
+      left: 50%;
+      float: left;
+      clear: both;
+    }
+
+    .header ul {
+      position: relative;
+      margin-left: -50%;
+      white-space: nowrap;
+      /* width: 720px; */
+      margin-top: 20px;
+    }
+
+    .header ul li {
+      background: #fff;
+      float: left;
+    }
+
+    .header ul li a {
+      display: block;
+      width: 120px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      transition: 0.5s
+    }
+
+    .header ul li a:hover {
+      z-index: 1;
+      border-radius: 5px;
+      box-shadow: 0 0px 2px #ccc;
+      transform: translateY(-5px);
+    }
+
+    .clearfix {
+      zoom: 1;
+    }
+
+    .clearfix::after {
+      content: "";
+      display: block;
+      visibility: hidden;
+      height: 0;
+      clear: both;
+    }
+
+    p {
+      margin-top: 500px;
+    }
+    .headFixed {
+      position: fixed;
+      top: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header" id="head">
+    <div class="div-wrapper">
+      <ul class="clearfix">
+        <li><a href="https://www.taobao.com">关于</a></li>
+        <li><a href="">技能</a></li>
+        <li><a href="">作品</a></li>
+        <li><a href="">博客</a></li>
+        <li><a href="">GitHub</a></li>
+        <li><a href="">f</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="body">
+    <p class="col">
+      “当我年轻的时候，我梦想改变这个世界；当我成熟以后，
+      我发现我不能够改变这个世界，我将目光缩短了些，决定只改变我的国家；
+      当我进入暮年以后，我发现我不能够改变我们的国家，我的最后愿望仅仅是改变一下我的家庭，
+      但是，这也不可能。当我现在躺在床上，行将就木时，我突然意识到：
+      如果一开始我仅仅去改变我自己，然后，我可能改变我的家庭；
+      在家人的帮助和鼓励下，我可能为国家做一些事情；
+      然后，谁知道呢?我甚至可能改变这个世界。”
+    </p>
+    <p>event.screenX、event.screenY
+
+      鼠标相对于用户显示器屏幕左上角的X,Y坐标。标准事件和IE事件都定义了这2个属性
+
+      event.clientX、event.clientY
+
+      鼠标相对于浏览器可视区域的X,Y坐标（将参照点改成了浏览器内容区域的左上角），可视区域不包括工具栏和滚动条。IE事件和标准事件都定义了这2个属性
+
+      event.pageX、event.pageY
+
+      类似于event.clientX、event.clientY，但它们使用的是文档坐标而非窗口坐标。这2个属性不是标准属性，但得到了广泛支持。IE事件中没有这2个属性。
+
+      event.offsetX、event.offsetY
+
+      这两个属性是IE特有的，鼠标相对于“触发事件的元素”的位置（鼠标想对于事件源元素的X,Y坐标）。
+
+      window.pageXOffset
+
+      整数只读属性，表示X轴滚动条向右滚动过的像素数（表示文档向右滚动过的像素数）。IE不支持该属性，使用body元素的scrollLeft属性替代。
+
+      window.pageYoffset
+
+      整数只读属性，表示Y轴滚动条向下滚动过的像素数（表示文档向下滚动过的像素数）。IE不支持该属性，使用body元素的scrollTop属性替代。
+    </p>
+    <p>
+      注意事项：
+      使用“+”、“-”、“*” 和 “/”四则运算；
+      可以使用百分比、px、em、rem等单位；
+      可以混合使用各种单位进行计算；
+      表达式中有“+”和“-”时，其前后必须要有空格，如"widht: calc(12%+5em)"这种没有空格的写法是错误的；
+      表达式中有“*”和“/”时，其前后可以没有空格，但建议留有空格。
+
+      兼容性写法：
+    </p>
+  </div>
+  <script>
+    var head = document.getElementById('head');
+    var headClassName = head.className;
+    function getScroll() {
+      return {
+        top: window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || -1,
+        left: window.scrollX || document.documentElement.scrollLeft || document.body.scrollLeft || -1
+      };
+    }
+
+    function getStyle(element, attr) {
+      return (window.getComputedStyle ? window.getComputedStyle(element, null)[attr] : element.currentStyle[attr]) || -
+        1;
+    }
+    // var heighter = parseInt(getStyle(head,'height'));
+    var heighter = head.offsetHeight;
+    console.log(heighter);
+    document.onscroll = function () {
+      console.log(123);
+      if (getScroll().top > heighter) {
+        console.log(456);
+        head.className = headClassName + ' headFixed';
+      }else {
+        console.log(890);
+        head.className = headClassName;
+      }
+    }
+  </script>
+</body>
+
+</html>

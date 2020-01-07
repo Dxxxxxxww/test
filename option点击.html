@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <select name="" id="select">
+    <option value="1">11111111111111111111</option>
+    <option value="2">22222222222222222222</option>
+    <option value="3">33333333333333333333</option>
+  </select>
+  <script>
+    let select1 = document.querySelectorAll('#select');
+    console.log(select1);
+      select1.addEventListener('change',function () {
+        console.log(123);
+      });
+      
+    let select = document.querySelectorAll('#select option');
+    console.log(select);
+    for (let i = 0; i < select.length; i++) {
+      const element = select[i];
+      console.log(element);
+      element.addEventListener('change', function () {
+        console.log(this);
+      });
+    }
+  </script>
+</body>
+
+</html>

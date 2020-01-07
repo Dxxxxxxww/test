@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../JavaScript/comman.js"></script>
+</head>
+<body>
+  <!-- <input type="button" value="btn" id="btn1"/>
+  <input type="button" value="去除第一个按钮的绑定事件" id="removeClick"/>
+  <script>
+    //事件移除
+    //1 使用null
+    // my$('btn1').onclick = function () {
+    //   console.log(123123);
+    // }
+    // my$('removeClick').onclick = function () {
+    //   my$('btn1').onclick = null;
+    // }
+
+    //2 怎样绑定就怎样解绑
+    function f1() {
+      console.log(456);
+    }
+    function f2() {
+      console.log(789);
+    }
+    function f3() {
+      my$('btn1').removeEventListener('click',f1,false);
+    }
+    my$('btn1').addEventListener('click',f1,false);
+    my$('btn1').addEventListener('click',f2,false);
+    my$('removeClick').addEventListener('click',f3,false);
+
+    //3 ie8 写法
+    // function f1() {
+    //   console.log(456);
+    // }
+    // function f2() {
+    //   console.log(789);
+    // }
+    // function f3() {
+    //   my$('btn1').detachEvent('click',f1);
+    // }
+    // my$('btn1').attachEvent('click',f1);
+    // my$('btn1').attachEvent('click',f2);
+    // my$('removeClick').attachEvent('click',f3);
+  </script> -->
+  <!-- <div id="div1" style="width: 300px;height: 300px;background: blue">
+    <div id="div2" style="width: 200px;height: 200px;background: pink">
+      <div id="div3" style="width: 100px;height: 100px;background: orange"></div>
+    </div>
+  </div>
+  <script>
+    //阻止事件冒泡
+    // window.event.cancelBubble = true; ie特有 ie 谷歌 支持， 火狐不支持
+    // obj.stopPropagation();   谷歌 火狐 支持 ie8不支持
+    my$('div1').onclick = function () {
+      console.log(this.id);
+    }
+    my$('div2').onclick = function (e) {
+      console.log(this.id);
+      e.stopPropagation();
+    }
+    my$('div3').onclick = function () {
+      console.log(this.id);
+      // window.event.cancelBubble = true;
+    }
+  </script> -->
+  
+  <img src="../images/a.jpg" alt="" width="200" height="100" id="img1" style="position:absolute;"/>
+  <script>
+    //图片跟随鼠标移动
+    var img = document.getElementById('img1');
+    document.onmousemove = function (e) {
+      //兼容ie8 有event对象用event对象，没有就用window.event
+      e = e || window.event;
+      var x = e.clientX;
+      var y = e.clientY;
+      img.style.left = x + 'px';
+      img.style.top = y + 'px';
+    }
+  </script>
+</body>
+</html>

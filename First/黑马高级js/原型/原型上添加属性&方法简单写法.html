@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // function Student(name, age, sex) {
+    //   this.name = name;
+    //   this.age = age;
+    //   this.sex = sex;
+    // }
+    // Student.prototype.eat = function () {
+    //   console.log('吃早饭吃午饭吃晚饭吃点心吃宵夜');
+    // }
+    // Student.prototype.height = '188';
+
+    // var stu1 = new Student('Bob', 22, 'male');
+
+    // console.dir(stu1);
+    // console.dir(Student);
+
+    function Student(name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+    }
+
+    Student.prototype = {
+      constructor: Student,  //这种方法在原型上添加东西 相当于给原型重新指向了一个对象，新对象需要手动增加构造器
+      height: '188',
+      weight: '60',
+      eat: function () {
+        console.log('haha');
+      }
+    };
+    console.dir(Student);
+  </script>
+</body>
+</html>

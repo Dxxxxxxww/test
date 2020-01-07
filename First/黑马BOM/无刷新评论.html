@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <table border="1">
+    <tbody id="tBody">
+      <tr>
+        <td>情</td>
+        <td>侣</td>
+      </tr>
+    </tbody>
+  </table>
+  <label for="name">昵称</label>
+  <input type="text" id="userName"/><br/>
+  <label for="content">评论</label>
+  <textarea name="content" id="content" cols="30" rows="10"></textarea>
+  <button id="add">添加</button>
+  <script>
+    var add = document.getElementById('add');
+    var tBody = document.getElementById('tBody');
+    var userName = document.getElementById('userName');
+    var content = document.getElementById('content');
+    add.onclick = function () {
+      var tr = document.createElement('tr');
+      var tdName = document.createElement('td');
+      var tdContent = document.createElement('td');
+      tBody.append(tr);
+      tr.append(tdName);
+      tr.append(tdContent);
+      tdName.innerHTML = userName.value;
+      tdContent.innerHTML = content.value;
+
+      userName.value = '';
+      content.value = '';
+    }
+  </script>
+</body>
+</html>

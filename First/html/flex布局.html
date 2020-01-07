@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        header, footer {
+            height: 100px;
+            background: #eee;
+        }
+        .main {
+            flex: 1;
+            display: flex;
+        }
+        .main .left, .main .right {
+            width: 15%
+        }
+        .main .left {
+            background: #f00;
+        }
+        .main .right {
+            background: #00f;
+        }
+        .main .center {
+            flex: 1;
+        }
+        @media screen and (min-width: 1200px) {
+            h1 {
+                font-size: 48px;
+            }
+            .main .center {
+                background: orange;
+            }
+        }
+        @media screen and (min-width: 800px) and (max-width: 1200px) {
+            h1 {
+                font-size: 30px;
+            }
+            .main .center {
+                background: #fcf;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            h1 {
+                font-size: 18px;
+            }
+            .main .center {
+                background: #aa0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>This is head</header>
+    <section class="main">
+        <section class="left"><h1>left</h1></section>
+        <section class="center"><h1>center</h1></section>
+        <section class="right"><h1>right</h1></section>
+    </section>
+    <footer>This is foot</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //业务里不要这样写，难读，把两个函数分开写
+      const groupBy = data =>
+        ((preparse, parseToArr) => parseToArr(preparse(data)))(
+          //这个函数类似去重，只不过不删除，而是concat相同省，不同市的值进一个数组 {'浙江': [{province:'浙江',citys:'杭州'}]}
+          //返回对象
+          d =>
+            d.reduce(
+              (acc, cur) =>
+                (acc[cur.province] = (acc[cur.province] || []).concat(cur)) &&
+                acc,
+              {}
+            ),
+          //格式化成我们想要的数据
+          obj => Object.keys(obj).map(k => ({ province: k, cities: obj[k] }))
+        )
+
+      console.log(
+        groupBy([
+          { city: '杭州', province: '浙江' },
+          { city: '温州', province: '浙江' },
+          { city: '无锡', province: '江苏' },
+          { city: '苏州', province: '江苏' }
+        ])
+      )
+      // 0:
+      //   province: "浙江"
+      //   cities: (2)[{ … }, { … }]
+      // 1:
+      //   province: "江苏"
+      //   cities: Array(2)
+      //      0: { city: "无锡", province: "江苏" }
+      //      1: { city: "苏州", province: "江苏" }
+    </script>
+  </body>
+</html>

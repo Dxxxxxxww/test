@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../JavaScript/comman.js"></script>
+</head>
+<body>
+    <!-- <div id="box">
+        <span>哈哈哈</span>
+        <p>呵呵呵</p>
+        <span>嘿嘿嘿</span>
+        <p>好好好</p>
+        <span>嘎嘎嘎</span>
+        <p>咯咯咯</p>
+    </div>
+    <button id="btn">btnbtn</button>
+    <script>
+        //使用节点来隔行变色
+        my$('btn').onclick = function () {
+            var childrenList = my$('box').childNodes;
+            for (let i = 0; i < childrenList.length; i++) {
+                if(childrenList[i].nodeType === 1 &&childrenList[i].nodeName === 'P' ){
+                    childrenList[i].style.backgroundColor = 'pink';
+                }
+            }
+        }
+    </script> -->
+    <!-- <ul id="uu">
+        <li>北京烤鸭</li>
+        <li>阳澄湖大闸蟹</li>
+        <li>温州鸭舌</li>
+        <li>无锡小笼包</li>
+        <li>沈阳撸串</li>
+        <li>大海鲜</li>
+    </ul>
+    <button id="btn">btnbtntnbtn</button>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            var uu = document.getElementById('uu');
+            var nodeList = uu.childNodes;
+            var count = 0;
+            for (let i = 0; i < nodeList.length; i++) {
+                if (nodeList[i].nodeType === 1 && nodeList[i].nodeName === 'LI') {
+                    nodeList[i].style.backgroundColor = count%2 == 0?'yellow':'red';
+                    count++;
+                }
+            }
+        }
+    </script> -->
+    <!-- <div id="div">
+        <img src="../images/a.jpg" alt="" width="300" height="150"/>
+        <img src="../images/b.png" alt="" width="300" height="150"/>
+        <img src="../images/c.png" alt="" width="300" height="150"/>
+    </div>
+    <script>
+        //点击图片更改背景图片
+        var imgs = document.getElementById('div').children;
+        for (let i = 0; i < imgs.length; i++) {
+            imgs[i].onclick = function () {
+                //需要注意的是背景图片是url 并不是src
+                document.body.style.backgroundImage = 'url('+ this.src +')';
+            }
+        }
+    </script> -->
+
+    <!-- <div>
+        <div id="head">
+            <input type="checkbox" name="cb" id="cb1"/>
+            <label for="cb1">全选</label>
+        </div>
+        <div id="body">
+            <input type="checkbox" name="cook" id="cook1">
+            <label for="cook1">汉堡王</label>
+            <input type="checkbox" name="cook" id="cook2">
+            <label for="cook2">KFC</label>
+            <input type="checkbox" name="cook" id="cook3">
+            <label for="cook3">金拱门</label>
+            <input type="checkbox" name="cook" id="cook4">
+            <label for="cook4">德克士</label>
+        </div>
+    </div>
+    <script>
+        //全选非全选
+        var allPick = document.getElementById('cb1');
+        var checkboxs = document.getElementById('body').getElementsByTagName('input');
+
+        allPick.onclick = function () {
+            for (let i = 0; i < checkboxs.length; i++) {
+                checkboxs[i].checked = this.checked;
+            }
+        }
+
+        for (let i = 0; i < checkboxs.length; i++) {
+            checkboxs[i].onclick = function () {
+                var flag = true;
+                for (let j = 0; j < checkboxs.length; j++) {
+                    if (!checkboxs[j].checked) {
+                        flag = false;
+                        break;
+                    }
+                }
+                allPick.checked = flag;
+            }
+        }
+    </script> -->
+</body>
+</html>

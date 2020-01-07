@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //防抖，优化为最后一次执行
+    function debounce(fn, wait, ime) {
+      let time = null;
+
+      return function () {
+        let context = this;
+        let args = arguments;
+
+        if (ime && !time) {
+          fn.apply(context, args);
+          return;
+        }
+        if (time) {
+          clearTimeout(time)
+        }
+        time = setTimeout(() => {
+          fn.apply(context, args);
+        }, wait);
+      }
+    }
+    //节流，降低执行频率  
+    function throttle(fn, wait, ime) {
+      let time = null;
+
+      return function () {
+        let context = this;
+        let args = arguments;
+
+        if (ime) {
+          fn.apply(context, args);
+          if (time) {
+            clearTimeout(time);
+            time = null;
+          }
+          return;
+        }
+        if (time) {
+          return;
+        }
+        time = setTimeout(() => {
+          fn.apply(context, args);
+        }, wait);
+      }
+    }
+
+    let abc = debounce(() => {
+      console.log('abc')
+    }, 3000, true);
+    abc();
+  </script>
+</body>
+
+</html>

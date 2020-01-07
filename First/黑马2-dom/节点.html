@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <ul id="uu">
+            <li>乔峰</li>
+            <li>御坂美琴</li>
+            <li>白井黑子</li>
+            <li id="gandom">高达00</li>
+            <li>上条当麻</li>
+            <li>卡尔</li>
+            <li>董喜炜</li>
+            <li>岳婷婷</li>
+        </ul>
+    </div>
+    <script>
+        var ulObj = document.getElementById('uu');
+        var gandom = document.getElementById('gandom');
+
+        console.log('父级节点------');
+        console.log(ulObj.parentNode)
+        console.log('父级元素------'+ulObj.parentElement);
+        console.log(ulObj.parentElement);
+        console.log('子节点------'+ulObj.childNodes);
+        console.log(ulObj.childNodes);
+        console.log('子元素------'+ulObj.children);
+        console.log(ulObj.children);
+        console.log('第一个子节点------'+ulObj.firstChild);
+        console.log(ulObj.firstChild);
+        console.log('第一个子元素------'+ulObj.firstElementChild);
+        console.log(ulObj.firstElementChild);
+        console.log('最后一个子节点------'+ulObj.lastChild);
+        console.log(ulObj.lastChild);
+        console.log('最后一个子元素------'+ulObj.lastElementChild);
+        console.log(ulObj.lastElementChild);
+        console.log('高达00的前一个兄弟节点------'+gandom.previousSibling);
+        console.log(gandom.previousSibling);
+        console.log('高达00的前一个兄弟元素------'+gandom.previousElementSibling);
+        console.log(gandom.previousElementSibling);
+        console.log('高达00的后一个兄弟节点------'+gandom.nextSibling);
+        console.log(gandom.nextSibling);
+        console.log('高达00的后一个兄弟元素------'+gandom.nextElementSibling);
+        console.log(gandom.nextElementSibling);
+    </script>
+</body>
+</html>

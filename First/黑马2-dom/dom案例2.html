@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../JavaScript/comman.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* box-sizing: border-box; */
+            list-style-type: none;
+        }
+        .div-style {
+            width: 600px;
+            margin-top: 20px;
+        } 
+        .show {
+            display: block;
+        }
+        .hide {
+            display: none;
+        }
+        .cls {
+            background: yellow;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            background: pink;
+            float: left;
+            margin-left: 10px;
+            border: 2px solid pink;
+        }
+        .input-query {
+            color: #ccc;
+        }
+        #uu li {
+            cursor: pointer;
+        }
+        .hd {
+            width: 200px;
+            height: 100px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- <a href="https://www.taobao.com" id="tb">淘宝--不跳转</a>
+    <a href="https://www.taobao.com" id="tb" onclick="f1()">淘宝--跳转</a> 
+    <script>
+        //上面的onclick 中的f1函数执行完是 false 并不是 return false 所以a链接还是会跳转
+        document.getElementById('tb').onclick = function () {
+            alert('我被点击了');
+            return false;
+            //此处的click执行完，由于有 return 所以下面的代码不执行，所以a标签不跳转。
+        }
+
+        function f1() {
+            alert('我被点击了');
+            return false
+        }
+    </script> -->
+
+    <!-- <a href="../images/a.jpg" id="a-img"><img src="../images/a.jpg" alt="apng" width="300" height="200"></a>
+    <img src="" alt="" id="img2" />
+    <script>
+        //阻止a标签自动跳转
+        my$('a-img').onclick = function () {
+            my$('img2').src = this.href;
+            my$('img2').alt = 'big a';
+            return false;
+        }
+    </script> -->
+
+    <!-- <a href="../images/a.jpg" title='imga'>
+        <img src="../images/a.jpg" alt="" id="img1" width="300" height="150"/>
+    </a>
+    <a href="../images/b.png" title='imgb'>
+        <img src="../images/b.png" alt="" id="img2" width="300" height="150"/>
+    </a>
+    <a href="../images/c.png" title='imgc'>
+        <img src="../images/c.png" alt="" id="img3" width="300" height="150"/>
+    </a>
+    <a href="../images/d.png" title='imgd'>
+        <img src="../images/d.png" alt="" id="img4" width="300" height="150"/>
+    </a>
+
+    <img src="" alt="" id="img-big">
+    <script>
+        //点击小图显示大图
+        var aObj = document.getElementsByTagName('a');
+        var imgBig = my$('img-big');
+        for (let i = 0; i < aObj.length; i++) {
+            aObj[i].onclick = function () {
+                imgBig.src = this.href;
+                imgBig.alt = this.title;
+                imgBig.title = this.title;
+                imgBig.width = 600;
+                imgBig.height = 300;
+                return false;
+            }
+        }
+    </script> -->
+
+    <!-- <input type="button" name="ipt" id="btn1" value="点一下就变色" />
+    <ul id="car-ul">
+        <li>宝马</li>
+        <li>奔驰</li>
+        <li>保时捷</li>
+        <li>兰博基尼</li>
+        <li>迈凯伦</li>
+        <li>法拉利</li>
+    </ul>
+    <script>
+        //隔行变色
+        var liCar =  my$('car-ul').getElementsByTagName('li');
+        my$('btn1').onclick = function () {
+            for (let i = 0; i < liCar.length; i++) {
+                if (i%2 == 0) {
+                    liCar[i].style.background = 'red';
+                    // console.log(liCar[i].innerText);
+                }else {
+                    liCar[i].style.background = 'yellow';
+                }
+            }
+        }
+    </script> -->
+
+    <!-- <ul id="ul-love">
+        <li>ytt</li>
+        <li>dxw</li>
+        <li>岳婷婷</li>
+        <li>董喜炜</li>
+        <li>呆瓜小布偶</li>
+        <li>大西瓜</li>
+    </ul>
+    <script>
+        //鼠标经过变色
+        var liList = my$('ul-love').getElementsByTagName('li');
+        for (let i = 0; i < liList.length; i++) {
+            liList[i].onmouseover = function () {
+                this.style.backgroundColor = 'yellow';
+            }
+            liList[i].onmouseout = function () {
+                this.style.backgroundColor = '';
+            }
+        }
+    </script> -->
+    <!-- <img src="../images/a.jpg" alt="ajpg" width="100px" height="50px" id="img-hover"/>
+    <div class="div-style hide" id="div1">
+        <img src="../images/a.jpg" alt=""/>
+    </div>
+    <script>
+        //通过鼠标经过来显示/隐藏元素
+        my$('img-hover').onmouseover = function () {
+            my$('div1').className = 'div-style show';
+        }
+        my$('img-hover').onmouseout = function () {
+            my$('div1').className = 'div-style hide';
+        }
+    </script> -->
+
+    <!-- <input type="text" name="name1" value="嘿嘿" />
+    <input type="text" name="name1" value="嘿嘿" />
+    <input type="text" name="name2" value="嘿嘿" />
+    <input type="text" name="name2" value="嘿嘿" />
+    <button id="btn">btnbnt</button>
+    <script>
+        //通过name属性来获取标签， 只有表单元素有name属性， datalist没有
+        var iptList = document.getElementsByName('name1');
+        my$('btn').onclick = function () {
+            console.log(iptList);
+            for (let i = 0; i < iptList.length; i++) {
+                iptList[i].value = '哈哈哈';
+            }
+        }
+    </script> -->
+
+
+    <!-- <p class="cls">这是一个P</p>
+    <p>这是二个P</p>
+    <span class="cls">这是第一个span</span><span>这是第二个span</span>
+    <div class="cls">这是第一个div</div>
+    <div>这是第二个div</div>
+    <button id="btn">btn</button>
+    <script>
+        //通过className来获取标签，  h5 新增，  低版本不支持
+        var objs = document.getElementsByClassName('cls');
+        my$('btn').onclick = function () {
+            for (let i = 0; i < objs.length; i++) {
+                objs[i].style.backgroundColor = 'red';
+            }
+        }
+    </script> -->
+    <!-- <div id="foo"></div>
+    <div id="bar"></div>
+    <script>
+        //通过选择器来选择元素对象
+       console.log(document.querySelector('div'));
+       console.log(document.querySelectorAll('div'));
+    </script> -->
+
+    <!-- <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        //hover高亮
+        //第一种方法(常用)：box-sizing  border box
+        // 第二种方法 默认有一个边框，这样再改变边框的时候就不会有大小的变换了
+        var objs = document.getElementsByTagName('div');
+        for (let i = 0; i < objs.length; i++) {
+            objs[i].onmouseover = function () {
+                this.style.border = '2px solid red';
+            }
+            objs[i].onmouseout = function () {
+                this.style.border = '';
+            }
+        }
+    </script> -->
+
+
+    <!-- <input type="text" name="" id="ipt" placeholder="请输入你要搜索的内容" />
+    <script>
+        my$('ipt').placeholder = 'aaa';
+    </script> -->
+    <!-- <input type="text" id="ipt" class="input-query"/>
+    <script>
+        //模拟placeholder
+        var ipt = my$('ipt');
+        ipt.value = '请输入要搜索的内容';
+        ipt.onfocus = function () {
+            if (this.value === '请输入要搜索的内容' ) {
+                this.value = '';
+                this.style.color = 'black';
+            }
+        }
+        ipt.onblur = function () {
+            //这里用长度判断而不用字符串判断是因为数字判断性能比字符串判断要高，'abcdef'跟'abcdttt'比较需要逐字符比较。
+            if (this.value.length <= 0) {  
+                this.value = '请输入要搜索的内容';
+                this.style.color = '#ccc';
+            }
+        }
+    </script> -->
+
+    <!-- <input type="text" id="ipt" />
+    <script>
+        document.getElementById('ipt').onblur = function () {
+            if (this.value.length >= 6 && this.value.length <= 10) {
+                this.style.backgroundColor = 'yellow';
+            }else {
+                this.style.backgroundColor = 'pink';
+            }
+        }
+    </script> -->
+
+    <!-- <script>
+        //兼容ie8  
+        //设置文本
+        function setInnerText(element, text) {
+            if (typeof element.textContent === 'undefined') {
+                element.innerText = text;
+            }else {
+                element.textContent = text;
+            }
+        }
+        //获取文本
+        function getInnerText(element) {
+            if (typeof element.textContent === 'undefined') {
+                return element.innerText;
+            }else {
+                return element.textContent;
+            }
+        }
+    </script> -->
+
+    <!-- <ul id="uu">
+        <li id="1">小红</li>
+        <li id="2">小兰</li>
+        <li id="3">小白</li>
+        <li id="4">小黑</li>
+        <li id="5">小粉</li>
+        <li id="6">小棕</li>
+    </ul>
+    <script>
+        //getAttribute setAttribute  获取和设置自定义属性。 removeAttribute移除属性(自定义属性和系统属性)
+        var objs = my$('uu').getElementsByTagName('li');
+        for (let i = 0; i < objs.length; i++) {
+            objs[i].setAttribute('score',(i+1)*10);
+        }
+        for (let i = 0; i < objs.length; i++) {
+            objs[i].onclick = function () {
+                alert(this.getAttribute('score'));
+            }
+        }
+        for (let i = 0; i < objs.length; i++) {
+            objs[i].onclick = function () {
+                this.removeAttribute('score');
+                this.removeAttribute('id');
+            }
+        }
+    </script> -->
+</body>
+</html>

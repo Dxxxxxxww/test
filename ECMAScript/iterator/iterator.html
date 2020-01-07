@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function makeIterator(arr) {
+    //   let index = 0;
+    //   return {
+    //     next() {
+    //       return index < arr.length ? {value: arr[index++]} : {done:true}
+    //     }
+    //   }
+    // }
+    // let it = makeIterator(['a','b']);
+    // console.log(it.next());
+    // console.log(it.next());
+    // console.log(it.next());
+    // 学习完 class 后使用 class 再来写一遍
+
+    // class RangeIterator {
+    //   constructor(start, stop) {
+    //     this.value = start;
+    //     this.stop = stop;
+    //   }
+
+    //   [Symbol.iterator]() {
+    //     return this;
+    //   }
+
+    //   next() {
+    //     var value = this.value;
+    //     if (value < this.stop) {
+    //       this.value++;
+    //       return {
+    //         done: false,
+    //         value: value
+    //       };
+    //     }
+    //     return {
+    //       done: true,
+    //       value: undefined
+    //     };
+    //   }
+    // }
+
+    // function range(start, stop) {
+    //   return new RangeIterator(start, stop);
+    // }
+
+    // for (var value of range(0, 3)) {
+    //   console.log(value); // 0, 1, 2
+    // }
+
+    // class RangeIterator {
+    //   constructor(arr) {
+    //     this.arr = arr;
+    //     this.index = 0;
+    //   }
+
+    //   [Symbol.iterator]() { return this;}
+
+    //   next() {
+    //     // 一开始把 index 写在这里 let index = 0; 
+    //     // 导致每次调用 next() 的时候 index 都等于 0 所以无限循环了
+    //     return this.index < this.arr.length ? {value: this.arr[this.index++]} : {done: true}
+    //   }
+    // }
+
+    // function range(arr) {
+    //   return new RangeIterator(arr);
+    // }
+
+    // for (const v of range([1,2,3])) {
+    //   console.log(v);
+    // }
+
+    // class ArrIterator {
+    //   constructor(start, end) {
+    //     this.start = start;
+    //     this.end = end;
+    //   }
+
+    //   [Symbol.iterator]() {return this}
+
+    //   next() {
+    //     let start = this.start;
+    //     let end = this.end;
+    //     if (start < end) {
+    //       this.start++;
+    //       //这里不能给start++,否则会无限循环
+    //       return {value: start, done: false};
+    //     } else {
+    //       return {value: 'undefined', done: true};
+    //     }
+    //   }
+    // }
+
+    // let a = new ArrIterator(0,3);
+    // for (const v of a) {
+    //   console.log(v);
+    // }
+
+    // function mkIterator(arr) {
+    //   let index = 0;
+    //   return {
+    //     next() {
+    //       return index < arr.length ? {value: arr[index++], done: false} :
+    //         {value: undefined, done: true};
+    //     }
+    //   }
+    // }
+    // function mkIterator(arr) {
+    //   let index = 0;
+    //   return {
+    //     next() {
+    //       return index < arr.length ? {value: arr[index++]} :
+    //         {done: true};
+    //     }
+    //   }
+    // }
+    // let it = mkIterator(['a', 'b']);
+    // console.log(it.next());
+    // console.log(it.next());
+    // console.log(it.next());
+
+    function mkIterator(arr) {
+      let index = 0;
+      return {
+        next(){
+          return index < arr.length ? {value: arr[index++]} : {done: true};
+        }
+      }
+    }
+    let arr = [1,2];
+    let it = mkIterator(arr);
+    console.log(it.next());
+    console.log(it.next());
+    console.log(it.next());
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    li {
+      width: 100px;
+      height: 100px;
+      opacity: 0.5;
+    }
+
+  </style>
+  <script src="../../JavaScript/jQuery.js"></script>
+  <script>
+    $(function () {
+      $('ul>li').mouseenter(function () {
+        $(this).css({'opacity': 1,'backgroundColor': 'red'}).siblings().css('opacity','0.5');
+      }).mouseout(function () {
+        $(this).parent().children().css({'opacity': 0.5,'backgroundColor': ''});
+      }).click(function () {
+        //有趣这里使用prevAll()方法后，返回的就不是之前的this对象了而是this之前的一堆兄弟对象，所以需要使用end()方法来重新找到之前的this对象
+        $(this).prevAll().css('backgroundColor', 'yellow').end().nextAll().css('backgroundColor', 'brown');
+      });
+    });
+  </script>
+</head>
+<body>
+  <ul>
+    <li>岳</li>
+    <li>婷</li>
+    <li>婷</li>
+    <li>董</li>
+    <li>喜</li>
+    <li>炜</li>
+  </ul>
+</body>
+</html>

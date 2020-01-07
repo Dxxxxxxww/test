@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log('普通函数----------------');
+    function f1() {
+      let num = 10;
+      num++;
+      return num;
+    }
+
+    console.log(f1());
+    console.log(f1());
+    console.log(f1());
+
+    console.log('闭包----------------');
+    function f2() {
+      let num = 10;
+      return function () {
+        num++;
+        return num;
+      };
+    }
+
+    let f3 = f2();
+    console.log(f3());
+    console.log(f3());
+    console.log(f3());
+
+    console.log('创建两次闭包-------------每个闭包的内存不一样');
+    let f4 = f2();
+    console.log(f4());
+    console.log(f4());
+    console.log(f4());
+  </script>
+</body>
+</html>

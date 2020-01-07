@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('.wechat').click(function () {
+        $('#wx_login_dialog').addClass('wechat-login-show');
+      });
+      $('.login-box-footer-msg').click(function () {
+        $('#wx_login_dialog').removeClass('wechat-login-show');
+      });
+      $.getJSON('https://dev.oa45.com/ssz/scm/wx/genQR?callback=?', function(data) {
+        console.log(data.msg);
+      });
+
+    });
+    function clickHandle() {
+        console.log(123);
+      }
+  </script>
+  <style>
+    .wechat-login-box {
+      top: -339px;
+      z-index: -99;
+      visibility: hidden;
+      width: 400px;
+      height: 400px;
+    }
+    .wechat-qr-img {
+      width: 144px;
+      height: 144px;
+      margin: 40px auto;
+      display: block;
+    }
+    .login-box-footer-msg {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 55px;
+      cursor: pointer;
+      color: #6886aa;
+    }
+    .wechat-login-show {
+      visibility: visible;
+      z-index: 99;
+    }
+  </style>
+  <script>
+    
+  </script>
+</head>
+<body>
+  <button class="wechat" type="button">btn</button>
+  <div class="login-box-body wechat-login-box" id="wx_login_dialog">
+    <p class="login-box-msg" onclick="clickHandle()">微信扫一扫</p>
+    <img class="wechat-qr-img" src="https://open.weixin.qq.com/connect/qrcode/071r5LzrR6izHl51"/>
+    <div class="login-box-footer-msg">使用其他方式登录</div>
+  </div>
+</body>
+</html>

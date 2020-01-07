@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .cls span {
+      float: left;
+      width: 56px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      border: 1px solid #E4E4E4;
+      background-color: #E4E4E4;
+      color: #cecece;
+      margin-right: 1px;
+    }
+    .cls span.s1 {
+      background-color: red;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+    .cls span.s2 {
+      background-color: yellow;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+    .cls span.s3 {
+      background-color: green;
+      color: #fff;
+      border: 1px solid #fff;
+    }
+  </style>
+    <script>
+      window.onload = function () {  
+        //防抖
+        function debounce(fn, wait, immediate) {
+          let timer = null;
+          return function() {
+              let args = arguments
+              let context = this
+
+              if (immediate && !timer) {
+                  fn.apply(context, args)
+              }
+
+              if (timer) clearTimeout(timer)
+              timer = setTimeout(() => {
+                  fn.apply(context, args)
+              }, wait)
+          }
+        }
+        //事件处理函数
+        function onkeyupHandler() {
+          //获取输入的值
+          let pwdValue = my$('pwd').value;
+          //获取密码强度
+          let level = getLevel(pwdValue);
+          //获取span标签组
+          let arr = my$('div').getElementsByTagName('span');
+
+          if (pwdValue.length >= 6) {
+            //先清除一遍，再渲染，这样的操作是为了输入后删除的时候可以去除渲染上去的东西
+            for (let i = 0; i < arr.length; i++) {
+              arr[i].className = '';
+            }
+            for (let i = 0; i < level; i++) {
+              arr[i].className = 's' + level;
+            }
+          }else {
+            for (let i = 0; i < arr.length; i++) {
+              arr[i].className = '';
+            }
+          }
+        };
+        //正则判断密码强度
+        function getLevel(val) {
+          let level = 0;
+          if (/[0-9]/.test(val)) {
+            level++;
+          }
+          if (/[a-zA-Z]/.test(val)) {
+            level++;
+          }
+          if (/[^0-9a-zA-Z]/.test(val)) {
+            level++;
+          }
+          return level;
+        }
+        //仿jq选择元素
+        function my$(str) {
+          return document.getElementById(str);
+        }
+
+        my$('pwd').addEventListener('keyup',debounce(onkeyupHandler,200));
+      };
+
+    </script>
+</head>
+<body>
+  <input type="text" name="pwd" id="pwd" value="" />
+  <div class="cls" id="div">
+    <span >弱</span>
+    <span >中</span>
+    <span >强</span>
+  </div>
+</body>
+</html>

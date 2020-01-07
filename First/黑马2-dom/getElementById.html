@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../JavaScript/comman.js"></script>
+    <script>
+        // window.onload = function () {
+        //     document.getElementById('btn').onclick = function () {
+        //         alert('点我啦~');
+        //     }
+        // }
+    </script>
+    <style>
+        .cls {
+            width:200px ; 
+            height: 200px; 
+            background: yellow;
+        }
+        .disappear {
+            display: none;
+        }
+        .bg {
+            background: #000;
+            transition: all 0.5s;
+        }
+        .bg-white {
+            background: #fff;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- <button id="btn">btnbtn</button> -->
+
+    <!-- <img src="" alt="1png" id="img-1"/> 
+    <script>
+        document.getElementById('img-1').src = '../images/photo/1.png';
+        document.getElementById('img-1').style = 'width:300px;height:300px';
+        // document.getElementById('img-1').width = '300';
+        // document.getElementById('img-1').height = '200'; 
+    </script> -->
+
+
+    <!-- <p id="p1">这是一个P标签</p>
+    <script>
+        document.getElementById('p1').innerText = '这是一个P';
+    </script> -->
+
+    <!-- <a href="https://www.baidu.com" id="aLink">百度</a>
+    <button id="btn">btnbtn</button>
+    <script>
+        var aObj = document.getElementById('aLink');
+        var btn = document.getElementById('btn');
+        btn.onclick = function () {
+            aObj.href = 'https://www.taobao.com';
+            aObj.innerText = '淘宝';
+        }
+    </script> -->
+
+    <!-- <button id="btn">btnbtn</button>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            var pList = document.getElementsByTagName('p');
+            for (let i = 0; i < pList.length; i++) {
+                pList[i].innerText = 'haha';
+            }
+        }
+    </script> -->
+
+    <!-- <img src="../images/photo/2.png" alt="2png" title="2png"/>
+    <button id="btn">btnbtn</button>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            document.getElementsByTagName('img')[0].alt = '22222';
+            document.getElementsByTagName('img')[0].title = '23333  ';
+        }
+    </script> -->
+
+
+    <!-- <input type="button" id="btn" value="btnbtn"></input><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <input type="text" value="" /><br/>
+    <script>
+        document.getElementById('btn').onclick = function () {
+            var ipts = document.getElementsByTagName('input');
+            for (let i = 0; i < ipts.length; i++) {
+                if (ipts[i].type === 'text') {
+                    ipts[i].value = '哈哈';
+                }
+            }
+        }
+    </script> -->
+
+    <!-- <img src="../images/photo/3.png" alt="3png" />
+    <img src="../images/photo/4.png" alt="4png" />
+    <img src="../images/photo/5.png" alt="5png" />
+    <script>
+        var imgObjs = document.getElementsByTagName('img');
+        for (let i = 0; i < imgObjs.length; i++) {
+            imgObjs[i].onclick = function () {
+                alert('点击了我'+ imgObjs[i].alt);
+            }
+        }
+    </script> -->
+
+    <!-- <input type="button" name="btn" id="btn" value="btn" />
+    <script>
+        var btnObj = document.getElementById('btn');
+        btnObj.onclick = function () {
+            this.name = 'btn23456';
+            this.id = 'btn23456';
+            this.type = 'text';
+            this.value ='btn23456';
+        }
+    </script> -->
+
+    <!-- <img src="../images/photo/5.png" alt="5png" title="5png" id="img5"/>
+    <script>
+        document.getElementById('img5').onclick = function () {
+            // this.style.width = '200px';
+            // this.style.height = '200px';
+            // this.style = 'width:200px;height:200px';
+            this.width = '200';
+            this.height = '200';
+        }
+    </script> -->
+
+    <!-- 排他功能 -->
+    <!-- <input type="button" value="没怀孕" id="ipt1"/>
+    <input type="button" value="没怀孕" id="ipt2"/>
+    <input type="button" value="没怀孕" id="ipt3"/>
+    <input type="button" value="没怀孕" id="ipt4"/>
+    <input type="button" value="没怀孕" id="ipt5"/>
+    <input type="button" value="没怀孕" id="ipt6"/>
+    <script>
+        var btnObjs = document.getElementsByTagName('input');
+        for (let i = 0; i < btnObjs.length; i++) {
+            btnObjs[i].onclick = function () {
+                for (let j = 0; j < btnObjs.length; j++) {
+                    btnObjs[j].value = '没怀孕';
+                }
+                this.value = '怀孕了';
+            }
+            
+        }
+    </script> -->
+
+    <!-- <img src="../images/photo/6.png" alt="6png" title="6png" id="6png"/>
+    <script>
+        //更换图片src
+        document.getElementById('6png').onclick = function () {
+            this.src = '../images/photo/8.png';
+            this.alt = '8png';
+            this.id = '8png';
+            this.title = '8png';
+        }
+    </script> -->
+
+    <!-- <input type="button" name="btn" id="btn1" value="btn1"/>
+    <input type="radio"  name="sex" id="man"/>
+    <label for="man">男</label>
+    <input type="radio"  name="sex" id="woman" checked/>
+    <label for="woman">女</label>
+    <script>
+        //单选框
+        
+
+        my$('btn1').onclick = function () {
+            my$('man').checked = true;
+        }
+    </script> -->
+
+    <!-- <button id="btn">btn</button>
+    <input type="checkbox" name="cb" id="cb1" />吃饭
+    <input type="checkbox" name="cb" id="cb2" />睡觉
+    <input type="checkbox" name="cb" id="cb3" checked/>打豆豆
+    <script>
+        //复选框
+        
+        my$('btn').onclick = function () {
+            my$('cb1').checked = true;
+            my$('cb2').checked = true;
+            my$('cb3').checked = false;
+        }
+    </script> -->
+
+    <!-- <input type="button" name="ipt" id="btn" value="disappear"/>    
+    <div class="cls" id="div1">
+
+    </div>
+    <script>
+        //改变div样式
+        my$('btn').onclick = function () {
+            if (this.value === 'disappear') {
+                my$('div1').className = 'disappear';
+                this.value = 'show';
+            }else if(this.value === 'show'){
+                // my$('div1').style.display = 'block';
+                my$('div1').className = 'cls';
+                this.value = 'disappear';
+            }
+        }
+    </script> -->
+    <input type="button" name="btn" id="btn" value="开/关灯"/>
+    <p>1</p>
+    <script>    
+        //网页开关灯
+        my$('btn').onclick = function () {
+            
+            document.body.className = (document.body.className !== 'bg' ? 'bg' : 'bg-white');
+        }
+    </script>
+</body>
+</html>

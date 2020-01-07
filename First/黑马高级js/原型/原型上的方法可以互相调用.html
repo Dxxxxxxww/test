@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Animal(name) {
+      this.name = name;
+      this.eat = function () {
+        console.log('eat');
+      };
+      this.sleep = function () {
+        //实例对象中的方法可以互相调用
+        console.log('sleep');
+        this.eat();
+      }
+    }
+
+    Animal.prototype.play = function () {
+      //原型上的方法也可以互相调用
+      console.log('play');
+      this.run();
+    }
+    Animal.prototype.run = function () {
+      console.log('run');
+    }
+    var dog = new Animal('doge');
+    dog.sleep();
+    dog.play();
+  </script>
+</body>
+</html>

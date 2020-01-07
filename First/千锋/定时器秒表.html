@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器</title>
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 625%;
+        }
+        html , body {
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            width: 3rem;
+            height: 4rem;
+            background: #eee;
+            margin: 0.5rem auto;
+            font-size: 0.36rem;
+            overflow: hidden;
+        }
+        .div-show {
+            position: relative;
+            text-align: center;
+            margin: 0.2rem auto;
+            height: 1rem;
+            line-height: 1rem;
+        }
+        #show-hour::after {
+            content: ":";
+            position: absolute;
+
+        }
+        #show-min::after {
+            content: ":";
+            position: absolute;
+
+        }
+        .div-btns {
+            margin: 0.5rem auto;
+        }
+        .div-btns div {
+            margin-bottom: 0.2rem;
+            text-align: center;
+        }
+        #start, #pause, #stop  {
+            width: 1rem;
+            height: 0.5rem;
+            font-size: 0.24rem;
+            border-radius: 0.05rem;
+            border: none;
+            background: #ddd;
+            box-shadow: 0 0.05rem 0.05rem #666;
+            transition: all 0.2s;
+        }
+        #start:hover, #pause:hover, #stop:hover {
+            background: #aaa;
+        }
+        #start:active, #pause:active, #stop:active {
+            box-shadow: 0 0.02rem 0.05rem #222;
+            transform: translateY(0.02rem);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div-show">
+            <span id="show-hour">00</span>
+            <span id="show-min">00</span>
+            <span id="show-sec">00</span>
+        </div>
+        <div class="div-btns">
+            <div>
+                <button id="start" class="iconfont">&#xe600;</button>
+            </div>
+            <div>
+                <button id="pause"  class="iconfont">&#xe69d;</button>
+            </div>
+            <div>
+                <button id="stop"  class="iconfont">&#xe611;</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var count = 0;
+        var timer;
+        var clickTimes = 0;
+        //获取id的函数
+        function $(elementId) {
+            return document.getElementById(elementId);
+        }
+        //开始计数
+        $('start').onclick = function () {
+            if (clickTimes > 0) {
+                console.log('不能重复添加');
+                return;
+            }
+            clickTimes = 1;
+            timer = setInterval(function (params) {
+                count++;
+                $('show-sec').innerHTML = format(count % 60);
+                $('show-min').innerHTML = format(parseInt(String(count / 60)) % 60);
+                $('show-hour').innerHTML = format(parseInt(String(count / 3600)));
+            }, 100);
+        }
+        //暂停计数
+        $('pause').onclick = function () {
+            clearInterval(timer);
+            clickTimes = 0;
+        }
+        //停止计数
+        $('stop').onclick = function () {
+            clearInterval(timer);
+            count = 0;
+            clickTimes = 0;
+            $('show-sec').innerHTML = '00';
+            $('show-min').innerHTML = '00';
+            $('show-hour').innerHTML = '00';
+        }
+        //格式化双0的状态
+        function format(params) {
+            /* if (params < 10) {
+                return '0' + params;
+            }else {
+                return params;
+            } */
+            return params < 10 ? '0' + params : params;
+        }
+    </script>
+</body>
+</html>

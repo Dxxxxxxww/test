@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>防抖</title>
+    <style>
+      #container {
+        width: 100%;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        color: #fff;
+        background-color: #444;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <button id="button">取消debounce</button>
+    <script>
+      var count = 1
+      var container = document.getElementById('container')
+
+      function getUserAction(e) {
+        console.log(e)
+        console.log(this)
+        container.innerHTML = count++
+        return '有没有返回值啊'
+      }
+
+      //第六版 增加取消功能 虽然基本用不上 比如说我 debounce 的时间间隔是 10 秒钟，immediate 为 true，
+      //这样的话，我只有等 10 秒后才能重新触发事件，现在我希望有一个按钮，点击后，取消防抖，这样我再去触发，就可以又立刻执行啦
+      const debounce = (func, wait, immediate) => {
+        let timeout, result
+        const debounced = function() {
+          const _this = this
+          const args = arguments
+
+          if (timeout) {
+            clearTimeout(timeout)
+          }
+          if (immediate) {
+            let callNow = !timeout
+            timeout = setTimeout(() => {
+              timeout = null
+            }, wait)
+            if (callNow) {
+              //只能在同步时候返回
+              result = func.apply(_this, args)
+              console.log(result)
+            }
+          } else {
+            timeout = setTimeout(function() {
+              //因为这里是异步，，我们将 func.apply(context, args) 的返回值赋给变量，最后再 return 的时候，值将会一直是 undefined
+              //因为异步还未执行，匿名函数已经执行完了 eventloop
+              result = func.apply(_this, args)
+            }, wait)
+          }
+          console.log('abc', result)
+          return result
+        }
+        debounced.cancel = function() {
+          clearTimeout(timeout)
+          timeout = null
+        }
+        return debounced
+      }
+      //第五版 返回值 虽然基本用不上
+      // const debounce = (func, wait, immediate) => {
+      //   let timeout, result
+      //   return function() {
+      //     const _this = this
+      //     const args = arguments
+
+      //     if (timeout) {
+      //       clearTimeout(timeout)
+      //     }
+      //     if (immediate) {
+      //       let callNow = !timeout
+      //       timeout = setTimeout(() => {
+      //         timeout = null
+      //       }, wait)
+      //       if (callNow) {
+      //         //只能在同步时候返回
+      //         result = func.apply(_this, args)
+      //         console.log(result)
+      //       }
+      //     } else {
+      //       timeout = setTimeout(function() {
+      //         //因为这里是异步，，我们将 func.apply(context, args) 的返回值赋给变量，最后再 return 的时候，值将会一直是 undefined
+      //         //因为异步还未执行，匿名函数已经执行完了 eventloop
+      //         result = func.apply(_this, args)
+      //       }, wait)
+      //     }
+      //     console.log('abc', result)
+      //     return result
+      //   }
+      // }
+      // function a() {
+      //   let result
+      //   setTimeout(() => {
+      //     result = 123
+      //     console.log('异步执行完成', result)
+      //   }, 1000)
+      //   console.log('return前一行', result)
+      //   return result
+      // }
+      // console.log('函数 a 执行完成', a())
+
+      //第四版 解决需要立刻执行函数，然后等到停止触发 n 秒后，才可以重新触发立即执行。
+      // const debounce = (func, wait, immediate) => {
+      //   let timeout
+      //   return function() {
+      //     const _this = this
+      //     const args = arguments
+
+      //     if (timeout) {
+      //       clearTimeout(timeout)
+      //     }
+      //     if (immediate) {
+      //       let callNow = !timeout
+      //       timeout = setTimeout(() => {
+      //         timeout = null
+      //       }, wait)
+      //       if (callNow) {
+      //         func.apply(_this, args)
+      //       }
+      //     } else {
+      //       timeout = setTimeout(function() {
+      //         func.apply(_this, args)
+      //       }, wait)
+      //     }
+      //   }
+      // }
+      //第三版 解决传参问题
+      // const debounce = (func, wait) => {
+      //   let timeout
+      //   return function() {
+      //     const _this = this
+      //     const args = arguments
+
+      //     clearTimeout(timeout)
+      //     timeout = setTimeout(function() {
+      //       func.apply(_this, args)
+      //     }, wait)
+      //   }
+      // }
+      //第二版  解决 this 问题
+      // const debounce = (func, wait) => {
+      //   let timeout
+      //   return function () {
+      //     const _this = this
+      //     clearTimeout(timeout)
+      //     timeout = setTimeout(func.bind(_this), wait);
+      //   }
+      // }
+      //第一版
+      // const debounce = (func, wait) => {
+      //   let timeout
+      //   return function() {
+      //     clearTimeout(timeout)
+      //     timeout = setTimeout(func, wait)
+      //   }
+      // }
+      // console.log(debounce(getUserAction, 1000)())
+    
+      const setUseAction = debounce(getUserAction, 5000, true)
+      container.onmousemove = setUseAction
+      document.getElementById('button').addEventListener('click', function() {
+        setUseAction.cancel()
+      })
+    </script>
+  </body>
+</html>
