@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <!-- <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black" /> -->
+    <!-- 设置苹果工具栏颜色 -->
+    <!-- <meta name="format-detection" content="telephone=no, email=no" /> -->
+    <!--忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <!-- <meta name="renderer" content="webkit" /> -->
+    <!-- 避免IE使用兼容模式 -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <!-- <meta name="HandheldFriendly" content="true" /> -->
+    <!-- 微软的老式浏览器 -->
+    <!-- <meta name="MobileOptimized" content="320" /> -->
+    <!-- uc强制竖屏 -->
+    <!-- <meta name="screen-orientation" content="portrait" /> -->
+    <!-- QQ强制竖屏 -->
+    <!-- <meta name="x5-orientation" content="portrait" /> -->
+    <!-- UC强制全屏 -->
+    <!-- <meta name="full-screen" content="yes" /> -->
+    <!-- QQ强制全屏 -->
+    <!-- <meta name="x5-fullscreen" content="true" /> -->
+    <!-- UC应用模式 -->
+    <!-- <meta name="browsermode" content="application" /> -->
+    <!-- QQ应用模式 -->
+    <!-- <meta name="x5-page-mode" content="app" /> -->
+    <!-- windows phone 点击无高光 -->
+    <!-- <meta name="msapplication-tap-highlight" content="no" />  -->
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 100px;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .abc {
+        /* position: fixed; */
+        width: 100vw;
+        height: 38vh;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        z-index: 999;
+        background-color: #ddd;
+        -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+        user-select: none;
+        -webkit-user-select: none; /*webkit浏览器*/
+        /* -khtml-user-select: none; 早期浏览器 */
+        -moz-user-select: none; /*火狐*/
+        -ms-user-select: none; /*IE10*/
+      }
+
+      /*设置页面长按不可复制粘贴，但是iOS上出现input、textarea不能输入，因此将使用-webkit-user-select:auto;*/
+      input,
+      textarea {
+        -webkit-user-select: auto; /*webkit浏览器*/
+        margin: 0px;
+        padding: 0px;
+        outline: none;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        margin-bottom: 2vh;
+        padding: 0 0 4px 4px;
+        background-color: #ddd;
+      }
+      .left {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(75vw - 3px);
+        height: 36vh;
+        background-color: #ddd;
+      }
+      .right {
+        display: flex;
+        flex-wrap: wrap;
+        width: calc(25vw - 1px);
+        background-color: #ddd;
+      }
+      .box {
+        width: calc(25vw - 1px);
+        height: 9vh;
+        line-height: 9vh;
+        text-align: center;
+        padding: 4px 4px 0 0;
+        font-size: 0;
+      }
+      .box > span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        font-size: 16px;
+        background-color: #fff;
+      }
+      .color {
+        color: red;
+      }
+      .box span.actived {
+        background-color: #eee !important;
+      }
+      .box span.finish {
+        background-color: #ff8d00;
+      }
+      .hidden {
+        display: none;
+      }
+      .box span.delete-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .del-icon {
+        position: relative;
+        display: block;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top-left-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border: 1px solid #333;
+        font-style: normal;
+      }
+      .del-icon::before {
+        content: '';
+        position: absolute;
+        left: -20px;
+        bottom: -1px;
+        display: block;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid #333;
+      }
+      .del-icon::after {
+        content: '';
+        position: absolute;
+        left: -17px;
+        bottom: 0;
+        display: block;
+        width: 0;
+        height: 0;
+        border-radius: 2px;
+        border-left: 9px solid transparent;
+        border-top: 9px solid transparent;
+        border-bottom: 9px solid transparent;
+        border-right: 9px solid #fff;
+      }
+      i.icon {
+        position: relative;
+        font-style: normal;
+        bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div>
+        <div>
+          <img src="./favicon.ico" alt="" />
+        </div>
+      </div>
+    </div>
+    <!-- 啊 -->
+    <!-- 啊 -->
+    <div class="abc">
+      <div class="container" id="container">
+        <div class="left">
+          <div class="box"><span id="input1">1</span></div>
+          <div class="box"><span id="input2">2</span></div>
+          <div class="box"><span id="input3">3</span></div>
+          <div class="box"><span id="input4">4</span></div>
+          <div class="box"><span id="input5">5</span></div>
+          <div class="box"><span id="input6">6</span></div>
+          <div class="box"><span id="input7">7</span></div>
+          <div class="box"><span id="input8">8</span></div>
+          <div class="box"><span id="input9">9</span></div>
+          <div class="box" style="width: calc(50vw - 2px);">
+            <span id="input0">0</span>
+          </div>
+          <div class="box"><span onclick="inputMoney(event)">.</span></div>
+        </div>
+        <div class="right">
+          <div class="box">
+            <span class="delete-wrapper" id="inputDel"
+              ><span class="del-icon"><i class="icon">×</i></span></span
+            >
+          </div>
+          <div class="box" style="height: 27vh; line-height: 27vh;">
+            <span class="finish" id="inputSuccess">完成</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="www.baidu.com" id="a">baidu</a>
+    <input type="text" id="input" />
+    <script>
+      // 键盘输入逻辑应在手指抬起时触发
+      const { log } = console
+      const input = document.getElementById('input')
+      // console.log(document.querySelector('.container').classList)
+      // console.log(document.getElementsByClassName('container')[0])
+      // console.log(document.getElementById('container'))
+      // document.querySelectorAll('.box').forEach((v) => {
+      //   v.addEventListener('touchstart', a)
+      // })
+      // function a(e) {
+      //   console.log(e.target.innerText)
+      // }
+      // function abc() {
+      //   console.log('abc')
+      // }
+
+      document.getElementById('a').addEventListener('click', (e) => {
+        e.preventDefault()
+      })
+      function initInputEvent() {
+        for (let i = 0; i < 10; i++) {
+          let str = 'input' + i
+          document
+            .getElementById(str)
+            .addEventListener('touchstart', beforeInputMoney)
+          document.getElementById(str).addEventListener('touchend', inputMoney)
+        }
+      }
+      initInputEvent()
+      input.addEventListener('focus', (e) => {
+        e.preventDefault()
+        console.log(123)
+      })
+      var ua = navigator.userAgent
+      // 键盘输入逻辑应在手指抬起时触发
+      function beforeInputMoney(e) {
+        e.target.classList.add('actived')
+      }
+      // 键盘输入逻辑应在手指抬起时触发
+      function inputMoney(e) {
+        console.log(e)
+
+        e.target.classList.remove('actived')
+        var num = e.target.innerText
+        var money = input.value
+        var value = money
+        log('num---', num)
+        log('money---', money)
+        if (num == '.') {
+          if (value == '') {
+            log('a')
+            money = '0.'
+          } else {
+            if (value.indexOf('.') != '-1') {
+              log('b')
+              money = value
+            } else {
+              log('c')
+              money = value.toString() + num.toString()
+            }
+          }
+        } else {
+          value = value.toString() + num.toString()
+          if (value.indexOf('.') != '-1') {
+            log('d')
+            money = value.substr(0, value.indexOf('.') + 3)
+          } else {
+            money = parseFloat(value).toString().substr(0, 16)
+            log('e')
+          }
+        }
+        log('value+++', value)
+        log('money+++', money)
+        input.value = money
+      }
+      document.getElementById('inputSuccess').addEventListener('click', (e) => {
+        container.classList.add('color')
+        close()
+      })
+      document.getElementById('inputDel').addEventListener('click', () => {
+        container.classList.remove('color')
+      })
+      log(document.querySelector('.abc'))
+      document.querySelector('.abc').addEventListener('longTap', (e) => {
+        log('123', e)
+      })
+      function close() {
+        setTimeout(() => {
+          document.querySelector('.abc').classList.add('hidden')
+        }, 310)
+      }
+    </script>
+  </body>
+</html>

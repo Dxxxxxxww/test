@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log('script start')
+
+      // 此时 setTimeout2 这个宏任务产生了 一个微任务， 所以当此宏任务执行完会执行所有的微任务
+      // 此时微任务队列里只有 promise inner aaa 这一个微任务
+      setTimeout(function () {
+        console.log('setTimeout1')
+        Promise.resolve().then(function () {
+          console.log('promise inner aaa')
+        })
+      }, 0)
+
+      Promise.resolve().then(function () {
+        console.log('promise outer')
+      })
+
+      // 此时 setTimeout2 这个宏任务产生了 一个微任务， 所以当此宏任务执行完会执行所有的微任务
+      // 此时微任务队列里只有 promise inner timeout bbb 这一个微任务
+      setTimeout(function () {
+        console.log('setTimeout2')
+        Promise.resolve().then(function () {
+          console.log('promise inner timeout bbb')
+        })
+      }, 0)
+
+      setTimeout(function () {
+        console.log('setTimeout3')
+      }, 0)
+
+      Promise.resolve()
+        .then(function () {
+          console.log('promise1')
+        })
+        .then(function () {
+          console.log('promise2')
+        })
+
+      console.log('script end')
+    </script>
+  </body>
+</html>
