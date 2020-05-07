@@ -1,5 +1,5 @@
 /*
-  定义：
+  *定义：
     遍历器(Iterator)： 它是一种接口，为不同的数据结构(主要是array object map set)提供统一的数据访问机制。
     任何一种数据结构只要部署了 Iterator 接口，就可以遍历。
 
@@ -62,6 +62,7 @@ interface Iterable {
 */
 
 /*
+ // *默认 Iterator 接口：
   一种数据接口，只要部署了 Iterator 接口，我们就称其是可遍历的。
   ES6规定，默认的 Iterator 接口部署在数据结构的 Symbal.iterator 属性 => 只要某种数据结构含有 Symbal.iterator 属性，那它就是可遍历的。
 
@@ -135,3 +136,112 @@ for (const v of range(0, 3)) {
 /*
   如果 Symbol.iterator 接口部署的不是遍历器生成函数，则解释引擎会报错。
 */
+
+/*
+  *调用 Iterator 接口的场合
+  除了 for...of 外，还有以下场景默认调用 Iterator接口(Symbol.iterator)：
+  1、...扩展运算符
+  2、数组，Set 解构赋值
+  3、yield*
+  4、其他场合：
+          for...of, Array.from(), new Map()/Set()/WeakMap()/WeakSet(), Promise.all(). Promise.race()
+*/
+
+/*
+// 数组，Set 解构赋值
+let set = new Set().add('a').add('b').add('c');
+
+let [x,y] = set;
+// x='a'; y='b'
+
+let [first, ...rest] = set;
+// first='a'; rest=['b','c'];
+*/
+
+/*
+// 证明 Array.from 会调用遍历器接口
+const arr1 = ['a', 'b', 'c', 'd']
+arr1[Symbol.iterator] = function() {
+  let i = 0
+  // 返回一个遍历器对象
+  return {
+    next() {
+      console.log('abc')
+      return i < arr1.length
+        ? { value: arr1[i++], done: false }
+        : { value: undefined, done: true }
+    },
+  }
+}
+const azz = Array.from(arr1) // abc * 5
+*/
+
+/*
+  *字符串的 Iterator 接口
+  字符串是一个类似数组的数据结构，也具有 Symbol.iterator 接口
+ */
+
+/*
+const str = 'abcdef'
+log(typeof str[Symbol.iterator]) // function
+const its = str[Symbol.iterator]()
+log(its.next()) // { value: 'a', done: false }
+log(its.next()) // { value: 'b', done: false }
+log(its.next()) // { value: 'c', done: false }
+log(its.next()) // { value: 'd', done: false }
+log(its.next()) // { value: 'e', done: false }
+log(its.next()) // { value: 'f', done: false }
+log(its.next()) // { value: undefined, done: true }
+*/
+
+/*
+ *遍历器的最简单实现就是使用 generator 函数
+ */
+
+/*
+([])[Symbol.iterator] = function* () {
+  yield 1
+  yield 2
+  yield 3
+}
+
+const obj = {
+  * [Symbol.iterator]() {
+    yield 'hello'
+    yield 'world'
+  }
+}
+*/
+
+/*
+  *遍历器的 return throw 方法：
+    遍历器的 next 方法是必须的， 
+    return(遍历中断跳出循环，通常是因为出错或者break) 
+    throw(一般用于配合 generator 函数使用，普通遍历器用不上) 可选
+ */
+
+/*
+  *for...of:
+    可以使用 for...of 的数据结构：
+    Array Set Map arguments NodeList
+    总结：具备 Iterator 接口的数据结构，Generator 对象，字符串
+ */
+
+/*
+  // 对象在不设置 Symbol.iterator 接口情况下使用 for...of 
+  const o = { a: 1, b: 2 }
+  // 使用 Object.keys()
+  for (const k of Object.keys(o)) {
+    log(k + '->' + o[k]) // a->1 b->2
+  }
+  // 使用 Generator 函数包裹
+  function* g(o) {
+    for (const k of Object.keys(o)) {
+      yield [k, o[k]]
+    }
+  }
+  
+  for (const v of g(o)) {
+    log(v) // [ 'a', 1 ]  [ 'b', 2 ]
+  }
+  */

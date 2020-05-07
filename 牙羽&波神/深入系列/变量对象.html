@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const { log } = console
+      function a(b, c) {
+        log(b)
+        function b() {
+          console.log(10)
+        }
+        b()
+        // var b // 声明无效
+        // var b = 10 // 赋值为 10
+        // let b // 报错 SyntaxError: Identifier 'b' has already been declared
+        return b
+      }
+      log(a(1, 2))
+    </script>
+  </body>
+</html>
