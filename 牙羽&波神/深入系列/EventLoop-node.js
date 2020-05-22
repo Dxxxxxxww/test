@@ -8,6 +8,7 @@
 
 // EventLoop 执行顺序： 1、同步代码。2、微任务。3、宏任务
 // 每执行完一个宏任务，会执行所有的微任务。
+
 async function async1() {
   console.log('async1 start')
   await async2()
@@ -18,8 +19,8 @@ async function async2() {
 }
 console.log('script start')
 setTimeout(function () {
-  console.log('setTimeout')
-}, 0)
+  console.log('settimeout')
+})
 async1()
 new Promise(function (resolve) {
   console.log('promise1')
@@ -27,7 +28,58 @@ new Promise(function (resolve) {
 }).then(function () {
   console.log('promise2')
 })
+setImmediate(() => {
+  console.log('setImmediate')
+})
+process.nextTick(() => {
+  console.log('process')
+})
 console.log('script end')
+
+// 正确
+// script start // 同步代码
+// async1 start
+// async2
+// promise1
+// script end
+// process // 微任务
+// async1 end
+// promise2
+// settimeout // 宏任务
+// setImmediate
+
+// 错误
+// script start // 同步代码
+// "async1 start"
+// async2
+// promise1
+// script end
+// async1 end // 微任务
+// promise2
+// process
+// settimeout // 宏任务
+// setImmediate
+
+// async function async1() {
+//   console.log('async1 start')
+//   await async2()
+//   console.log('async1 end')
+// }
+// async function async2() {
+//   console.log('async2')
+// }
+// console.log('script start')
+// setTimeout(function () {
+//   console.log('setTimeout')
+// }, 0)
+// async1()
+// new Promise(function (resolve) {
+//   console.log('promise1')
+//   resolve()
+// }).then(function () {
+//   console.log('promise2')
+// })
+// console.log('script end')
 
 // function async1() {
 //   console.log('async1 start') // 2
