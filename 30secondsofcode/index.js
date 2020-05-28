@@ -43,3 +43,32 @@ const objectToQueryString = (param) => {
     : ''
 }
 objectToQueryString({ page: '1', size: '2kg', key: undefined }) // ?page=1&size=2kg
+
+/**
+ * @description invert object's key and value
+ * @param {Object} obj
+ * @param {Function} fn
+ */
+const invertKeyValue = (obj, fn) =>
+  Object.keys(obj).reduce((acct, key) => {
+    const val = fn ? fn(obj[key]) : obj[key]
+    acct[val] = acct[val] || []
+    acct[val].push(key)
+    return acct
+  }, {})
+invertKeyValue({ a: 1, b: 2, c: 1 }) // { 1: [ 'a', 'c' ], 2: [ 'b' ] }
+invertKeyValue({ a: 1, b: 2, c: 1 }, (value) => 'group' + value) // { group1: [ 'a', 'c' ], group2: [ 'b' ] }
+/**
+ * @description invert object's key and value
+ * @param {Object} obj
+ * @param {String} prefix
+ */
+const invertKeyValue2 = (obj, prefix) =>
+  Object.keys(obj).reduce((acct, key) => {
+    const val = prefix ? `${prefix}${obj[key]}` : obj[key]
+    acct[val] = acct[val] || []
+    acct[val].push(key)
+    return acct
+  }, {})
+invertKeyValue2({ a: 1, b: 2, c: 1 }) // { 1: [ 'a', 'c' ], 2: [ 'b' ] }
+invertKeyValue2({ a: 1, b: 2, c: 1 }, 'group') // { group1: [ 'a', 'c' ], group2: [ 'b' ] }
