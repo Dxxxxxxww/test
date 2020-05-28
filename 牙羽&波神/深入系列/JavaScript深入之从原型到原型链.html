@@ -9,15 +9,25 @@
 
   <body>
     <script>
-      var b = 20
-      function a(callback) {
-        var b = 10
-        callback()
+      const name = 'ab'
+      const person = {
+        name: 'tom',
+        getName: () => {
+          debugger
+          return this.name // 'this.name'   不管是否调用外部 name， script 依然在作用域链上
+        },
       }
 
-      a(() => {
-        console.log(b)
-      })
+      console.log(person.getName())
+      // var b = 20
+      // function a(callback) {
+      //   var b = 10
+      //   callback()
+      // }
+
+      // a(() => {
+      //   console.log(b)
+      // })
 
       // for (let i = 0; i < 3; i++) {
       //   setTimeout(() => {

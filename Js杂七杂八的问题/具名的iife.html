@@ -13,7 +13,9 @@
 
       // 2. 对于一个常量进行赋值，在 strict 模式下会报错，非 strict 模式下静默失败。
 
-      // 3. IIFE中的函数是函数表达式，而不是函数声明。
+      // 3. IIFE(立即执行的函数表达式)中的函数是函数表达式，而不是函数声明。
+
+      // 具名的函数表达式，函数名在 local 作用域上存在
 
       // 函数内调用函数名，会返回函数本身
       // function b() {
@@ -35,6 +37,7 @@
 
       // 函数声明
       // function b() {
+      //   debugger
       //   b = 20 // 可以理解为 访问 window.b 存在，并且是个函数，将其赋值为 20
       //   log(b, '-----', b.name)
       // }
@@ -42,13 +45,14 @@
       // log(b, '===', window)
       // b() // b 已经不是函数了，调用会报错
 
-      // 函数表达式
-      // var c = function d() {
-      //   d = 30
-      //   log(d, '-----', d.name)
-      // }
-      // c()
-      // log(window)
+      // 函数表达式 具名的函数表达式，函数名在 local 作用域上存在
+      var c = function d() {
+      debugger
+      d = 30
+      log(d, '-----', d.name)
+      }
+      c()
+      log(window)
     </script>
   </body>
 </html>
