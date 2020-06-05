@@ -72,3 +72,53 @@ const invertKeyValue2 = (obj, prefix) =>
   }, {})
 invertKeyValue2({ a: 1, b: 2, c: 1 }) // { 1: [ 'a', 'c' ], 2: [ 'b' ] }
 invertKeyValue2({ a: 1, b: 2, c: 1 }, 'group') // { group1: [ 'a', 'c' ], group2: [ 'b' ] }
+
+/**
+ * @description find key which in obj
+ * @param {Object} obj
+ * @param {Array} arr
+ */
+const pick = (obj, arr) =>
+  arr.reduce((acc, curr) => (curr in obj && (acc[curr] = obj[curr]), acc), {})
+pick({ a: 1, b: '2', c: 3 }, ['a', 'c']) // { 'a': 1, 'c': 3 }
+
+const formatDuration = (ms) => {
+  if (ms < 0) ms = -ms
+  const time = {
+    day: Math.floor(ms / 86400000),
+    hour: Math.floor(ms / 3600000) % 24,
+    minute: Math.floor(ms / 60000) % 60,
+    second: Math.floor(ms / 1000) % 60,
+    millisecond: Math.floor(ms) % 1000,
+  }
+
+  return Object.entries(time)
+    .filter((v) => v[1] > 0)
+    .map(([k, v]) => `${v} ${k}${v !== 1 ? 's' : ''}`)
+    .join(', ')
+}
+formatDuration(1001) // '1 second, 1 millisecond'
+formatDuration(34325055574) // '397 days, 6 hours, 44 minutes, 15 seconds, 574 milliseconds'
+
+// 尚未研究
+// const serializeForm = form =>
+//   Array.from(new FormData(form), field => field.map(encodeURIComponent).join('=')).join('&');
+// EXAMPLES
+// serializeForm(document.querySelector('#form')); // email=test%40email.com&name=Test%20Name
+
+/**
+ * @description 传入一个键映射对象(值为new key)，一个需要被重新命名的对象
+ * @param {Object} keysMap
+ * @param {Object} obj
+ * @returns {Object} 返回一个新键映射的对象
+ */
+const renameKeys = (keysMap, obj) =>
+  Object.keys(obj).reduce(
+    (acc, key) => ({
+      ...acc,
+      [keysMap[key] || key]: obj[key],
+    }),
+    {}
+  )
+const obj = { name: 'Bobo', job: 'Front-End Master', shoeSize: 100 }
+renameKeys({ name: 'firstName', job: 'passion' }, obj) // { firstName: 'Bobo', passion: 'Front-End Master', shoeSize: 100 }
