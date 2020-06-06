@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const { log, dir } = console
+      class Point {
+        constructor(x, y) {
+          this.x = x
+          this.y = y
+        }
+
+        toString() {
+          return '(' + this.x + ', ' + this.y + ')'
+        }
+      }
+
+      var point = new Point(2, 3)
+
+      point.toString() // (2, 3)
+      dir(point)
+      // log(point.hasOwnProperty('x')) // true
+      // log(point.hasOwnProperty('y')) // true
+      // log(point.hasOwnProperty('toString')) // false
+      // log(point.__proto__.hasOwnProperty('toString')) // true
+
+      class Circle {
+        x = '1'
+        y = '2'
+
+        toString() {
+          return '(' + this.x + ', ' + this.y + ')'
+        }
+      }
+
+      var circle = new Circle(2, 3)
+
+      circle.toString() // (2, 3)
+      dir(circle)
+      // dir(circle.__proto__)
+      log(circle.hasOwnProperty('x')) // true
+      log(circle.hasOwnProperty('y')) // true
+      log(circle.hasOwnProperty('toString')) // false
+      log(circle.__proto__.hasOwnProperty('toString')) // true
+    </script>
+  </body>
+</html>
