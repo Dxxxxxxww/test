@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // for (let i = 0; i < 3; i++) {
+      //   setTimeout(() => {
+      //     console.log(i) // scopes: Local Block Global
+      //   }, 10)
+      // }
+
+      // let const 声明的变量在作用域链上的形式
+      // function a() {
+      //   let b = 'b'
+      //   var c = 'c'
+      //   setTimeout(() => {
+      //     debugger
+      //     console.log(b, c) // scopes Local Closure Global
+      //   })
+      // }
+      // a()
+
+      // 全局情况
+      var a = 10
+      let b = 20
+      function aa() {
+        debugger
+        console.log(a)
+      }
+
+      function bb() {
+        console.log(b)
+      }
+
+      aa()
+      bb()
+    </script>
+  </body>
+</html>

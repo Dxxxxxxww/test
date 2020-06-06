@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 异步任务会被放置到 Task Table，也就是上图中的异步处理模块，当异步任务有了运行结果，就将该函数移入任务队列。
+      /* setTimeout 异步事件 是在 设定的秒数到达之后，才将回调函数从异步处理模块转入到宏任务队列。
+        setTimeout(()=>console.log(1),3000)
+        setTimeout(()=>console.log(2),100)
+        // 2 1
+      */
+    </script>
+    <script>
+      // 题3
+      const { log } = console
+      var p4 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(1000)
+          console.log('哈哈哈')
+        }, 0)
+      })
+      p4.then((res) => {
+        console.log('1')
+        console.log(res)
+        console.log('2')
+      }).then(() => {
+        console.log('第二次then')
+      })
+
+      // 题1
+      // async function async1() {
+      //   console.log('async1 start')
+      //   await async2()
+      //   console.log('async1 end')
+      // }
+      // async function async2() {
+      //   console.log('async2')
+      // }
+      // console.log('script start')
+      // setTimeout(function () {
+      //   console.log('setTimeout')
+      // }, 0)
+      // async1()
+      // new Promise(function (resolve) {
+      //   console.log('promise1')
+      //   resolve()
+      // }).then(function () {
+      //   console.log('promise2')
+      // })
+      // console.log('script end')
+
+      // setTimeout 应该是在指定秒数后将回调函数放入任务队列
+      // setTimeout(() => {
+      //   log('b')
+      // }, 2000)
+      // log('c')
+      // setTimeout(() => {
+      //   log('a')
+      // }, 1000)
+
+      // 题2
+      // const p1 = new Promise((resolve, reject) => {
+      //   console.log('promise1')
+      //   resolve()
+      // })
+      //   .then(() => {
+      //     console.log('then11')
+      //     new Promise((resolve, reject) => {
+      //       console.log('promise2')
+      //       resolve()
+      //     })
+      //       .then(() => {
+      //         console.log('then21')
+      //       })
+      //       .then(() => {
+      //         console.log('then23')
+      //       })
+      //   })
+      //   .then(() => {
+      //     console.log('then12')
+      //   })
+      // const p2 = new Promise((resolve, reject) => {
+      //   console.log('promise3')
+      //   resolve()
+      // }).then(() => {
+      //   console.log('then31')
+      // })
+    </script>
+  </body>
+</html>

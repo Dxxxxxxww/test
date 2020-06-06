@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 继承
+      function Person(name, age) {
+        this.name = name
+        this.age = age
+      }
+
+      Person.prototype.getName = function () {
+        // 这里不能使用箭头函数，使用箭头函数无法访问到正确的 this
+        return this.name
+      }
+
+      function xiaoHong(name, age, sex) {
+        Person.call(this, name, age)
+        this.sex = sex
+      }
+
+      //Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。
+      // xiaoHong.prototype = Object.create(Person.prototype, {
+      //   constructor: {
+      //     value: xiaoHong,
+      //   },
+      //   getSex: {
+      //     value: function () {
+      //       // 这里不能使用箭头函数，使用箭头函数无法访问到正确的 this
+      //       // 此处的 this 也指向 window    window.Object
+      //       return this.sex
+      //     },
+      //   },
+      // })
+
+      // 手动实现一个 Object.create
+      function create(proto, options = null) {
+        const tmp = {}
+        tmp.__proto__ = proto
+
+        if (options) {
+          Object.defineProperties(tmp, options)
+        }
+
+        return tmp
+      }
+
+      function xiaoHei(name, age, sex) {
+        Person.call(this, name, age)
+        this.sex = sex
+      }
+
+      // 模拟实现 Object.create
+      xiaoHei.prototype = create(Person.prototype, {
+        constructor: {
+          value: xiaoHei,
+        },
+        getSex: {
+          value: function () {
+            // 这里不能使用箭头函数，使用箭头函数无法访问到正确的 this
+            // 此处的 this 也指向 window    window.Object
+            return this.sex
+          },
+        },
+      })
+
+      // const xh = new xiaoHong('a', 18, 'fm')
+      // console.dir(xh)
+      // console.log(xh.getName())
+      // console.log(xh.getSex())
+      // const xh = new xiaoHei('a', 18, 'fm')
+      // console.dir(xh)
+      // console.log(xh.getName())
+      // console.log(xh.getSex())
+
+      // 顺便实现 new 好了 new Person('a', 18)
+      // 1.声明一个中间对象；
+      // 2.将该中间对象的原型指向构造函数的原型；
+      // 3.将构造函数的this，指向该中间对象；(将构造函数上的属性方法添加到中间对象上)
+      // 4.返回该中间对象，即返回实例对象。
+      function new2(func) {
+        const tmp = {}
+        tmp.__proto__ = func.prototype
+        // [].slice.call(arguments, 1)
+        const ret = func.apply(tmp, Array.prototype.slice.call(arguments, 1))
+
+        if (typeof ret === 'object' || typeof ret === 'function') {
+          return ret
+        }
+
+        return tmp
+      }
+
+      const xh = new2(xiaoHei, 'a', 18, 'fm')
+      console.dir(xh)
+      console.log(xh.getName())
+      console.log(xh.getSex())
+    </script>
+  </body>
+</html>

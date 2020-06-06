@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const { log } = console
+      // 知乎，关于具名的IIFE内部对函数自身再赋值问题？ 贺师俊大佬的回答
+      // 1. 函数表达式与函数声明不同，函数名只在该函数内部有效，并且此绑定是常量绑定(注：无法修改)。
+
+      // 2. 对于一个常量进行赋值，在 strict 模式下会报错，非 strict 模式下静默失败。
+
+      // 3. IIFE(立即执行的函数表达式)中的函数是函数表达式，而不是函数声明。
+
+      // 具名的函数表达式，函数名在 local 作用域上存在
+
+      // 函数内调用函数名，会返回函数本身
+      // function b() {
+      //   log(b, '-----', b.name) // function b
+      // }
+      // b() // function b
+      // log(b, '===', window)
+      // b() // function b
+
+      // var a = 10
+      // ;(function a() {
+      //   // 作为函数名的标识符（在这里是a）只能从函数体内部访问，在函数外部访问不到
+      //   // iife 函数的 name 属性无法被修改，只能访问
+      //   // var a = 20
+      //   a = 20
+      //   log(a.name, '----', a)
+      // })()
+      // log(a) // 10 ， ReferenceError: a is not defined
+
+      // 函数声明
+      // function b() {
+      //   debugger
+      //   b = 20 // 可以理解为 访问 window.b 存在，并且是个函数，将其赋值为 20
+      //   log(b, '-----', b.name)
+      // }
+      // b() // 函数执行后，window.b 就从函数变成了 number 20
+      // log(b, '===', window)
+      // b() // b 已经不是函数了，调用会报错
+
+      // 函数表达式 具名的函数表达式，函数名在 local 作用域上存在
+      var c = function d() {
+      debugger
+      d = 30
+      log(d, '-----', d.name)
+      }
+      c()
+      log(window)
+    </script>
+  </body>
+</html>

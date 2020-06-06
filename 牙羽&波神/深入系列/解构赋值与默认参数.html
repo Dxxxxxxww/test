@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Chameleon {
+        static colorChange(newColor) {
+          this.newColor = newColor
+        }
+        // 如果传参，解构赋值给 newColor ，如果不传，则默认为空对象，空对象解构，则使用默认值 'green'
+        // constructor({ newColor = 'green' } = {}) {
+        //   this.newColor = newColor
+        // }
+        // 真的是为了面试题而面试题，直接这样不就好了
+        // constructor(newColor = 'green') {
+        //   this.newColor = newColor
+        // }
+      }
+
+      const fre = new Chameleon({ newColor: 'yellow' })
+      // const fre = new Chameleon('yellow')
+      console.log(fre)
+    </script>
+  </body>
+</html>

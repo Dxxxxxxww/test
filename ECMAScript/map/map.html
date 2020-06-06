@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-
-<body>
-  <script>
-    let map = new Map();
-    map.set('title', 'i am awesome')
-    console.log(map.get('title'))
-  </script>
-</body>
-
+  <body>
+    <script>
+      const { log } = console
+      const set = new Set([
+        ['a', 1],
+        ['b', 2],
+      ])
+      const map = new Map(set)
+      // const map = new Map([
+      //   ['a', 1],
+      //   ['b', 2],
+      // ])
+      // log(map)
+      // let map = new Map();
+      // const o = {}
+      // map.set(o, 'i am awesome')
+      // map.set('title', 'i am awesome')
+      log(map)
+    </script>
+  </body>
 </html>

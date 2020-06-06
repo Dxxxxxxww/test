@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      new Promise((resolve, reject) => {
+        console.log('promise1')
+        resolve('a')
+      })
+        .then((res) => {
+          console.log('then11', res)
+          return new Promise((resolve, reject) => {
+            console.log('promise2')
+            resolve('b')
+          })
+            .then((res) => {
+              console.log('then21', res)
+              return 'c'
+            })
+            .then((res) => {
+              console.log('then23', res)
+              return 'd'
+            })
+        })
+        .then((res) => {
+          console.log('then12', res)
+        })
+      // 带有 return
+      //         promise1
+      // VM765:5 then11 a
+      // VM765:7 promise2
+      // VM765:10 then21 b
+      // VM765:13 then23 c
+      // VM765:17 then12 d
+      // Promise {<resolved>: undefined}
+
+      new Promise((resolve, reject) => {
+        console.log('promise1')
+        resolve()
+      })
+        .then(() => {
+          console.log('then11')
+          new Promise((resolve, reject) => {
+            console.log('promise2')
+            resolve()
+          })
+            .then(() => {
+              console.log('then21')
+            })
+            .then(() => {
+              console.log('then23')
+            })
+        })
+        .then(() => {
+          console.log('then12')
+        })
+      //不带 return
+      //         promise1
+      // VM197:5 then11
+      // VM197:7 promise2
+      // VM197:10 then21
+      // VM197:15 then12
+      // VM197:12 then23
+      // Promise {<resolved>: undefined}
+
+      // function timeout(ms) {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(resolve, ms, 'done')
+      //   })
+      // }
+      // timeout(1000).then((res) => console.log(res))
+
+      // Promise.prototype.finally()
+      // finally 返回一个 promise 。finally 回调函数不接收任何参数，且 finally 不管 return 何值，都会返回原来的值。
+      // const p = Promise.resolve(2).finally(() => {
+      //   return 10
+      // })
+      // p.then((res) => res) // Promise {<resolved>: 2}
+      // const p1 = Promise.resolve(2).finally(() => {})
+      // p1.then((res) => res) // Promise {<resolved>: 2}
+
+      // Promise.all() 接收一个数组或是具有 Iterator 接口的参数。数组参数都是 Promise 对象。如果不是则会自动被 Promise.resolve() 转为 Promise 对象
+      // 返回值1、当所有的 promise 返回 fulfilled 才返回 fulfilled 。 返回值会组成一个数组返回给 Promise.all 的回调函数。
+      //      2、只要有一个为 rejected 则返回值为 rejected。第一个 rejected 实例的返回值会传给 Promise.all 的回调函数。
+
+      // Promise.race() 与 all 类似，但是 只要有一个 Promise 状态改变，返回值就确定了
+      // const p = Promise.race([p1, p2, p3]);
+      // 上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。
+
+      // Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束。该方法由 ES2020 引入。(对 all 的补充)
+
+      // Promise.any()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。该方法目前是一个第三阶段的提案 。(对 race 的补充)
+    </script>
+  </body>
+</html>

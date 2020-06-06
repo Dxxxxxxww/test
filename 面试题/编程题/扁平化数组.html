@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const { log } = console
+      // 1. 将数组扁平化并去除其中重复数据，最终得到一个升序且不重复的数组。
+      const arr = [
+        [1, 2, 2],
+        [3, 4, 5, 5],
+        [6, 7, 8, 9, [11, 12, [12, 13, [14]]]],
+        10,
+      ]
+      // 解法 2 成功，这里简单的使用了 Set 来去重，去重还可以用对象 key 的方式去重更好
+      Array.prototype.flat = function () {
+        return [].concat(
+          ...this.map((item) => (Array.isArray(item) ? item.flat() : item))
+        )
+      }
+      Array.prototype.unique = function () {
+        return [...new Set(this)]
+      }
+
+      log(
+        arr
+          .flat()
+          .unique()
+          .sort((a, b) => a - b)
+      )
+
+      // 解法 1 失败，数字转为了字符串，并且没有去重，使用了map(Number)只是将其变成了数字
+      // log(
+      //   arr
+      //     .toString()
+      //     .split(',')
+      //     .sort((a, b) => a - b)
+      //   // .map(Number)
+      // )
+    </script>
+  </body>
+</html>

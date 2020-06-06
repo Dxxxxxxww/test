@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      const name = 'ab'
+      const person = {
+        name: 'tom',
+        getName: () => {
+          debugger
+          return this.name // 'this.name'   不管是否调用外部 name， script 依然在作用域链上
+        },
+      }
+
+      console.log(person.getName())
+      // var b = 20
+      // function a(callback) {
+      //   var b = 10
+      //   callback()
+      // }
+
+      // a(() => {
+      //   console.log(b)
+      // })
+
+      // for (let i = 0; i < 3; i++) {
+      //   setTimeout(() => {
+      //     console.log(i) // scopes: Local Block Global
+      //   }, 10)
+      // }
+
+      // let const 声明的变量在作用域链上的形式
+      // function a() {
+      //   let b = 'b'
+      //   var c = 'c'
+      //   setTimeout(() => {
+      //     console.log(b, c)// scopes Local Closure Global
+      //   })
+      // }
+
+      // a()
+
+      // function Person() {
+
+      // }
+
+      // var person = new Person();
+      // person.name = 'Dxx';
+      // console.log(person.name)
+    </script>
+  </body>
+</html>

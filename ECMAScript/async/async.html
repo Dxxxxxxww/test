@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      async function a() {
+        console.log('a')
+        await b()
+        console.log('c')
+      }
+      function e() {
+        console.log('e')
+      }
+
+      async function b() {
+        console.log('b')
+      }
+      function d() {
+        console.log('d')
+      }
+      a()
+      d()
+      e()
+    </script>
+  </body>
+</html>

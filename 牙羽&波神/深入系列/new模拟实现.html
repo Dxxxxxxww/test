@@ -8,6 +8,17 @@
   </head>
   <body>
     <script>
+      // 1.声明一个中间对象；
+      // 2.将该中间对象的原型指向构造函数的原型；
+      // 3.将构造函数的this，指向该中间对象；(将构造函数上的属性方法添加到中间对象上)
+      // 4.返回该中间对象，即返回实例对象。
+      function new2() {
+        const _constructor = [].shift.call(arguments)
+        const obj = Object.create(_constructor.prototype)
+        const res = _constructor.apply(obj, arguments)
+        return typeof res === 'object' || typeof res === 'function' ? res : obj
+      }
+
       // 第二版
       // function objectFactory() {
       //   var obj = new Object(),
@@ -68,7 +79,7 @@
 
       Otaku.prototype.strength = 60
 
-      Otaku.prototype.sayYourName = function() {
+      Otaku.prototype.sayYourName = function () {
         console.log('I am ' + this.name)
       }
 

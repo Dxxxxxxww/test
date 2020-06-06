@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // call 的作用：使用一个指定的 this 值和若干个指定的参数值的前提下调用某个函数或方法。
+      // 第一版 实现基本功能，指定 this 来调用函数
+      // 需要用到 arguments，所以不能使用箭头函数
+      // Function.prototype.call2 = function (context) {
+      //   // 因为是函数调用的 call 所以可以通过 this 来获取到对应的函数
+      //   context.func = this
+      //   const result = context.func()
+      //   delete context.func
+      //   return result
+      // }
+      // 第二版 加上 参数
+      // Function.prototype.call2 = function (context) {
+      //   context.func = this
+      //   const args = []
+      //   // 通过循环获取 ['arguments[1]', 'arguments[2]'] 这样的参数数组
+      //   // 不能直接传递实际参数值是因为，假如是字符串的话，比如这里的 'c' ，在eval里就会变成 c 变量，而非值，会报错
+      //   // es3 的方法
+      //   for (let i = 1, len = arguments.length; i < len; i++) {
+      //     args.push(`arguments[${i}]`)
+      //   }
+      //   // 通过数组的 toString 方法，获取到参数 => arguments[1], arguments[2]
+      //   // 注意不能写成 'context.func(args)'。这样相当于是把 'arguments[1],arguments[2]'传给了第一个参数了
+      //   // 而现在这样处理实际上就是相当于 context.func(arguments[1], arguments[2])
+      //   const result = eval(`context.func(${args})`)
+      //   // es6 的方法
+      //   // for (let i = 1, len = arguments.length; i < len; i++) {
+      //   //   args.push(arguments[i])
+      //   // }
+      //   // const result = context.func(...args)
+      //   delete context.func
+      //   return result
+      // }
+      // 第三版 传入的对象参数可以是 null，null 的话 指向 window
+      Function.prototype.call2 = function (context) {
+        context = context || window
+        context.func = this
+        const args = []
+        // 这里 i 一定是1，因为第一个参数是 context
+        for (let i = 1, len = arguments.length; i < len; i++) {
+          args.push(`arguments[${i}]`)
+        }
+        // eval 所需的参数是 string，args 通过数组的 toString 方法，就可以变为 context.func(arguments[1], arguments[2])
+        const result = eval(`context.func(${args})`)
+        // Reflect.deleteProperty
+        delete context.func
+        return result
+      }
+
+      var a = 10
+      const obj = {
+        a: 1,
+      }
+      function test(p1, p2, p3) {
+        return `${this.a} + ${p1} + ${p2} + ${p3}`
+      }
+      console.log(test.call2(obj, 1, 2, 'c')) // 1
+      console.log(test()) // 1
+    </script>
+  </body>
+</html>

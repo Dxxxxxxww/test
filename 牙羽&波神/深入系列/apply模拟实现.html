@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // apply 的原理跟 call 一样，差别仅仅是传参方式
+      Function.prototype.apply2 = function (context, args) {
+        context = context || window
+        context.func = this
+        args = args || []
+        const params = []
+        // 这里的 i 是 0 是因为这是 apply 传来的数组，并不需要排除 context 了
+        // es3
+        for (let i = 0, len = args.length; i < len; i++) {
+          params.push(`args[${i}]`)
+        }
+        // es3没办法传值，只能用 eval 的方法来传值
+        const result = eval(`context.func(${params})`)
+        // es6
+        // for (let i = 0, len = args.length; i < len; i++) {
+        //   params.push(args[i])
+        // }
+        // es6 就直接可以用展开运算符来传值
+        // const result = context.func(...params)
+        delete context.func
+        return result
+      }
+
+      var a = 10
+      const obj = {
+        a: 1,
+      }
+      function test(p1, p2, p3) {
+        return `${this.a} + ${p1} + ${p2} + ${p3}`
+      }
+      console.log(test.apply2(obj, [1, 2, 'c'])) // 1
+      console.log(test()) // 1
+    </script>
+  </body>
+</html>
