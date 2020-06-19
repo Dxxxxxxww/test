@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const { log } = console
+      const list = [1, 2, 3, 4, 5, 6]
+      // for (let i = 0; i < list.length; i++) {
+      //   if (list[i] == 3) {
+      //     break
+      //   }
+      //   console.log(list[i])
+      // }
+      // 可以 return
+      // list.reduce((cur, next) => {
+      //   if (next == 3) {
+      //     return
+      //   }
+      //   console.log('def', next)
+      // }, 0)
+      // 报错 Uncaught SyntaxError: Illegal break statement
+      // list.reduce((cur, next) => {
+      //   if (next == 3) {
+      //     break
+      //   }
+      //   console.log('def', next)
+      // }, 0)
+      // 报错 Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
+      // list.reduce((cur, next) => {
+      //   if (next == 3) {
+      //     continue
+      //   }
+      //   console.log('def', next)
+      // }, 0)
+      // 报错 Uncaught SyntaxError: Illegal break statement
+      // list.reduce((cur, next) => {
+      //   if (next == 3) {
+      //     break
+      //   }
+      //   console.log('def', next)
+      // }, 0)
+      // 总结：map 只能 return 。 break，continue 报错
+      // 可以 return
+      // const a = list.map((v) => {
+      //   if (v == 3) {
+      //     return v
+      //   }
+      //   console.log('def', v)
+      // })
+      // log(a)
+      // 报错 Uncaught SyntaxError: Illegal break statement
+      // list.map((v) => {
+      //   if (v == 3) {
+      //     break
+      //   }
+      //   console.log('def')
+      // })
+      // log(a)
+      // 报错 Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
+      // list.map((v) => {
+      //   if (v == 3) {
+      //     continue
+      //   }
+      //   console.log('def')
+      // })
+      // log(a)
+      // 总结：forEach 只能 return 。 break，continue 报错
+      // 可以 return
+      // list.forEach((v) => {
+      //   if (v == 3) {
+      //     return
+      //   }
+      //   console.log('def', v)
+      // })
+      // 报错 Uncaught SyntaxError: Illegal break statement
+      // list.forEach((v) => {
+      //   if (v == 3) {
+      //     break
+      //   }
+      //   console.log('def')
+      // })
+      // 报错 Uncaught SyntaxError: Illegal continue statement: no surrounding iteration statement
+      // list.forEach((v) => {
+      //   if (v == 3) {
+      //     continue
+      //   }
+      //   console.log('def')
+      // })
+    </script>
+  </body>
+</html>

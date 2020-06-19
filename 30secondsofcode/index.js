@@ -122,3 +122,78 @@ const renameKeys = (keysMap, obj) =>
   )
 const obj = { name: 'Bobo', job: 'Front-End Master', shoeSize: 100 }
 renameKeys({ name: 'firstName', job: 'passion' }, obj) // { firstName: 'Bobo', passion: 'Front-End Master', shoeSize: 100 }
+
+/**
+ * @description 传入一个对象，根据筛选条件返回符合条件的对象
+ * @param {Object} obj
+ * @param {Function} fn 筛选条件函数
+ */
+const pickBy = (obj, fn) =>
+  Object.keys(obj)
+    .filter((k) => fn(obj[k], k))
+    .reduce((cur, next) => ((cur[next] = obj[next]), cur), {})
+pickBy({ a: 1, b: '2', c: 3 }, (x) => typeof x === 'number') // { 'a': 1, 'c': 3 }
+pickBy({ a: 1, b: '2', c: 3 }, (x) => typeof x !== 'number') // { b: '2' }
+
+// 跟 pickBy 正好相反，可以直接使用 pickBy 然后传递相反条件函数
+// const omitBy = (obj, fn) =>
+//   Object.keys(obj)
+//     .filter((k) => !fn(obj[k], k))
+//     .reduce((cur, next) => ((cur[next] = obj[next]), cur), {})
+// omitBy({ a: 1, b: '2', c: 3 }, (x) => typeof x === 'number') // { b: '2' }
+
+/**
+ * @description 传入一个对象，根据规则更改对象的 key
+ * @param {*} obj
+ * @param {*} fn
+ */
+const mapKeys = (obj, fn) =>
+  Object.keys(obj).reduce(
+    (cur, next) => ((cur[fn(obj[next], next, obj)] = obj[next]), cur),
+    {}
+  )
+mapKeys({ a: 1, b: 2 }, (val, key) => key + val) // { a1: 1, b2: 2 }
+
+/**
+ * @description 传入一个对象，根据规则获取二级对象的值
+ * @param {*} obj
+ * @param {*} fn
+ * @returns {Object} 返回一个对象，值是键和二级对象值的映射
+ */
+const mapValues = (obj, fn) =>
+  Object.keys(obj).reduce(
+    (cur, next) => ((cur[next] = fn(obj[next], next, obj)), cur),
+    {}
+  )
+// const users = {
+//   fred: { user: 'fred', age: 40 },
+//   pebbles: { user: 'pebbles', age: 1 },
+// }
+// mapValues(users, u => u.age); // { fred: 40, pebbles: 1 }
+
+/**
+ * @description 传入一个对象，目标键，返回对应的值，不管嵌套多深
+ * @param {*} obj
+ * @param {*} fn
+ * @returns {String} 值
+ */
+const dig = (obj, target) =>
+  Reflect.has(obj, target)
+    ? obj[target]
+    : Object.values(obj).reduce((cur, next) => {
+        if (cur !== undefined) {
+          return cur
+        }
+        if (typeof next === 'object') {
+          return dig(next, target)
+        }
+      }, undefined)
+// const data = {
+//   level1: {
+//     level2: {
+//       level3: 'some data'
+//     }
+//   }
+// };
+// dig(data, 'level3'); // 'some data'
+// dig(data, 'level4'); // undefined

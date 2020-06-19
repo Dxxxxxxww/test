@@ -1,6 +1,6 @@
 const { log } = console
 
-// 动态原型模式
+// 动态原型模式 正确方式
 // 使用动态原型模式时，不能用对象字面量重写原型
 function Car(name) {
   this.name = name
@@ -17,6 +17,7 @@ function Car(name) {
 // 然后 Person.apply(obj)
 // 返回这个对象
 // 注意这个时候，回顾下 apply 的实现步骤，会执行 obj.Person 方法，这个时候就会执行 if 语句里的内容，注意构造函数的 prototype 属性指向了实例的原型，使用字面量方式直接覆盖 Person.prototype，并不会更改实例的原型的值，person1 依然是指向了以前的原型，而不是 Person.prototype。而之前的原型是没有 getName 方法的，所以就报错了！
+// 错误方式
 function Car(name) {
   this.name = name
   if (typeof this.getName != 'function') {

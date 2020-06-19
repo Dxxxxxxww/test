@@ -39,8 +39,29 @@
 
       // 手动实现一个 Object.create
       function create(proto, options = null) {
+        // 中间对象只是用来连接原型，上面没有任何变量方法，很干净
         const tmp = {}
         tmp.__proto__ = proto
+
+        if (options) {
+          Object.defineProperties(tmp, options)
+        }
+
+        return tmp
+      }
+      // 这种比上面好的地方在于不使用 __proto__
+      function create2(proto) {
+        // 中间函数只是用来连接原型，上面没有任何变量方法，很干净
+        function F() {}
+        F.prototype = proto
+        return new F()
+      }
+
+      function create3(proto, options = null) {
+        // 创建中间函数 F
+        function F(params) {}
+        F.prototype = proto
+        const tmp = new F()
 
         if (options) {
           Object.defineProperties(tmp, options)
