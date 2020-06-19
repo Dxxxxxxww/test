@@ -30,19 +30,55 @@
         return '有没有返回值啊'
       }
 
+      //第二版 我想要一个有头有尾的！就是鼠标移入能立刻执行，停止触发的时候还能再执行一次！
       const throttle = function(func, wait) {
-        let timeout
-        return function() {
-          const _this = this
-          const args = arguments
-          if (!timeout) {
-            timeout = setTimeout(() => {
+        let timeout,
+          _this,
+          args,
+          result,
+          previous = 0
+
+        const later = function() {
+          previous = +new Date()
+          timeout = null
+          func.apply(_this, args)
+        }
+
+        const throttled = function() {
+          const now = +new Date()
+          //下次触发 func 剩余的时间
+          const remaining = wait - (now - previous)
+          _this = this
+          args = arguments
+          // 如果没有剩余的时间了或者你改了系统时间
+          if (remaining <= 0 || remaining > wait) {
+            if (timeout) {
+              clearTimeout(timeout)
               timeout = null
-              func.apply(_this, args)
-            }, wait)
+            }
+            previous = now
+            func.apply(_this, args)
+          } else if (!timeout) {
+            timeout = setTimeout(later, remaining)
           }
         }
+
+        return throttled
       }
+      //第一版
+      // const throttle = function(func, wait) {
+      //   let timeout
+      //   return function() {
+      //     const _this = this
+      //     const args = arguments
+      //     if (!timeout) {
+      //       timeout = setTimeout(() => {
+      //         timeout = null
+      //         func.apply(_this, args)
+      //       }, wait)
+      //     }
+      //   }
+      // }
 
       const setUseAction = throttle(getUserAction, 1000)
       container.onmousemove = setUseAction
