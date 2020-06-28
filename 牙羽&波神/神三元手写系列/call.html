@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // es3 版本
+      Function.prototype.call3 = function (context) {
+        context = context || window
+        context.func = this
+        // args 实际上是一个存放 arguments1 arguments2 ... 的容器， 在 eval 中 toString 后
+        // 会被展开成 arguments1 arguments2 的形式
+        const args = []
+        for (let i = 1; i < arguments.length; i++) {
+          args.push(`arguments[${i}]`)
+        }
+        // es3 版本核心在于使用 eval，其他的 let const 可以使用 var 替换， `` 也可以使用 ''
+        const result = eval(`context.func(${args})`)
+        delete context.func
+
+        return result
+      }
+
+      // es6 版本
+      Function.prototype.call6 = function (context = window, ...args) {
+        context.func = this
+        const result = context.func(...args)
+        delete context.func
+        return result
+      }
+
+      const a = 10,
+        obj = {
+          a: 1,
+          b: {
+            c: 'ccc',
+          },
+        }
+      function test(p1, p2, p3) {
+        return `${this.a} + ${this.b.c} + ${p1} + ${p2} + ${p3}`
+      }
+      console.log(test.call3(obj, 1, 2, 'c'))
+      console.log(test.call6(obj, 1, 2, 'c'))
+    </script>
+  </body>
+</html>

@@ -1,65 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      //防抖，优化为最后一次执行
+      function debounce(fn, wait, ime) {
+        let time = null
 
-<body>
-  <script>
-    //防抖，优化为最后一次执行
-    function debounce(fn, wait, ime) {
-      let time = null;
+        return function () {
+          let context = this
+          let args = arguments
 
-      return function () {
-        let context = this;
-        let args = arguments;
-
-        if (ime && !time) {
-          fn.apply(context, args);
-          return;
-        }
-        if (time) {
-          clearTimeout(time)
-        }
-        time = setTimeout(() => {
-          fn.apply(context, args);
-        }, wait);
-      }
-    }
-    //节流，降低执行频率  
-    function throttle(fn, wait, ime) {
-      let time = null;
-
-      return function () {
-        let context = this;
-        let args = arguments;
-
-        if (ime) {
-          fn.apply(context, args);
-          if (time) {
-            clearTimeout(time);
-            time = null;
+          if (ime && !time) {
+            fn.apply(context, args)
+            return
           }
-          return;
+          if (time) {
+            clearTimeout(time)
+          }
+          time = setTimeout(() => {
+            // 这里的 fn 需要用保留的 this 来确定 this 指向
+            // 如果直接用 fn() 会导致 this 丢失。在执行父级箭头函数的时候，箭头函数的 this 虽然还是正确的 this， 但 fn 调用就不是了
+            fn.apply(context, args)
+          }, wait)
         }
-        if (time) {
-          return;
-        }
-        time = setTimeout(() => {
-          fn.apply(context, args);
-        }, wait);
       }
-    }
+      //节流，降低执行频率
+      function throttle(fn, wait, ime) {
+        let time = null
 
-    let abc = debounce(() => {
-      console.log('abc')
-    }, 3000, true);
-    abc();
-  </script>
-</body>
+        return function () {
+          let context = this
+          let args = arguments
 
+          if (ime) {
+            fn.apply(context, args)
+            if (time) {
+              clearTimeout(time)
+              time = null
+            }
+            return
+          }
+          if (time) {
+            return
+          }
+          time = setTimeout(() => {
+            // 这里的 fn 需要用保留的 this 来确定 this 指向
+            // 如果直接用 fn() 会导致 this 丢失。在执行父级箭头函数的时候，箭头函数的 this 虽然还是正确的 this， 但 fn 调用就不是了
+            fn.apply(context, args)
+          }, wait)
+        }
+      }
+
+      let abc = debounce(
+        () => {
+          console.log('abc')
+        },
+        3000,
+        true
+      )
+      abc()
+    </script>
+  </body>
 </html>

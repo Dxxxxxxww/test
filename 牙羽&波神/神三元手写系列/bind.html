@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Function.prototype.bind3 = function (context) {
+        context = context || window
+        const func = this
+        const args = [].slice.call(arguments, 1)
+
+        const fBound = function () {
+          const params = args.concat([].slice.call(arguments))
+          // 判断是否是 构造函数 new 的情况
+          const result = func.apply(
+            this instanceof fBound ? this : context,
+            params
+          )
+          return result
+        }
+        // 我们直接修改 fBound.prototype 的时候，也会直接修改绑定函数的 prototype。需要一个空函数来中转，给原型链上增加一个中间对象。
+        fBound.prototype = this.prototype
+
+        return fBound
+      }
+
+      // 优化
+      Function.prototype.bind4 = function (context) {
+        context = context || window
+        const args = [].slice.call(arguments, 1),
+          self = this,
+          fNOP = function () {},
+          fBound = function () {
+            const params = args.concat([].slice.call(arguments))
+            return self.apply(this instanceof fBound ? this : context, params)
+          }
+
+        fNOP.prototype = this.prototype
+        // 每次执行都会新 new 一个对象
+        fBound.prototype = new fNOP()
+
+        return fBound
+      }
+
+      // es6 版本
+      Function.prototype.bind6 = function (context = window) {
+        const self = this,
+          args = [].slice.call(arguments, 1),
+          fNOP = function () {},
+          fBound = function () {
+            const params = args.concat([].slice.call(arguments))
+            return self.apply(this instanceof fBound ? this : context, params)
+          }
+
+        fNOP.prototype = this.prototype
+        fBound.prototype = new fNOP()
+
+        return fBound
+      }
+
+      const a = 10,
+        obj = {
+          a: 1,
+          b: {
+            c: 'ccc',
+          },
+        }
+      function test(p1, p2, p3) {
+        return `${this.a} + ${this.b.c} + ${p1} + ${p2} + ${p3}`
+      }
+      test.prototype.a = 'aaa'
+      // test.bind3(obj, 1, 2).prototype.b = 'bbb'
+      // console.log(test.bind3(obj, 1, 2)('c'))
+      // console.log(test.bind3(obj, 1, 2).prototype, test.prototype)
+
+      console.log('-----以下是bind4-----')
+
+      // const bound = test.bind4(obj, 1, 2)
+      // bound.prototype.b = 'bbb'
+      // console.dir(bound)
+      // console.log(test.bind4(obj, 1, 2).prototype)
+      // console.log(test.bind4(obj, 1, 2)('c'))
+      // console.log(test.bind4(obj, 1, 2).prototype, test.prototype)
+
+      console.log('-----以下是bind6-----')
+
+      const bound = test.bind6(obj, 1, 2)
+      bound.prototype.b = 'bbb'
+      console.dir(bound)
+      console.log(test.bind6(obj, 1, 2).prototype)
+      console.log(test.bind6(obj, 1, 2)('c'))
+      console.log(test.bind6(obj, 1, 2).prototype, test.prototype)
+      console.log(test.bind6(obj, [1, 2, 'c']))
+    </script>
+  </body>
+</html>

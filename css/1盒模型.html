@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 120px;
+        height: 120px;
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid #999;
+      }
+
+      .content {
+        box-sizing: content-box;
+        background-color: antiquewhite;
+      }
+
+      .border {
+        box-sizing: border-box;
+        background-color: brown;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      content: width = content
+    </div>
+    <div class="border">
+      border: width = content + padding + border
+    </div>
+  </body>
+</html>

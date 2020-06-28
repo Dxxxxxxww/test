@@ -55,6 +55,19 @@
         return result
       }
 
+      // es6 版本 神三元
+      Function.prototype.call6 = function (context, ...args) {
+        var context = context || window
+        context.fn = this
+
+        // var result = eval('context.fn(...args)')
+        // 直接这样就可以了
+        const result = context.func(...args)
+
+        delete context.fn
+        return result
+      }
+
       var a = 10
       const obj = {
         a: 1,
@@ -63,7 +76,7 @@
         return `${this.a} + ${p1} + ${p2} + ${p3}`
       }
       console.log(test.call2(obj, 1, 2, 'c')) // 1
-      console.log(test()) // 1
+      // console.log(test()) // 1
     </script>
   </body>
 </html>

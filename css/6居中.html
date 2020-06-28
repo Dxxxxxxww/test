@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 120px;
+        height: 120px;
+        padding: 10px;
+        border: 1px solid #999;
+        box-sizing: border-box;
+        background-color: burlywood;
+      }
+
+      .div {
+        margin: 0 auto;
+      }
+
+      .float {
+        position: absolute;
+        float: left;
+        left: 50%;
+        margin-left: -60px;
+      }
+
+      .position {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        /* transform -50% 比 margin-left 更好 */
+        transform: translate3d(-50%, 0, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div"></div>
+    <div class="float"></div>
+    <div class="position"></div>
+  </body>
+</html>

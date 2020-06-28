@@ -197,3 +197,18 @@ const dig = (obj, target) =>
 // };
 // dig(data, 'level3'); // 'some data'
 // dig(data, 'level4'); // undefined
+
+const flattenObject = (obj, prefix = '') => {
+  const pre = prefix.length ? prefix + '.' : ''
+  return Object.keys(obj).reduce((cur, next) => {
+    if (typeof obj[next] === 'object') {
+      Object.assign(cur, flattenObject(obj[next], pre + next))
+      // 不能这样写
+      // cur[pre + next] = flattenObject(obj[next], pre + next)
+    } else {
+      cur[pre + next] = obj[next]
+    }
+    return cur
+  }, {})
+}
+flattenObject({ a: { b: { c: 1 } }, d: 1 }) // { 'a.b.c': 1, d: 1 }
