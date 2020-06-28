@@ -9,13 +9,24 @@
     <script>
       const { log } = console
       const list = [1, 2, 3, 4, 5, 6]
+      // function test() {
+      //   for (let i = 0; i < list.length; i++) {
+      //     if (list[i] == 3) {
+      //       break
+      //       // return
+      //     }
+      //     console.log(list[i])
+      //   }
+      // }
       // for (let i = 0; i < list.length; i++) {
       //   if (list[i] == 3) {
-      //     break
+      //     // break
+      //     return // SyntaxError: Illegal return statement  return 只能用在函数中
       //   }
+      //   // return  // SyntaxError: Illegal return statement  return 只能用在函数中
       //   console.log(list[i])
       // }
-      // 可以 return
+      // 可以 return  如果真要中断，可以使用 try catch throw new error 的方式
       // list.reduce((cur, next) => {
       //   if (next == 3) {
       //     return
@@ -43,15 +54,17 @@
       //   }
       //   console.log('def', next)
       // }, 0)
-      // 总结：map 只能 return 。 break，continue 报错
+      // 总结：map 只能 return 。map return 没什么研究意义，因为 map 本来就是要 return 返回数据，其他的 api 也是如此。
+      // break，continue 报错  如果真要中断，可以使用 try catch throw new error 的方式
       // 可以 return
-      // const a = list.map((v) => {
+      // const a = list.map(v => {
       //   if (v == 3) {
-      //     return v
+      //     return v // 这里 return 了，下面的语句自然不执行
       //   }
-      //   console.log('def', v)
+      //   log('def', v) // def 1 2 4 5 6
+      //   return v
       // })
-      // log(a)
+      // log(a) // [1, 2, 3, 4, 5, 6]
       // 报错 Uncaught SyntaxError: Illegal break statement
       // list.map((v) => {
       //   if (v == 3) {
@@ -68,14 +81,22 @@
       //   console.log('def')
       // })
       // log(a)
-      // 总结：forEach 只能 return 。 break，continue 报错
+      // 总结：forEach 只能 return 。 break，continue 报错  如果真要中断，可以使用 try catch throw new error 的方式
       // 可以 return
-      // list.forEach((v) => {
+      // list.forEach(v => {
       //   if (v == 3) {
-      //     return
+      //     return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 break 的作用。 node 环境相同
       //   }
-      //   console.log('def', v)
+      //   log('def', v) // def 1 2 4 5 6
       // })
+      // function test(params) {
+      //   list.forEach(v => {
+      //     if (v == 3) {
+      //       return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 break 的作用。 node 环境相同
+      //     }
+      //     log('def', v) // def 1 2 4 5 6
+      //   })
+      // }
       // 报错 Uncaught SyntaxError: Illegal break statement
       // list.forEach((v) => {
       //   if (v == 3) {
@@ -90,6 +111,7 @@
       //   }
       //   console.log('def')
       // })
+      // test()
     </script>
   </body>
 </html>
