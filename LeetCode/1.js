@@ -1,5 +1,23 @@
 const { log } = console
 
+// 3. 无重复字符的最长子串
+const lengthOfLongestSubstring = (s) => {
+  let max = 0
+  const map = new Map()
+  // debugger
+  // i 右指针， j 左指针
+  for (let i = 0, j = 0; i < s.length; i++) {
+    if (map.has(s[i])) {
+      // 确保左指针只往右划，map 中所保存的值可能已在滑窗外了
+      j = Math.max(map.get(s[i]) + 1, j)
+    }
+    max = Math.max(max, i - j + 1)
+    map.set(s[i], i)
+  }
+  return max
+}
+log(lengthOfLongestSubstring('abba'))
+
 // 15. 三数之和
 // 给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。答案中不可以包含重复的三元组。
 // 双指针：双指针法的适用范围比较广，一般像求和、比大小的都可以用它来解决。但是有一个前提：数组必须有序
@@ -40,10 +58,6 @@ const threeSum = (nums) => {
 
   return result
 }
-// 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位数字。
-// 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
-// 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
-const addTwoNumbers = () => {}
 
 // 1. 双数之和。给定一个整数数组 nums  和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
 // 给定 nums = [2, 7, 11, 15], target = 9

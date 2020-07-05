@@ -82,17 +82,17 @@
       // })
       // log(a)
       // 总结：forEach 只能 return 。 break，continue 报错  如果真要中断，可以使用 try catch throw new error 的方式
-      // 可以 return
+      // 可以 return,  return 的表现形式类似 continue
       // list.forEach(v => {
       //   if (v == 3) {
-      //     return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 break 的作用。 node 环境相同
+      //     return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 continue 的作用。 node 环境相同
       //   }
       //   log('def', v) // def 1 2 4 5 6
       // })
       // function test(params) {
       //   list.forEach(v => {
       //     if (v == 3) {
-      //       return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 break 的作用。 node 环境相同
+      //       return // 这里 return 了，下面的语句自然不执行，但是循环依旧继续 相当于起到了 continue 的作用。 node 环境相同
       //     }
       //     log('def', v) // def 1 2 4 5 6
       //   })
