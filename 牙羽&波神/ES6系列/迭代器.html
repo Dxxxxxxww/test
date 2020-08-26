@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 迭代器就是一个包含 next 方法的对象，next 方法返回一个对象，值为 value 和 done，value 表示当前的值，done 表示遍历是否结束。
+      function createIterator(items) {
+        let i = 0
+        return {
+          next() {
+            return {
+              value: items[i++],
+              done: i > items.length,
+            }
+          },
+        }
+      }
+
+      // 迭代器接口，就是返回迭代器的函数
+      // 只要数据结构只要部署了 Iterator 接口，我们就称这种数据结构是“可遍历的”（iterable）
+      // ES6 规定，默认的 Iterator 接口部署在数据结构的 Symbol.iterator 属性，或者说，一个数据结构只要具有 Symbol.iterator 属性，就可以认为是"可遍历的"（iterable）。
+      // for...of 就是调用迭代器接口，获取到迭代器然后遍历迭代器
+      function forOf(obj, cb) {
+        if (typeof obj[Symbol.iterator] !== 'function')
+          throw new TypeError(result + ' is not iterable')
+        if (typeof cb !== 'function') throw new TypeError('cb must be callable')
+        
+        const it = obj[Symbol.iterator]()
+        let result = it.next()
+        while (!result.done) {
+          cb(result.value)
+          result = it.next()
+        }
+      }
+
+      // 每个集合类型都有一个默认的迭代器，在 for-of 循环中，如果没有显式指定则使用默认的迭代器。数组和 Set 集合的默认迭代器是 values() 方法，Map 集合的默认迭代器是 entries() 方法
+      const set = new Set([1, 2, 3])
+      for (const v of set) {
+        console.log(v)
+      }
+
+      const map = new Map([
+        ['k1', 'v1'],
+        ['k2', 'v2'],
+      ])
+      for (const [k, v] of map) {
+        console.log(`${k}:${v}`)
+      }
+    </script>
+  </body>
+</html>
