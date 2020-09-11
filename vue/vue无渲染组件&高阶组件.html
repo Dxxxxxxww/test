@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  高阶组件就是：一个函数接受一个组件为参数，返回一个包装后的组件。
+  在 React 的世界里，高阶组件就是 f(Class) -> 新的Class。
+  在 Vue 的世界里，高阶组件就是 f(object) -> 新的object。
+
+  vue 无渲染组件 -> 主要是通过使用 作用域插槽，使逻辑功能可以在不同 ui 上复用的一种方式。
+  vue 高阶组件 -> 在 Vue 的世界里，组件是一个对象，所以高阶组件就是一个函数接受一个对象，返回一个新的包装好的对象。它是由以下两个部分组成：
+  木偶 组件： 就像一个牵线木偶一样，只根据外部传入的 props 去渲染相应的视图，而不管这个数据是从哪里来的。
+  智能 组件： 一般包在 木偶 组件的外部，通过请求等方式获取到数据，传入给 木偶 组件，控制它的渲染。
+  <智能组件>
+    <木偶组件 />
+  </智能组件>
+
+它们还有另一个别名，就是 容器组件 和 ui组件。
+
+两者都是解决逻辑视图分离的，都算是 vue 的 HOC 实现方式
+</body>
+</html>
