@@ -33,9 +33,29 @@ Get set delete clear has
 Keys values entries foreach 默认迭代器是entries 
 视NaN 等于本身
 
-WeakMap 键名弱引用，不计入GC 键值为正常引用 键名只能是对象
+WeakMap 键名只能是对象 键名弱引用，不计入GC 键值为正常引用 。 
+一旦 key 所指向的对象不再需要，WeakMap 里面的键名对象和所对应的键值（不管键值是对象还是基本类型）对会自动消失，不用手动删除引用。
 属性
 无
 方法
 Set get delete has
 不可遍历 */
+
+let key = {},
+  obj = { fpp: 1 },
+  a = 1
+
+wm.set(key, obj)
+obj = null
+console.log(wm.get(key)) // {fpp: 1}
+
+key = null
+console.log(wm.get(key)) // undefined
+
+key = {}
+wm.set(key, a)
+console.log(wm.get(key)) // 1
+a = null
+console.log(wm.get(key)) // 1
+key = null
+console.log(wm.get(key)) // undefined
