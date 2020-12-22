@@ -26,7 +26,8 @@
       //   // return  // SyntaxError: Illegal return statement  return 只能用在函数中
       //   console.log(list[i])
       // }
-      // 可以 return  如果真要中断，可以使用 try catch throw new error 的方式
+      // 可以 return  如果真要中断，可以使用 throw new error 的方式
+      // 但是不能 try catch  会捕获错误，循环不会停止
       // list.reduce((cur, next) => {
       //   if (next == 3) {
       //     return
@@ -55,7 +56,8 @@
       //   console.log('def', next)
       // }, 0)
       // 总结：map 只能 return 。map return 没什么研究意义，因为 map 本来就是要 return 返回数据，其他的 api 也是如此。
-      // break，continue 报错  如果真要中断，可以使用 try catch throw new error 的方式
+      // break，continue 报错  如果真要中断，可以使用 throw new error 的方式
+      // 但是不能 try catch  会捕获错误，循环不会停止
       // 可以 return
       // const a = list.map(v => {
       //   if (v == 3) {
@@ -81,7 +83,9 @@
       //   console.log('def')
       // })
       // log(a)
-      // 总结：forEach 只能 return 。 break，continue 报错  如果真要中断，可以使用 try catch throw new error 的方式
+      // 总结：forEach 只能 return 。 break，continue 报错  如果真要中断，可以使用 throw new error 的方式
+      // 但是不能 try catch  会捕获错误，循环不会停止
+  
       // 可以 return,  return 的表现形式类似 continue
       // list.forEach(v => {
       //   if (v == 3) {
