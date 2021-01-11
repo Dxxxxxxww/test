@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hexagon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 100px auto;
+        height: 190px;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        height: inherit;
+      }
+
+      .box-content {
+        font-size: 24px;
+        text-align: center;
+        color: #888888;
+      }
+
+      .left-box {
+        position: absolute;
+        transform: rotateZ(60deg);
+      }
+
+      .right-box {
+        position: absolute;
+        transform: rotateZ(-60deg);
+      }
+
+      .box-line {
+        width: 108px;
+        height: 4px;
+      }
+
+      .top-line {
+        background-color: seagreen;
+        animation: breathe-top 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px -4px 10px 0px seagreen;
+      }
+
+      .bottom-line {
+        background-color: tomato;
+        animation: breathe-bottom 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px 4px 10px 0px tomato;
+      }
+
+      .left-top-line {
+        background-color: #900000;
+        animation: breathe-left-top 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px -4px 10px 0px #900000;
+      }
+
+      .right-bottom-line {
+        background-color: purple;
+        animation: breathe-right-bottom 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px 4px 10px 0px purple;
+      }
+
+      .right-top-line {
+        background-color: mediumblue;
+        animation: breathe-right-top 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px -4px 10px 0px mediumblue;
+      }
+
+      .left-bottom-line {
+        background-color: teal;
+        animation: breathe-left-bottom 1s ease-in-out 0s infinite alternate;
+        box-shadow: 0px 4px 10px 0px teal;
+      }
+
+      @keyframes breathe {
+        0% {
+          opacity: 0.4;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes breathe-top {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px -4px 10px 0px rgba(seagreen, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px -4px 10px 0px rgba(seagreen, 1);
+        }
+      }
+
+      @keyframes breathe-bottom {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px 4px 10px 0px rgba(tomato, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px 4px 10px 0px rgba(tomato, 1);
+        }
+      }
+
+      @keyframes breathe-left-top {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px -4px 10px 0px rgba(#900000, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px -4px 10px 0px rgba(#900000, 1);
+        }
+      }
+
+      @keyframes breathe-right-bottom {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px 4px 10px 0px rgba(purple, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px 4px 10px 0px rgba(purple, 1);
+        }
+      }
+
+      @keyframes breathe-right-top {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px -4px 10px 0px rgba(mediumblue, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px -4px 10px 0px rgba(mediumblue, 1);
+        }
+      }
+
+      @keyframes breathe-left-bottom {
+        0% {
+          opacity: 0.4;
+          box-shadow: 0px 4px 10px 0px rgba(teal, 0.6);
+        }
+
+        100% {
+          opacity: 1;
+          box-shadow: 0px 4px 10px 0px rgba(teal, 1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="hexagon">
+        <div class="box right-box">
+          <div class="box-line left-top-line"></div>
+          <div class="box-line right-bottom-line"></div>
+        </div>
+        <div class="box left-box">
+          <div class="box-line right-top-line"></div>
+          <div class="box-line left-bottom-line"></div>
+        </div>
+        <div class="box">
+          <div class="box-line top-line"></div>
+          <div class="box-content">Hello</div>
+          <div class="box-line bottom-line"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
